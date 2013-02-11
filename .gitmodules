@@ -1,0 +1,9 @@
+[submodule "Silex"]
+	path = Silex
+	url = https://github.com/fabpot/Silex.git
+[submodule "Twig"]
+	path = Twig
+	url = https://github.com/fabpot/Twig.git
+[submodule "SwiftMailer"]
+	path = SwiftMailer
+	url = https://github.com/swiftmailer/swiftmailer.git

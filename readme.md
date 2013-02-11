@@ -1,11 +1,1 @@
-MonkBlog
-===============
-
-Purpose
----------------
-
-MonkBlog is a blog engine. It's built on top of MongoDB, Javascript, and a little bit of PHP to glue things together.
-
-Change Log
----------------
-v0.0: Readme added.
+MonkBlog===============Purpose---------------MonkBlog is a gaming blog engine. It's built on top of MongoDB, Javascript, and a little bit of PHP to glue things together.It's intended for people who are developer enough to use Composer, designer enough to appreciate easy templating, and gamer enough to use Monk's built-in gaming profile features.Dependencies---------------MonkBlog relies on the following:* Silex* Doctrine* MongoDB* Twig* jQueryCore Features--------------* Easy templating with Twig* Support for responsive design* Support for inclusion of data from World of WarcraftChange Log---------------v0.01: Added basic theme functionality.v0.0: Readme added.
