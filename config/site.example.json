@@ -1,0 +1,11 @@
+{
+    "SiteTitle": "Iron Arachne",
+    "Theme": "default",
+    "Database": {
+        "Name": "",
+        "Host": "",
+        "Port": 0,
+        "User": "",
+        "Password": ""
+    }
+}

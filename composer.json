@@ -1,8 +1,13 @@
 {
+    "name": "manatrance/monkblog",
+    "description": "The clean and simple blog engine built on NoSQL.",
+    "license": "mit",
     "require": {
-        "silex/silex": "1.0.*@dev",
+        "php": "5.4.*",
+        "silex/silex": "dev-master",
         "twig/twig": "dev-master",
         "swiftmailer/swiftmailer": "4.3.*@dev",
-        "doctrine/mongodb": "dev-master"
+        "doctrine/mongodb": "dev-master",
+        "phpunit/phpunit": "3.7.*"
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'core/Site.php';
 
 $app = new Silex\Application(); 
 $app['debug'] = true;
@@ -17,28 +16,19 @@ $theme = $settings['Theme'];
 
 $site = new Site($siteTitle);
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
+$app->register(new Silex\Provider\TwigServiceProvider(), [
     'twig.path' => __DIR__.'/views/themes/'.$theme,
-));
+]);
 
 // Main Index
-$app->get('/', function() use ($app, $site) {
-    return $app['twig']->render('index.html.twig', array(
+$app->get('/', function() use ($app, $site) 
+{
+    return $app['twig']->render('index.html.twig', [
         'site' => $site,
-    ));
+    ]);
 });
 
-// Show Individual Post
-$app->get('/post/{id}', function (Silex\Application $app, $id) use ($blogPosts) {
-    if (!isset($blogPosts[$id])) {
-        $app->abort(404, "Post $id does not exist.");
-    }
-
-    $post = $blogPosts[$id];
-
-    return $app['twig']->render('post.html.twig', array(
-        'post' => $post,
-    ));
-});
+$app->mount('/post', include 'core/Controllers/PostController.php');
+$app->mount('/page', include 'core/Controllers/PageController.php');
 
 $app->run(); 
