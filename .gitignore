@@ -163,8 +163,9 @@ pip-log.txt
 .DS_Store
 
 # Composer
-composer.lock
 vendor
 
 # Specific to Monk
 config/site.json
+.idea
+.vagrant
