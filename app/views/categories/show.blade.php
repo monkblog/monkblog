@@ -1,0 +1,1 @@
+/Users/benovermyer/Websites/monkblog/app/views/categories/show.blade.php
