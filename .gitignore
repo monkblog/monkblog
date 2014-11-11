@@ -5,3 +5,4 @@ config/site.json
 .vagrant
 node_modules
 bower_components
+.sass-cache
