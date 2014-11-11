@@ -11,7 +11,12 @@ class CategoriesController extends \BaseController {
 	{
 		$categories = Category::all();
 
-		return View::make('categories.index', compact('categories'));
+		$viewData = [
+			'categories' => $categories,
+			'pageTitle' => 'Categories',
+		];
+
+		return View::make( 'categories.index', $viewData );
 	}
 
 	/**
@@ -21,7 +26,12 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('categories.create');
+		$viewData = [
+			'pageTitle' => 'Create New Category',
+			'category' => new Category,
+		];
+
+		return View::make( 'categories.create', $viewData );
 	}
 
 	/**
@@ -31,16 +41,16 @@ class CategoriesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Category::$rules);
+		$validator = Validator::make( $data = Input::all(), Category::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		Category::create($data);
+		Category::create( $data );
 
-		return Redirect::route('categories.index');
+		return Redirect::route( 'admin.categories.index' );
 	}
 
 	/**
@@ -53,7 +63,7 @@ class CategoriesController extends \BaseController {
 	{
 		$category = Category::findOrFail($id);
 
-		return View::make('categories.show', compact('category'));
+		return View::make( 'categories.show', compact('category'));
 	}
 
 	/**
@@ -66,7 +76,7 @@ class CategoriesController extends \BaseController {
 	{
 		$category = Category::find($id);
 
-		return View::make('categories.edit', compact('category'));
+		return View::make( 'categories.edit', compact( 'category' ) );
 	}
 
 	/**
@@ -75,20 +85,20 @@ class CategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update( $id )
 	{
-		$category = Category::findOrFail($id);
+		$category = Category::findOrFail( $id );
 
-		$validator = Validator::make($data = Input::all(), Category::$rules);
+		$validator = Validator::make( $data = Input::all(), Category::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		$category->update($data);
+		$category->update( $data );
 
-		return Redirect::route('categories.index');
+		return Redirect::route( 'categories.index' );
 	}
 
 	/**
@@ -97,11 +107,11 @@ class CategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy( $id )
 	{
-		Category::destroy($id);
+		Category::destroy( $id );
 
-		return Redirect::route('categories.index');
+		return Redirect::route( 'categories.index' );
 	}
 
 }

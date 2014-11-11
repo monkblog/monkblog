@@ -15,6 +15,7 @@ Route::get( '/logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' 
 Route::group( [ 'prefix' => 'admin', 'before' => 'auth' ], function () {
 	Route::get( '/', [ 'as' => 'admin.home', 'uses' => 'HomeController@getAdminHome' ] );
 	Route::resource( 'categories', 'CategoriesController' );
+	Route::resource( 'pages', 'PagesController' );
 	Route::resource( 'posts', 'PostsController' );
 	Route::resource( 'tags', 'TagsController' );
 	Route::resource( 'users', 'UsersController' );

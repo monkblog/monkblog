@@ -104,4 +104,16 @@ class PagesController extends \BaseController {
 		return Redirect::route('pages.index');
 	}
 
+	public function getPageBySlug( $slug ) {
+		// do validation
+
+		$page = Page::where( 'slug', '=', $slug );
+
+		if ( !$page ) {
+			App::abort( 404 );
+		}
+
+		return Response::view( 'page.show', compact( $page ) );
+	}
+
 }

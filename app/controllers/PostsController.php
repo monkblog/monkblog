@@ -11,7 +11,12 @@ class PostsController extends \BaseController {
 	{
 		$posts = Post::all();
 
-		return View::make('posts.index', compact('posts'));
+		$viewData = [
+			'posts' => $posts,
+			'pageTitle' => 'All Posts',
+		];
+
+		return View::make( 'posts.index', $viewData );
 	}
 
 	/**
@@ -21,7 +26,13 @@ class PostsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('posts.create');
+		$viewData = [
+			'pageTitle' => 'Write New Post',
+			'post' => new Post,
+			'categories' => Category::lists( 'title', 'id' ),
+		];
+
+		return View::make( 'posts.create', $viewData );
 	}
 
 	/**
@@ -31,16 +42,16 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Post::$rules);
+		$validator = Validator::make( $data = Input::all(), Post::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		Post::create($data);
+		Post::create( $data );
 
-		return Redirect::route('posts.index');
+		return Redirect::route( 'admin.posts.index' );
 	}
 
 	/**
@@ -75,20 +86,20 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update( $id )
 	{
-		$post = Post::findOrFail($id);
+		$post = Post::findOrFail( $id );
 
-		$validator = Validator::make($data = Input::all(), Post::$rules);
+		$validator = Validator::make( $data = Input::all(), Post::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
 		$post->update($data);
 
-		return Redirect::route('posts.index');
+		return Redirect::route( 'admin.posts.index' );
 	}
 
 	/**
@@ -101,7 +112,7 @@ class PostsController extends \BaseController {
 	{
 		Post::destroy( $id );
 
-		return Redirect::route('posts.index');
+		return Redirect::route( 'admin.posts.index' );
 	}
 
 	public function getPostBySlug( $slug ) {

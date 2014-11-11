@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration {
 		{
 			$table->increments( 'id' );
 			$table->string( 'title' );
+			$table->string( 'slug' )->unique();
 			$table->string( 'body' );
 			$table->string( 'summary' );
 			$table->integer( 'category_id' )->unsigned();
@@ -33,7 +34,7 @@ class CreatePostsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('posts');
+		Schema::drop( 'posts' );
 	}
 
 }
