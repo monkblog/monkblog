@@ -1,17 +1,27 @@
 <?php
 
-// Specific routes
+// Shared variables
 
-Route::get( '/', [ 'as' => 'home', 'uses' => 'HomeController@getHome' ] );
-Route::get( 'post/{slug}', [ 'uses' => 'PostsContrller@getPostBySlug' ] );
-Route::get( '/{slug}', [ 'uses' => 'PagesContrller@getPageBySlug' ] );
+View::share( 'siteTitle', Config::get( 'site.title', '' ) );
+
+// Auth routes
+
+Route::get( '/login', [ 'as' => 'login', 'uses' => 'AuthController@getLogin' ] );
+Route::post( '/login', [ 'as' => 'login.post', 'uses' => 'AuthController@postLogin' ] );
+Route::get( '/logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' ] );
 
 // Admin routes
 
-Route::group( [ 'prefix' => 'admin' ], function () {
+Route::group( [ 'prefix' => 'admin', 'before' => 'auth' ], function () {
+	Route::get( '/', [ 'as' => 'admin.home', 'uses' => 'HomeController@getAdminHome' ] );
 	Route::resource( 'categories', 'CategoriesController' );
 	Route::resource( 'posts', 'PostsController' );
 	Route::resource( 'tags', 'TagsController' );
-	Route::resource( 'themes', 'ThemesController' );
 	Route::resource( 'users', 'UsersController' );
 } );
+
+// Specific routes
+
+Route::get( '/', [ 'as' => 'home', 'uses' => 'HomeController@getHome' ] );
+Route::get( 'post/{slug}', [ 'uses' => 'PostsController@getPostBySlug' ] );
+Route::get( '/{slug}', [ 'uses' => 'PagesController@getPageBySlug' ] );

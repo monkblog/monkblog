@@ -24,11 +24,13 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('homestead'),
-
-));
+$env = $app->detectEnvironment([
+	'local' => [
+		'vagrant',
+		'homestead', 
+		'vagrant-ubuntu-trusty-64',
+	],
+]);
 
 /*
 |--------------------------------------------------------------------------

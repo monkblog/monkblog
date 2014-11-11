@@ -1,1 +1,5 @@
-/Users/benovermyer/Websites/monkblog/app/views/posts/create.blade.php
+@extends('admin.layout')
+
+@section('content')
+
+@stop

@@ -97,11 +97,23 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy( $id )
 	{
-		Post::destroy($id);
+		Post::destroy( $id );
 
 		return Redirect::route('posts.index');
+	}
+
+	public function getPostBySlug( $slug ) {
+		// do validation
+
+		$post = Post::where( 'slug', '=', $slug );
+
+		if ( !$post ) {
+			App::abort( 404 );
+		}
+
+		return Response::view( 'post.show', compact( $post ) );
 	}
 
 }

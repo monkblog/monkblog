@@ -2,22 +2,25 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
-	public function showWelcome()
+	public function getHome()
 	{
-		return View::make('hello');
+		$recentPosts = Post::where( 'is_published', '=', 'true' )->orderBy( 'created_at', 'desc' )->take( 3 )->get();
+
+		$viewData = [
+			'pageTitle' => 'Home',
+			'recentPosts' => $recentPosts,
+		];
+
+		return View::make( 'home', $viewData );
+	}
+
+	public function getAdminHome()
+	{
+		$viewData = [
+			'pageTitle' => 'Home',
+		];
+
+		return View::make( 'admin.home', $viewData );
 	}
 
 }
