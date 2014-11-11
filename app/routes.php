@@ -3,6 +3,7 @@
 // Shared variables
 
 View::share( 'siteTitle', Config::get( 'site.title', '' ) );
+View::share( 'monkVersion', Config::get( 'site.version', '' ) );
 
 // Auth routes
 

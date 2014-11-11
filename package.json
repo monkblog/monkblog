@@ -1,0 +1,15 @@
+{
+  "name": "monkblog",
+  "description": "A blog engine built on Laravel",
+  "version": "v1.0.0",
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-ruby-sass": "^0.7.1"
+  }
+}
