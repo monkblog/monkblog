@@ -5,7 +5,7 @@
     <h1>{{{ $page->title }}}</h1>
 
     <div id="content">
-        {{{ $page->body }}}
+        {{ Markdown::render( $page->body ) }}
     </div>
 
 @stop

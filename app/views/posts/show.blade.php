@@ -9,7 +9,7 @@
     </span>
 
     <div id="content">
-        {{{ $post->body }}}
+        {{ Markdown::render( $post->body ) }}
     </div>
 
 @stop
