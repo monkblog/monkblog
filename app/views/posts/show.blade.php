@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <h1>{{{ $post->title }}}</h1>
+    <article class="post full">
+        <h1>{{{ $post->title }}}</h1>
 
-    <span class="meta">
-        Posted On {{{ $post->created_at }}}
-    </span>
+        <div class="meta">{{ date( $dateFormat, strtotime( $post->published_at ) ) }}</div>
 
-    <div id="content">
-        {{ Markdown::render( $post->body ) }}
-    </div>
+        <div id="content">
+            {{ Markdown::render( $post->body ) }}
+        </div>
+    </article>
 
 @stop
