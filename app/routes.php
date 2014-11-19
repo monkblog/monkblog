@@ -9,6 +9,7 @@ View::share( 'monkVersion', Config::get( 'site.version', '' ) );
 
 Route::get( '/', [ 'as' => 'home', 'uses' => 'HomeController@getHome' ] );
 Route::get( 'post/{slug}', [ 'as' => 'post.public.show', 'uses' => 'PostsController@getPostBySlug' ] );
+Route::get( '/archive/{offset}/{limit}', [ 'as' => 'archive', 'uses' => 'PostsController@archive' ] );
 
 // Auth routes
 

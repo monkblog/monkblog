@@ -9,4 +9,7 @@
         </li>
         @endforeach
     </ul>
+    @if( $more )
+        <a href="{{ URL::route( 'archive', [ 3, 5 ] ) }}" class="post-nav next">Older Posts</a>
+    @endif
 @stop

@@ -20,6 +20,44 @@ class PostsController extends \BaseController {
 	}
 
 	/**
+	* Display an archive listing of posts
+	*
+	* @return Response
+	*/
+	public function archive( $offset = 0, $limit = 3 )
+	{
+		if ( $offset < 0 ) {
+			$offset = 0;
+		}
+		
+		$posts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->skip( $offset )->take( $limit )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
+
+		$postCount = Post::where( 'is_published', '=', true )->count();
+
+		$more = false;
+		$less = false;
+
+		if ( $offset + $limit < $postCount ) {
+			$more = true;
+		}
+
+		if ( $offset > 0 ) {
+			$less = true;
+		}
+
+		$viewData = [
+			'posts' => $posts,
+			'pageTitle' => 'Archive',
+			'offset' => $offset,
+			'limit' => $limit,
+			'more' => $more,
+			'less' => $less,
+		];
+
+		return View::make( 'posts.archive', $viewData );
+	}
+
+	/**
 	 * Show the form for creating a new post
 	 *
 	 * @return Response
