@@ -59,11 +59,20 @@ class CategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show( $id )
 	{
-		$category = Category::findOrFail($id);
+		$category = Category::find( $id );
 
-		return View::make( 'categories.show', compact('category'));
+		if ( !$category ) {
+			App::abort( 404 );
+		}
+
+		$viewData = [
+			'category' => $category,
+			'pageTitle' => 'Category: ' . $category->title,
+		];
+
+		return View::make( 'categories.show', $viewData );
 	}
 
 	/**
@@ -72,11 +81,20 @@ class CategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit( $id )
 	{
-		$category = Category::find($id);
+		$category = Category::find( $id );
 
-		return View::make( 'categories.edit', compact( 'category' ) );
+		if ( !$category ) {
+			App::abort( 404 );
+		}
+
+		$viewData = [
+			'category' => $category,
+			'pageTitle' => 'Editing Category "' . $category->title . '"',
+		];
+
+		return View::make( 'categories.edit', $viewData );
 	}
 
 	/**
@@ -87,7 +105,11 @@ class CategoriesController extends \BaseController {
 	 */
 	public function update( $id )
 	{
-		$category = Category::findOrFail( $id );
+		$category = Category::find( $id );
+
+		if ( !$category ) {
+			App::abort( 404 );
+		}
 
 		$validator = Validator::make( $data = Input::all(), Category::$rules );
 
@@ -101,6 +123,17 @@ class CategoriesController extends \BaseController {
 		return Redirect::route( 'categories.index' );
 	}
 
+	public function confirmDestroy( $id ) {
+		$category = Category::find( $id );
+
+		$viewData = [
+			'category' => $category,
+			'pageTitle' => 'Confirm Delete ' . $category->title,
+		];
+
+		return Response::view( 'categories.destroy', $viewData );
+	}
+
 	/**
 	 * Remove the specified category from storage.
 	 *
@@ -111,7 +144,7 @@ class CategoriesController extends \BaseController {
 	{
 		Category::destroy( $id );
 
-		return Redirect::route( 'categories.index' );
+		return Redirect::route( 'admin.categories.index' );
 	}
 
 }
