@@ -1,6 +1,6 @@
 ## Monk!
 
-A blogging engine built on Laravel.
+A blogging engine built on Laravel. It's specifically built for http://benovermyer.com, though with a bit of tweaking on the visual side can be used for any blog site.
 
 ### License
 
