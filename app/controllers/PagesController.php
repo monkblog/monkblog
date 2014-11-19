@@ -150,7 +150,7 @@ class PagesController extends \BaseController {
 
 	public function getPageBySlug( $slug ) {
 
-		$page = Page::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
+		$page = Page::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->first();
 
 		if ( !$page ) {
 			App::abort( 404 );

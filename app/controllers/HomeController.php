@@ -4,7 +4,7 @@ class HomeController extends BaseController {
 
 	public function getHome()
 	{
-		$recentPosts = Post::where( 'is_published', '=', 'true' )->orderBy( 'published_at', 'desc' )->take( 3 )->get();
+		$recentPosts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->take( 3 )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
 
 		$viewData = [
 			'pageTitle' => 'Home',

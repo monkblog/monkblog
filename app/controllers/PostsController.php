@@ -9,7 +9,7 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::all();
+		$posts = Post::orderBy( 'published_at', 'desc' )->get();
 
 		$viewData = [
 			'posts' => $posts,
@@ -75,7 +75,11 @@ class PostsController extends \BaseController {
 	 */
 	public function show( $id )
 	{
-		$post = Post::findOrFail( $id );
+		$post = Post::find( $id );
+
+		if ( !$post ) {
+			App::abort( 404 );
+		}
 
 		return View::make( 'posts.show', compact( 'post' ) );
 	}
@@ -147,7 +151,7 @@ class PostsController extends \BaseController {
 
 	public function getPostBySlug( $slug ) {
 
-		$post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
+		$post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->first();
 
 		if ( !$post ) {
 			App::abort( 404 );
