@@ -35,6 +35,19 @@ class PostsController extends \BaseController {
 		return View::make( 'posts.create', $viewData );
 	}
 
+	public function publish( $id )
+	{
+		$post = Post::find( $id );
+
+		if ( !$post->is_published ) {
+			$post->is_published = true;
+			$post->published_at = date( 'Y-m-d H:i:s' );
+			$post->save();
+		}
+
+		return Redirect::route( 'admin.posts.index' );
+	}
+
 	/**
 	 * Store a newly created post in storage.
 	 *
@@ -60,11 +73,11 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show( $id )
 	{
-		$post = Post::findOrFail($id);
+		$post = Post::findOrFail( $id );
 
-		return View::make('posts.show', compact('post'));
+		return View::make( 'posts.show', compact( 'post' ) );
 	}
 
 	/**
@@ -73,11 +86,17 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit( $id )
 	{
-		$post = Post::find($id);
+		$post = Post::find( $id );
 
-		return View::make('posts.edit', compact('post'));
+		$viewData = [
+			'pageTitle' => 'Edit Post: ' . $post->title,
+			'post' => $post,
+			'categories' => Category::lists( 'title', 'id' ),
+		];
+
+		return View::make( 'posts.edit', $viewData );
 	}
 
 	/**
@@ -97,7 +116,7 @@ class PostsController extends \BaseController {
 			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		$post->update($data);
+		$post->update( $data );
 
 		return Redirect::route( 'admin.posts.index' );
 	}
@@ -115,16 +134,31 @@ class PostsController extends \BaseController {
 		return Redirect::route( 'admin.posts.index' );
 	}
 
-	public function getPostBySlug( $slug ) {
-		// do validation
+	public function confirmDestroy( $id ) {
+		$post = Post::find( $id );
 
-		$post = Post::where( 'slug', '=', $slug );
+		$viewData = [
+			'post' => $post,
+			'pageTitle' => 'Confirm Delete ' . $post->title,
+		];
+
+		return Response::view( 'posts.destroy', $viewData );
+	}
+
+	public function getPostBySlug( $slug ) {
+
+		$post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
 
 		if ( !$post ) {
 			App::abort( 404 );
 		}
 
-		return Response::view( 'post.show', compact( $post ) );
+		$viewData = [
+			'post' => $post,
+			'pageTitle' => $post->title,
+		];
+
+		return Response::view( 'posts.show', $viewData );
 	}
 
 }

@@ -1,6 +1,6 @@
-@extends('admin.layout')
+@extends( 'admin.layout' )
 
-@section('content')
+@section( 'content' )
     {{ Form::model( $post, [ 'route' => 'admin.posts.store' ] ) }}
     {{ Form::label( 'title', 'Title' ) }}
     {{ Form::text( 'title' ) }}
@@ -12,6 +12,6 @@
     {{ Form::select( 'category_id', $categories ) }}
     {{ Form::label( 'body', 'Body' ) }}
     {{ Form::textarea( 'body' ) }}
-    {{ Form::submit( 'Finish Draft' ) }}
+    {{ Form::submit( 'Finish Draft', [ 'class' => 'button' ] ) }}
     {{ Form::close() }}
 @stop

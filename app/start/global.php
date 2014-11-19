@@ -51,6 +51,11 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::missing( function( $exception )
+{
+    return Response::view( 'errors.missing', [ 'pageTitle' => 'Not Found' ], 404 );
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

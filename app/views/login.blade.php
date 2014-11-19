@@ -6,6 +6,6 @@
         {{ Form::email( 'email' ) }}
         {{ Form::label( 'password', 'Password' ) }}
         {{ Form::password( 'password' ) }}
-        {{ Form::submit( 'Login' ) }}
+        {{ Form::submit( 'Login', [ 'class' => 'button' ] ) }}
     {{ Form::close() }}
 @stop

@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration {
 			$table->integer( 'category_id' )->unsigned();
 			$table->foreign( 'category_id' )->references( 'id' )->on( 'categories' );
 			$table->boolean( 'is_published' );
+			$table->timestamp( 'published_at' )->index();
 			$table->timestamps();
 		});
 	}

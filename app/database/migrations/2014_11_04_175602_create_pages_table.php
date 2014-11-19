@@ -20,6 +20,7 @@ class CreatePagesTable extends Migration {
 			$table->string( 'body' );
 			$table->string( 'slug' )->unique();
 			$table->boolean( 'is_published' );
+			$table->timestamp( 'published_at' )->index();
 			$table->timestamps();
 		});
 	}

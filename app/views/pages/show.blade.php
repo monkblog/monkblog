@@ -1,1 +1,11 @@
-/Users/benovermyer/Websites/monkblog/app/views/pages/show.blade.php
+@extends( 'layout' )
+
+@section( 'content' )
+
+    <h1>{{{ $page->title }}}</h1>
+
+    <div id="content">
+        {{{ $page->body }}}
+    </div>
+
+@stop

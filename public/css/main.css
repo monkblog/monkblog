@@ -9060,4 +9060,5 @@ th.hide-for-touch {
 /* line 5, ../../scss/main.scss */
 footer p {
   font-size: 0.75rem;
+  text-align: center;
 }

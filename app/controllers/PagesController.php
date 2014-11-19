@@ -11,7 +11,12 @@ class PagesController extends \BaseController {
 	{
 		$pages = Page::all();
 
-		return View::make('pages.index', compact('pages'));
+		$viewData = [
+			'pages' => $pages,
+			'pageTitle' => 'All Pages',
+		];
+
+		return View::make( 'pages.index', $viewData );
 	}
 
 	/**
@@ -21,7 +26,25 @@ class PagesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('pages.create');
+		$viewData = [
+			'page' => new Page,
+			'pageTitle' => 'Write New Page',
+		];
+
+		return View::make( 'pages.create', $viewData );
+	}
+
+	public function publish( $id )
+	{
+		$page = Page::find( $id );
+
+		if ( !$page->is_published ) {
+			$page->is_published = true;
+			$page->published_at = date( 'Y-m-d H:i:s' );
+			$page->save();
+		}
+
+		return Redirect::route( 'admin.pages.index' );
 	}
 
 	/**
@@ -31,16 +54,16 @@ class PagesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Page::$rules);
+		$validator = Validator::make( $data = Input::all(), Page::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		Page::create($data);
+		Page::create( $data );
 
-		return Redirect::route('pages.index');
+		return Redirect::route( 'admin.pages.index' );
 	}
 
 	/**
@@ -49,11 +72,16 @@ class PagesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show( $id )
 	{
-		$page = Page::findOrFail($id);
+		$page = Page::findOrFail( $id );
 
-		return View::make('pages.show', compact('page'));
+		$viewData = [
+			'page' => $page,
+			'pageTitle' => $page->title,
+		];
+
+		return View::make( 'pages.show', $viewData );
 	}
 
 	/**
@@ -62,11 +90,16 @@ class PagesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit( $id )
 	{
-		$page = Page::find($id);
+		$page = Page::find( $id );
 
-		return View::make('pages.edit', compact('page'));
+		$viewData = [
+			'page' => $page,
+			'pageTitle' => 'Editing ' . $page->title,
+		];
+
+		return View::make( 'pages.edit', $viewData );
 	}
 
 	/**
@@ -75,20 +108,20 @@ class PagesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update( $id )
 	{
-		$page = Page::findOrFail($id);
+		$page = Page::findOrFail( $id );
 
-		$validator = Validator::make($data = Input::all(), Page::$rules);
+		$validator = Validator::make( $data = Input::all(), Page::$rules );
 
-		if ($validator->fails())
+		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return Redirect::back()->withErrors( $validator )->withInput();
 		}
 
-		$page->update($data);
+		$page->update( $data );
 
-		return Redirect::route('pages.index');
+		return Redirect::route( 'admin.pages.index' );
 	}
 
 	/**
@@ -97,23 +130,38 @@ class PagesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy( $id )
 	{
-		Page::destroy($id);
+		Page::destroy( $id );
 
-		return Redirect::route('pages.index');
+		return Redirect::route( 'admin.pages.index' );
+	}
+
+	public function confirmDestroy( $id ) {
+		$page = Page::find( $id );
+
+		$viewData = [
+			'page' => $page,
+			'pageTitle' => 'Confirm Delete ' . $page->title,
+		];
+
+		return Response::view( 'pages.destroy', $viewData );
 	}
 
 	public function getPageBySlug( $slug ) {
-		// do validation
 
-		$page = Page::where( 'slug', '=', $slug );
+		$page = Page::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
 
 		if ( !$page ) {
 			App::abort( 404 );
 		}
 
-		return Response::view( 'page.show', compact( $page ) );
+		$viewData = [
+			'pageTitle' => $page->title,
+			'page' => $page,
+		];
+
+		return Response::view( 'pages.show', $viewData );
 	}
 
 }

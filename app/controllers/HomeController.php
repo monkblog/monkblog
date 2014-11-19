@@ -4,7 +4,7 @@ class HomeController extends BaseController {
 
 	public function getHome()
 	{
-		$recentPosts = Post::where( 'is_published', '=', 'true' )->orderBy( 'created_at', 'desc' )->take( 3 )->get();
+		$recentPosts = Post::where( 'is_published', '=', 'true' )->orderBy( 'published_at', 'desc' )->take( 3 )->get();
 
 		$viewData = [
 			'pageTitle' => 'Home',
@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 	public function getAdminHome()
 	{
 		$viewData = [
-			'pageTitle' => 'Home',
+			'pageTitle' => 'Dashboard',
 		];
 
 		return View::make( 'admin.home', $viewData );
