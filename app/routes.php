@@ -4,7 +4,9 @@
 
 View::share( 'siteTitle', Config::get( 'site.title', '' ) );
 View::share( 'monkVersion', Config::get( 'site.version', '' ) );
-View::share( 'pageList', Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get() );
+if( php_sapi_name() != 'cli' ) {
+    View::share( 'pageList', Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get() );
+}
 View::share( 'dateFormat', 'l, M jS @ g:ia' );
 
 // Public routes
