@@ -24,13 +24,15 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment([
-	'local' => [
-		'vagrant',
-		'homestead', 
-		'vagrant-ubuntu-trusty-64',
-	],
-]);
+$env = $app->detectEnvironment( function()
+{
+	$environment = getenv( 'MONK_BLOG_ENVIRONMENT' );
+	if ( empty( $environment ) ) {
+		return 'local';
+	}
+
+	return $environment;
+});
 
 /*
 |--------------------------------------------------------------------------

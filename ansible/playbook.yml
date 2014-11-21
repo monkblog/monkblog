@@ -4,6 +4,7 @@
   vars:
     web_server: nginxphp
     servername: monk.dev www.monk.dev 192.168.33.99
+    environment: production
     timezone: America/Chicago
   vars_files:
     - vars/common.yml

@@ -4,6 +4,7 @@
 	"keywords": ["blog", "laravel"],
 	"license": "MIT",
 	"type": "project",
+	"version": "1.0.1",
 	"require": {
 		"laravel/framework": "4.2.*",
 		"graham-campbell/markdown": "~2.0"
