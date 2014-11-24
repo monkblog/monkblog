@@ -30,6 +30,7 @@ Route::group( [ 'prefix' => 'admin', 'before' => 'auth' ], function () {
 	Route::get( '/pages/{id}/publish', [ 'as' => 'admin.pages.publish', 'uses' => 'PagesController@publish' ] );
 	Route::get( '/pages/{id}/delete', [ 'as' => 'admin.pages.confirmdestroy', 'uses' => 'PagesController@confirmDestroy' ] );
 	Route::get( '/categories/{id}/delete', [ 'as' => 'admin.categories.confirmdestroy', 'uses' => 'CategoriesController@confirmDestroy' ] );
+	Route::get( '/users/{id}/delete', [ 'as' => 'admin.users.confirmdestroy', 'uses' => 'UsersController@confirmDestroy' ] );
 	Route::resource( 'categories', 'CategoriesController' );
 	Route::resource( 'pages', 'PagesController' );
 	Route::resource( 'posts', 'PostsController' );
