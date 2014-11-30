@@ -43,7 +43,8 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			$redirectTo = ( Request::path() != 'admin' && strstr( Request::path() , 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
+			return Redirect::guest( 'login' . $redirectTo );
 		}
 	}
 });

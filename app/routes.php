@@ -4,7 +4,9 @@
 
 View::share( 'siteTitle', Config::get( 'site.title', '' ) );
 View::share( 'monkVersion', Config::get( 'site.version', '' ) );
-View::share( 'pageList', Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get() );
+if( php_sapi_name() != 'cli' ) {
+    View::share( 'pageList', Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get() );
+}
 View::share( 'dateFormat', 'l, M jS @ g:ia' );
 
 // Public routes
@@ -28,6 +30,7 @@ Route::group( [ 'prefix' => 'admin', 'before' => 'auth' ], function () {
 	Route::get( '/pages/{id}/publish', [ 'as' => 'admin.pages.publish', 'uses' => 'PagesController@publish' ] );
 	Route::get( '/pages/{id}/delete', [ 'as' => 'admin.pages.confirmdestroy', 'uses' => 'PagesController@confirmDestroy' ] );
 	Route::get( '/categories/{id}/delete', [ 'as' => 'admin.categories.confirmdestroy', 'uses' => 'CategoriesController@confirmDestroy' ] );
+	Route::get( '/users/{id}/delete', [ 'as' => 'admin.users.confirmdestroy', 'uses' => 'UsersController@confirmDestroy' ] );
 	Route::resource( 'categories', 'CategoriesController' );
 	Route::resource( 'pages', 'PagesController' );
 	Route::resource( 'posts', 'PostsController' );

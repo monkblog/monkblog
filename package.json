@@ -1,7 +1,7 @@
 {
   "name": "monkblog",
   "description": "A blog engine built on Laravel",
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "licenses": [
     {
       "name": "MIT",
