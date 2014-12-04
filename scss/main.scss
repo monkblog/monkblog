@@ -2,6 +2,7 @@
 @import "foundation";
 
 footer {
+    margin-top: 1rem;
     p {
         font-size: 0.75rem;
         text-align: center;
@@ -16,11 +17,30 @@ header {
     }
 }
 
-header.home {
-    h1 {
-        font-size: 2rem;
-        margin: 1rem 0;
-    }
+h3 {
+    border-bottom: 1px dotted #000;
+    display: block;
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+h3::first-letter {
+    color: #aaa;
+}
+
+.home h1 {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.post h1 {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+}
+
+.post header h1 {
+    font-size: 1.5rem;
 }
 
 .featured {
@@ -57,4 +77,9 @@ header.home {
         border-bottom: 1px solid $smoke;
         margin: 1rem 0;
     }
+}
+
+.read-more {
+    display: block;
+    margin-top: 1rem;
 }

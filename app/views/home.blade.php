@@ -1,12 +1,16 @@
 @extends( 'layout' )
 
+@section( 'bodyclass' )
+home
+@stop
+
 @section( 'content' )
     @if( !empty( $featuredPost ) )
     <article class="featured">
         <h1>{{{ $featuredPost->title }}}</h1>
         <span class="meta">{{ date( $dateFormat, strtotime( $featuredPost->published_at ) ) }}</span>
         <div class="summary">{{{ $featuredPost->summary }}}</div>
-        <a href="{{ URL::route( 'post.public.show', $featuredPost->slug ) }}">Read More</a>
+        <a href="{{ URL::route( 'post.public.show', $featuredPost->slug ) }}" class="read-more">Read More</a>
     </article>
     @endif
 
@@ -16,7 +20,7 @@
                 <h2><a href="{{ URL::route( 'post.public.show', $post->slug ) }}">{{{ $post->title }}}</a></h2>
                 <span class="meta">{{ date( $dateFormat, strtotime( $post->published_at ) ) }}</span>
                 <div class="summary">{{{ $post->summary }}}</div>
-                <a href="{{ URL::route( 'post.public.show', $post->slug ) }}">Read More</a>
+                <a href="{{ URL::route( 'post.public.show', $post->slug ) }}" class="read-more">Read More</a>
             </article>
         @endforeach
     @else

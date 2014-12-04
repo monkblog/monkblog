@@ -15,6 +15,7 @@
 
     <ul class="side-nav" role="navigation">
         <li role="menuitem">Email: <a href="mailto:manatrance@gmail.com">manatrance@gmail.com</a></li>
+        <li role="menuitem">Facebook: <a href="https://www.facebook.com/ben.overmyer">ben.overmyer</a></li>
         <li role="menuitem">Twitter: <a href="https://www.twitter.com/bovermyer">@bovermyer</a></li>
     </ul>
 </section>

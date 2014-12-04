@@ -9057,13 +9057,17 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-/* line 5, ../../scss/main.scss */
+/* line 4, ../../scss/main.scss */
+footer {
+  margin-top: 1rem;
+}
+/* line 6, ../../scss/main.scss */
 footer p {
   font-size: 0.75rem;
   text-align: center;
 }
 
-/* line 12, ../../scss/main.scss */
+/* line 13, ../../scss/main.scss */
 header h1 {
   font-size: 1.1rem;
   margin: 0;
@@ -9071,45 +9075,76 @@ header h1 {
 }
 
 /* line 20, ../../scss/main.scss */
-header.home h1 {
+h3 {
+  border-bottom: 1px dotted #000;
+  display: block;
+  font-size: 1.25rem;
+  padding-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* line 28, ../../scss/main.scss */
+h3::first-letter {
+  color: #aaa;
+}
+
+/* line 32, ../../scss/main.scss */
+.home h1 {
   font-size: 2rem;
   margin: 1rem 0;
 }
 
-/* line 26, ../../scss/main.scss */
+/* line 37, ../../scss/main.scss */
+.post h1 {
+  font-size: 4.5rem;
+  line-height: 4.5rem;
+}
+
+/* line 42, ../../scss/main.scss */
+.post header h1 {
+  font-size: 1.5rem;
+}
+
+/* line 46, ../../scss/main.scss */
 .featured {
   margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
 }
-/* line 30, ../../scss/main.scss */
+/* line 50, ../../scss/main.scss */
 .featured .meta {
   font-size: 0.9rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 37, ../../scss/main.scss */
+/* line 57, ../../scss/main.scss */
 .posts {
   list-style: none;
   margin: 0;
 }
-/* line 40, ../../scss/main.scss */
+/* line 60, ../../scss/main.scss */
 .posts li {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-/* line 48, ../../scss/main.scss */
+/* line 68, ../../scss/main.scss */
 .post .meta {
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 56, ../../scss/main.scss */
+/* line 76, ../../scss/main.scss */
 .post.full .meta {
   border-bottom: 1px solid #eeeeee;
   margin: 1rem 0;
+}
+
+/* line 82, ../../scss/main.scss */
+.read-more {
+  display: block;
+  margin-top: 1rem;
 }

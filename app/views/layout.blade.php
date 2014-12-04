@@ -5,11 +5,16 @@
         <link href='http://fonts.googleapis.com/css?family=Cabin:500|Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="{{ asset( 'css/main.css' ) }}">
     </head>
-    <body>
+    <body class="@yield( 'bodyclass' )">
         <div class="row">
-            <header class="small-12 columns @if( Route::currentRouteName() == 'home' ) home @endif">
+            <header class="small-12 columns">
                 <h1><a href="{{ URL::route( 'home' ) }}">{{{ $siteTitle }}}</a> <small>Developer and Game Designer</small></h1>
             </header>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                @yield( 'top-content' )
+            </div>
         </div>
         <div class="row">
             <div class="small-9 columns">
