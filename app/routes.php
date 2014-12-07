@@ -2,11 +2,11 @@
 
 // Shared variables
 
+$pageList = Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
+
 View::share( 'siteTitle', Config::get( 'site.title', '' ) );
 View::share( 'monkVersion', Config::get( 'site.version', '' ) );
-if( php_sapi_name() != 'cli' ) {
-    View::share( 'pageList', Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get() );
-}
+View::share( 'pageList', $pageList );
 View::share( 'dateFormat', 'l, M jS @ g:ia' );
 
 // Public routes
