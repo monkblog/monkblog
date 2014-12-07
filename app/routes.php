@@ -2,7 +2,10 @@
 
 // Shared variables
 
-$pageList = Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
+$pageList = [];
+if ( php_sapi_name() != 'cli' ) {
+    $pageList = Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
+}
 
 View::share( 'siteTitle', Config::get( 'site.title', '' ) );
 View::share( 'monkVersion', Config::get( 'site.version', '' ) );
