@@ -34,12 +34,13 @@ class UsersController extends \BaseController {
     {
         $validator = Validator::make($data = Input::all(), User::$rules);
 
-        if ($validator->fails())
+        if( $validator->fails() )
         {
             return Redirect::back()->withErrors($validator)->withInput();
         }
+        $data[ 'password' ] = Hash::make( $data[ 'password' ] );
 
-        User::create($data);
+        User::create( $data );
 
         return Redirect::route('admin.users.index');
     }
