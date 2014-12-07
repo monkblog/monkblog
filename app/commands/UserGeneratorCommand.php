@@ -48,8 +48,14 @@ class UserGeneratorCommand extends Command {
 		$validator = Validator::make( $userData, User::$rules );
 
 		if( $validator->fails() ) {
-			$this->error( $validator->errors()->first() );
-			$this->info( 'Trying running ' . $this->name . ' again.');
+			$messages = $validator->errors()->getMessages();
+			foreach( $messages as $message ) {
+				if( isset( $message[ 0 ] ) ) {
+					$this->error( $message[ 0 ] );
+					echo "\n";
+				}
+			}
+			$this->info( 'Try running ' . $this->name . ' again.');
 		}
 		else {
 			$userData[ 'password' ] = Hash::make( $userData[ 'password' ] );
