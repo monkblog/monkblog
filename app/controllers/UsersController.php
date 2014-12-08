@@ -1,6 +1,8 @@
 <?php
 
-class UsersController extends \BaseController {
+use \Illuminate\Support\MessageBag;
+
+class UsersController extends BaseController {
 
     /**
      * Display a listing of users
@@ -79,18 +81,25 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update( $id )
     {
         $user = User::findOrFail( $id );
-        $data = Input::all();
+        $data = Input::except( 'password' );
+        $passwordInput = Input::get( 'password' );
 
         $userRules = User::$rules;
-        //allow a user to update his info
+        //allow a user to update their info
         $userRules[ 'email' ] = str_replace( '{id}', $user->id, $userRules[ 'email' ] );
         $userRules[ 'display_name' ] = str_replace( '{id}', $user->id, $userRules[ 'display_name' ] );
-        $data[ 'password_confirmation' ] = $data[ 'password' ];
+        $userRules[ 'password' ] = '';
 
-        $validator = Validator::make( $data, $userRules );
+        if( !Hash::check( $passwordInput, $user->getAuthPassword() ) ) {
+            return Redirect::back()->withErrors(new MessageBag( [
+                    'password' => 'Update failed, invalid password'
+                ]) )->withInput()->exceptInput( 'password' );
+        }
+
+        $validator = Validator::make( $data, array_filter( $userRules ) );
 
         if( $validator->fails() ) {
             return Redirect::back()->withErrors($validator)->withInput();
@@ -99,6 +108,10 @@ class UsersController extends \BaseController {
         $user->update( $data );
 
         return Redirect::route('admin.users.index');
+    }
+
+    public function updatePassword( $id ) {
+
     }
 
     public function confirmDestroy( $id ) {

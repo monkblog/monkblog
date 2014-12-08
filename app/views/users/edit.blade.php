@@ -8,10 +8,19 @@
         {{ Form::text( 'last_name' ) }}
         {{ Form::label( 'display_name', 'Display Name' ) }}
         {{ Form::text( 'display_name' ) }}
+        @if( $error = $errors->first( 'display_name' ) )
+        <small class="error">{{ $error }}</small>
+        @endif
         {{ Form::label( 'email', 'Email' ) }}
         {{ Form::email( 'email' ) }}
+        @if( $error = $errors->first( 'email' ) )
+        <small class="error">{{ $error }}</small>
+        @endif
         {{ Form::label( 'password', 'Enter Password to Update' ) }}
         {{ Form::password( 'password' ) }}
+        @if( $error = $errors->first( 'password' ) )
+        <small class="error">{{ $error }}</small>
+        @endif
         {{ Form::submit( 'Save', [ 'class' => 'button' ] ) }}
     {{ Form::close() }}
 @stop
