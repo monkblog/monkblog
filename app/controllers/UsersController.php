@@ -111,7 +111,20 @@ class UsersController extends BaseController {
     }
 
     public function updatePassword( $id ) {
+        /**
+         * @todo add access for super admin once ACL is in place
+         */
+        if( Auth::id() != $id ) {
+            return Redirect::route( 'admin.users.index' )->withErrors(
+                new MessageBag( [
+                    'change_password' => "You don't have the right permissions to change the selected Users password"
+                ]) );
+        }
 
+        $user = User::find( $id );
+        $pageTitle = 'Reset Password for '. $user->display_name;
+
+        return View::make( 'users.edit-password', compact( 'user', 'pageTitle' ) );
     }
 
     public function confirmDestroy( $id ) {

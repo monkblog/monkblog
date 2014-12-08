@@ -21,6 +21,6 @@
         @if( $error = $errors->first( 'password' ) )
         <small class="error">{{ $error }}</small>
         @endif
-        {{ Form::submit( 'Save', [ 'class' => 'button' ] ) }}
+        {{ Form::submit( 'Update', [ 'class' => 'button' ] ) }}
     {{ Form::close() }}
 @stop

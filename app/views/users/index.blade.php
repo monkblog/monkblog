@@ -1,6 +1,9 @@
 @extends( 'admin.layout' )
 
 @section( 'content' )
+    @if( $error = $errors->first( 'change_password' ) )
+    <small class="error">{{ $error }}</small>
+    @endif
     <table>
         <thead>
             <tr><th>Email</th><th>Name</th><th>Display Name</th><th></th></tr>
@@ -8,10 +11,16 @@
         <tbody>
     @foreach( $users as $user )
         <tr>
-            <td><a href="{{ URL::route( 'admin.users.edit', $user->id ) }}">{{{ $user->email }}}</a></td>
+            <td>
+                <h5><a href="{{ URL::route( 'admin.users.edit', $user->id ) }}" title="Edit {{ $user->display_name }}">{{{ $user->email }}}</a></h5>
+                <a href="{{ URL::route( 'admin.users.updatePassword', $user->id ) }}" title="Change Password">Change Password</a>
+            </td>
             <td>{{{ $user->first_name }}} {{{ $user->last_name }}}</td>
             <td>{{{ $user->display_name }}}</td>
-            <td><a href="{{ URL::route( 'admin.users.confirmdestroy', $user->id ) }}" title="Delete {{{ $user->display_name }}}" class="button alert">Delete</a></td>
+            <td>
+                <a href="{{ URL::route( 'admin.users.edit', $user->id ) }}" title="Edit {{{ $user->display_name }}}" class="button">Edit</a>
+                <a href="{{ URL::route( 'admin.users.confirmdestroy', $user->id ) }}" title="Delete {{{ $user->display_name }}}" class="button alert">Delete</a>
+            </td>
             </tr>
     @endforeach
         </tbody>

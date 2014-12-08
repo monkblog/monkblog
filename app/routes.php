@@ -39,6 +39,7 @@ Route::group( [ 'prefix' => 'admin', 'before' => 'auth' ], function () {
     Route::get( '/pages/{id}/delete', [ 'as' => 'admin.pages.confirmdestroy', 'uses' => 'PagesController@confirmDestroy' ] );
     Route::get( '/categories/{id}/delete', [ 'as' => 'admin.categories.confirmdestroy', 'uses' => 'CategoriesController@confirmDestroy' ] );
     Route::get( '/users/{id}/delete', [ 'as' => 'admin.users.confirmdestroy', 'uses' => 'UsersController@confirmDestroy' ] );
+    Route::get( '/users/{id}/resetPassword', [ 'as' => 'admin.users.updatePassword', 'uses' => 'UsersController@updatePassword' ] );
     Route::get( '/options/{id}/delete', [ 'as' => 'admin.options.confirmdestroy', 'uses' => 'OptionsController@confirmDestroy' ] );
     Route::resource( 'categories', 'CategoriesController' );
     Route::resource( 'pages', 'PagesController' );
