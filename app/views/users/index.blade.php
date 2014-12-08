@@ -4,6 +4,12 @@
     @if( $error = $errors->first( 'change_password' ) )
     <small class="error">{{ $error }}</small>
     @endif
+    @if( Input::old( 'message' ) )
+    <div data-alert class="alert-box success radius">
+      {{ Input::old( 'message' ) }}
+      <a href="#" class="close">&times;</a>
+    </div>
+    @endif
     <table>
         <thead>
             <tr><th>Email</th><th>Name</th><th>Display Name</th><th></th></tr>

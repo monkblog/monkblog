@@ -127,6 +127,46 @@ class UsersController extends BaseController {
         return View::make( 'users.edit-password', compact( 'user', 'pageTitle' ) );
     }
 
+    public function savePassword( $id ) {
+        /**
+         * @todo add access for super admin once ACL is in place
+         */
+        if( Auth::id() != $id ) {
+            return Redirect::route( 'admin.users.index' )->withErrors(
+                new MessageBag( [
+                    'change_password' => "You don't have the right permissions to change the selected Users password"
+                ]) );
+        }
+
+        $user = User::find( $id );
+
+        $data = Input::except( 'old_password' );
+
+        if( !Hash::check( Input::get( 'old_password' ), $user->getAuthPassword() ) ) {
+            return Redirect::back()->withErrors( new MessageBag( [
+                'old_password' => 'Update failed, incorrect password supplied'
+            ]) )->withInput()->exceptInput( 'password' );
+        }
+
+        $userRules = User::$rules;
+        //allow a user to update their info
+        $userRules[ 'email' ] = str_replace( '{id}', $user->id, $userRules[ 'email' ] );
+        $userRules[ 'display_name' ] = str_replace( '{id}', $user->id, $userRules[ 'display_name' ] );
+
+        $validator = Validator::make( $data, array_filter( $userRules ) );
+
+        if( $validator->fails() ) {
+            return Redirect::back()->withErrors($validator)->withInput()->exceptInput( 'password' );
+        }
+
+        $data[ 'password' ] = Hash::make( $data[ 'password' ] );
+
+        $user->update( $data );
+
+        return Redirect::route( 'admin.users.index' )->withInput( [ 'message' => 'Password successfully changed.' ] );
+
+    }
+
     public function confirmDestroy( $id ) {
         $user = User::find( $id );
 
