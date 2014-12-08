@@ -18,6 +18,7 @@
                     <li><a href="{{ route( 'admin.pages.index' ) }}">Pages</a></li>
                     <li><a href="{{ route( 'admin.categories.index' ) }}">Categories</a></li>
                     <li><a href="{{ route( 'admin.users.index' ) }}">Users</a></li>
+                    <li><a href="{{ route( 'admin.options.index' ) }}">Options</a></li>
                     <li><a href="{{ route( 'logout' ) }}">Logout</a></li>
                 </ul>
             </section>

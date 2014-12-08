@@ -81,12 +81,18 @@ class UsersController extends \BaseController {
      */
     public function update($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail( $id );
+        $data = Input::all();
 
-        $validator = Validator::make( $data = Input::all(), User::$rules );
+        $userRules = User::$rules;
+        //allow a user to update his info
+        $userRules[ 'email' ] = str_replace( '{id}', $user->id, $userRules[ 'email' ] );
+        $userRules[ 'display_name' ] = str_replace( '{id}', $user->id, $userRules[ 'display_name' ] );
+        $data[ 'password_confirmation' ] = $data[ 'password' ];
 
-        if( $validator->fails() )
-        {
+        $validator = Validator::make( $data, $userRules );
+
+        if( $validator->fails() ) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
