@@ -119,6 +119,7 @@ class PostsController extends \BaseController {
 			App::abort( 404 );
 		}
 
+        $post->body = Markdown::render( $post->body );
 		return View::make( 'posts.show', compact( 'post' ) );
 	}
 
