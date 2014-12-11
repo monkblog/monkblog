@@ -14,8 +14,8 @@ home
     </article>
     {% endif %}
 
-    {% if recentPosts|length != 0 %}
-        {% for index, post in posts %}
+    {% if recentPosts is not empty and recentPosts is iterable %}
+        {% for index, post in recentPosts %}
             <article class="post small-4 columns">
                 <h2><a href="{{ url_route( 'post.public.show', post.slug ) }}">{{ post.title }}</a></h2>
                 <span class="meta">{{ post.published_at|date( dateFormat ) }}</span>
