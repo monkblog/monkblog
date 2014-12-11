@@ -21,14 +21,14 @@ class RouteTest extends TestCase {
 	public function testAdminLetsInAuthenticatedUser()
 	{
 		Route::enableFilters();
-		
+
 		$user = new User( [ 'email' => 'user@example.com' ] );
 
 		$this->be( $user );
 
 		$this->call( 'GET', '/admin' );
 
-		$this->assertRedirectedToRoute( 'admin.home' );
+		$this->assertResponseStatus( 200 );
 	}
 
 }
