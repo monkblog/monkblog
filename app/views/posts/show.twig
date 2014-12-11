@@ -1,0 +1,19 @@
+{% extends 'layout' %}
+
+{% block bodyclass %}
+post
+{% endblock %}
+
+{% block top_content %}
+    <h1>{{ post.title | replace( { "'" : '&rsquo;' } ) }}</h1>
+{% endblock %}
+
+{% block content %}
+    <article class="post full">
+        <div class="meta">{{ post.published_at | date( dateFormat ) }}</div>
+
+        <div id="content">
+            {{ post.body }}
+        </div>
+    </article>
+{% endblock %}

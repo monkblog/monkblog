@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{{ $pageTitle }}} | {{{ $siteTitle }}}</title>
+        <title>{{ pageTitle }} | {{ siteTitle }}</title>
         <link href='http://fonts.googleapis.com/css?family=Cabin:500|Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="{{ asset( 'css/main.css' ) }}">
     </head>
-    <body class="@yield( 'bodyclass' )">
+    <body class="{% block bodyclass %}{% endblock %}">
         <div class="row">
             <header class="small-12 columns">
-                <h1><a href="{{ URL::route( 'home' ) }}">{{{ $siteTitle }}}</a> <small>Developer and Game Designer</small></h1>
+                <h1><a href="{{ url_route( 'home' ) }}">{{ siteTitle }}</a> <small>Developer and Game Designer</small></h1>
             </header>
         </div>
         <div class="row">
             <div class="small-12 columns">
-                @yield( 'top-content' )
+                {% block top_content %}{% endblock %}
             </div>
         </div>
         <div class="row">
             <div class="small-9 columns">
-                @yield( 'content' )
+                {% block content %}{% endblock %}
             </div>
             <div class="small-3 columns">
-                @include( 'sidebar' )
+                {% include 'sidebar' %}
             </div>
         </div>
         <div class="row">

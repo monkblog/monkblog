@@ -76,6 +76,8 @@ class PagesController extends \BaseController {
 	{
 		$page = Page::findOrFail( $id );
 
+        $page->body = Markdown::render( $page->body );
+
 		$viewData = [
 			'page' => $page,
 			'pageTitle' => $page->title,
