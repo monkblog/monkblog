@@ -6,7 +6,7 @@
         <link type="text/css" rel="stylesheet" href="{{ asset( 'css/general_foundicons.css' ) }}">
         <link type="text/css" rel="stylesheet" href="{{ asset( 'css/main.css' ) }}">
     </head>
-    <body>
+    <body class="{% block bodyclass %}{% endblock %}">
         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
                 <li class="name"><h1><a href="{{ route( 'home' ) }}">{{ siteTitle }}</a></h1></li>
@@ -31,6 +31,7 @@
         </footer>
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="{{ asset( 'js/foundation.min.js' ) }}"></script>
+        {% block javascript %}{% endblock %}
         <script src="{{ asset( 'js/app.js' ) }}"></script>
     </body>
 </html>
