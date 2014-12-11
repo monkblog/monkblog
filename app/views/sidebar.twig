@@ -2,11 +2,11 @@
     <h3>Navigation</h3>
 
     <ul class="side-nav" role="navigation">
-        <li role="menuitem"><a href="{{ URL::route( 'home' ) }}">Home</a></li>
-        <li role="menuitem"><a href="{{ URL::route( 'archive', [ 0, 5 ] ) }}">Archive</a></li>
-        @foreach( $pageList as $page )
-            <li role="menuitem"><a href="{{ URL::route( 'page.public.show', $page->slug ) }}">{{{ $page->title }}}</a></li>
-        @endforeach
+        <li role="menuitem"><a href="{{ url_route( 'home' ) }}">Home</a></li>
+        <li role="menuitem"><a href="{{ url_route( 'archive', [ 0, 5 ] ) }}">Archive</a></li>
+        {% for page in pageList %}
+            <li role="menuitem"><a href="{{ url_route( 'page.public.show', page.slug ) }}">{{ page.title }}</a></li>
+        {% endfor %}
     </ul>
 </section>
 
