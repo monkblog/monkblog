@@ -7,14 +7,14 @@ editor
 {% block content %}
     <div class="row">
         <div class="small-6 columns">
-            {{ form_model( page, { 'route' : { 0 : 'admin.pages.update', 1 : page.id }, 'method' : 'put' } ) }}
+            {{ form_model( page, { route : [ 'admin.pages.update', page.id ], method : 'put' } ) }}
             {{ form_label( 'title', 'Title' ) }}
             {{ form_text( 'title' ) }}
             {{ form_label( 'slug', 'Slug' ) }}
             {{ form_text( 'slug' ) }}
             {{ form_label( 'body', 'Body' ) }}
             {{ form_textarea( 'body' ) }}
-            {{ form_submit( 'Save', { 'class' : 'button' } ) }}
+            {{ form_submit( 'Save', { class : 'button' } ) }}
             {{ form_close() }}
         </div>
         <div class="small-6 columns">
