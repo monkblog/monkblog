@@ -120,7 +120,7 @@ class CategoriesController extends \BaseController {
 
 		$category->update( $data );
 
-		return Redirect::route( 'categories.index' );
+		return Redirect::route( 'admin.categories.index' );
 	}
 
 	public function confirmDestroy( $id ) {

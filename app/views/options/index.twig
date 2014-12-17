@@ -1,0 +1,18 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Value</th> </tr>
+        </thead>
+        <tbody>
+    {% for option in options %}
+        <tr>
+            <td><a href="{{ url_route( 'admin.options.edit', option.id ) }}">{{ option.name }}</a></td>
+            <td>{{ option.value }}</td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_route( 'admin.options.create' ) }}" class="button">Create New Option</a>
+{% endblock %}

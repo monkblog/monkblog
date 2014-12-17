@@ -1,0 +1,19 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    {{ form_model( user, { 'route'  { 0 : 'admin.users.update', 1 : user.id }, 'method' : 'put' }  ) }}
+        {{ form_label( 'first_name', 'First Name' ) }}
+        {{ form_text( 'first_name' ) }}
+        {{ form_label( 'last_name', 'Last Name' ) }}
+        {{ form_text( 'last_name' ) }}
+        {{ form_label( 'display_name', 'Display Name' ) }}
+        {{ form_text( 'display_name' ) }}
+        {{ form_label( 'email', 'Email' ) }}
+        {{ form_email( 'email' ) }}
+        {{ form_label( 'password', 'Password' ) }}
+        {{ form_password( 'password' ) }}
+        {{ form_label( 'password_confirmation', 'Confirm Password' ) }}
+        {{ form_password( 'password_confirmation' ) }}
+        {{ form_submit( 'Save', { 'class' : 'button' } ) }}
+    {{ form_close() }}
+{% endblock %}

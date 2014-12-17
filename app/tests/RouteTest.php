@@ -2,16 +2,33 @@
 
 class RouteTest extends TestCase {
 
-	/**
-	 * A basic functional test example.
-	 *
-	 * @return void
-	 */
 	public function testHomeWorks()
 	{
-		$crawler = $this->client->request('GET', '/');
+		$this->call( 'GET', '/' );
 
-		$this->assertTrue( $this->client->getResponse()->isOk() );
+		$this->assertResponseOk();
+	}
+
+	public function testAdminIsFirewalled()
+	{
+		Route::enableFilters();
+
+		$this->call( 'GET', '/admin' );
+
+		$this->assertRedirectedToRoute( 'login' );
+	}
+
+	public function testAdminLetsInAuthenticatedUser()
+	{
+		Route::enableFilters();
+
+		$user = new User( [ 'email' => 'user@example.com' ] );
+
+		$this->be( $user );
+
+		$this->call( 'GET', '/admin' );
+
+		$this->assertResponseStatus( 200 );
 	}
 
 }

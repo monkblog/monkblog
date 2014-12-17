@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'providers' => array(
+	'providers' => [
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
@@ -124,8 +124,8 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-
-	),
+		'TwigBridge\ServiceProvider',
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -151,7 +151,7 @@ return array(
 	|
 	*/
 
-	'aliases' => array(
+	'aliases' => [
 
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
@@ -191,7 +191,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-		'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown',
-	),
+		'Markdown'          => 'GrahamCampbell\Markdown\Facades\Markdown',
+		'Twig'              => 'TwigBridge\Facade\Twig',
+	],
 
 );

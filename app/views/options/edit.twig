@@ -1,0 +1,12 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    {{ form_model( option, { 'route' : { 0 : 'admin.options.update' , 1 : option.id }, 'method' : 'put' } ) }}
+        {{ form_label( 'name', 'Option Name' ) }}
+        {{ form_text( 'name' ) }}
+        {{ form_label( 'value', 'Option Value' ) }}
+        {{ form_text( 'value' ) }}
+        {{ form_hidden( 'autoload', true ) }}
+        {{ form_submit( 'Save', { 'class' : 'button' } ) }}
+    {{ form_close() }}
+{% endblock %}
