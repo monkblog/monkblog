@@ -9,7 +9,11 @@
     <body class="{% block bodyclass %}{% endblock %}">
         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
-                <li class="name"><h1><a href="{{ route( 'home' ) }}">{{ siteTitle }}</a></h1></li>
+                <li class="name">
+                    <h1>
+                        <a href="{{ route( 'home' ) }}">{{ siteTitle }}</a>
+                    </h1>
+                </li>
             </ul>
             <section class="top-bar-section">
                 <ul class="right">
@@ -20,15 +24,17 @@
                     <li><a href="{{ route( 'admin.users.index' ) }}">Users</a></li>
                     <li><a href="{{ route( 'logout' ) }}">Logout</a></li>
                 </ul>
+                <ul class="left">
+                    <li>
+                        <small>Powered by Monk</small>
+                    </li>
+                </ul>
             </section>
         </nav>
         <div class="row fullWidth">
             <h1>{{ pageTitle }}</h1>
             {% block content %}{% endblock %}
         </div>
-        <footer class="row">
-            <p>Powered by Monk&trade; v{{ monkVersion }}</p>
-        </footer>
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="{{ asset( 'js/foundation.min.js' ) }}"></script>
         {% block javascript %}{% endblock %}
