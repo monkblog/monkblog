@@ -29,7 +29,7 @@ class PostsController extends \BaseController {
 		if ( $offset < 0 ) {
 			$offset = 0;
 		}
-		
+
 		$posts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->skip( $offset )->take( $limit )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
 
 		$postCount = Post::where( 'is_published', '=', true )->count();
@@ -45,10 +45,15 @@ class PostsController extends \BaseController {
 			$less = true;
 		}
 
+		$nextOffset = $offset + $limit;
+		$prevOffset = ( $offset - $limit < 0 ) ? 0 : $offset - $limit;
+
 		$viewData = [
 			'posts' => $posts,
 			'pageTitle' => 'Archive',
 			'offset' => $offset,
+			'nextOffset' => $nextOffset,
+			'prevOffset' => $prevOffset,
 			'limit' => $limit,
 			'more' => $more,
 			'less' => $less,
