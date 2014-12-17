@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment( function()
 {
 	$environment = getenv( 'MONK_BLOG_ENVIRONMENT' );
-	if ( empty( $environment ) ) {
+	if ( empty( $environment ) || $environment == '{}' ) {
 		return 'local';
 	}
 
