@@ -3,7 +3,7 @@
 class Option extends \Eloquent {
 
     public static $rules = [
-        'name' => 'required|unique:options',
+        'name' => 'required|unique:options,name,{id}',
         'value' => 'required',
     ];
 

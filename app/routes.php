@@ -5,15 +5,17 @@
 $pageList = [];
 $siteTitle = Config::get( 'site.title', '' );
 $siteVersion = Config::get( 'site.version', '' );
+$tagline = Config::get( 'site.tagline', '' );
 if ( php_sapi_name() != 'cli' ) {
     $pageList = Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
-    $siteTile = Option::where( 'name', '=', 'site_title' )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
-    $siteVersion = Option::where( 'name', '=',  'monk_version' )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
-    $siteVersion = ( is_object( $siteVersion[ 0 ] ) ) ? $siteVersion[ 0 ] : Config::get( 'site.version', '' );
+    $siteTitle = Option::where( 'name', '=', 'site_title' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $siteVersion = Option::where( 'name', '=',  'monk_version' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $tagline = Option::where( 'name', '=',  'tagline' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
 }
 
-View::share( 'siteTitle',  $siteTitle);
+View::share( 'siteTitle',  $siteTitle );
 View::share( 'monkVersion', $siteVersion );
+View::share( 'tagline',  $tagline );
 View::share( 'pageList', $pageList );
 View::share( 'dateFormat', 'l, M jS @ g:ia' );
 

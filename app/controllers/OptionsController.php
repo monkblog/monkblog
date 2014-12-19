@@ -50,7 +50,10 @@ class OptionsController extends BaseController {
      */
     public function show($id)
     {
-        //
+        $option = Option::findOrFail( $id );
+        $pageTitle = $option->name;
+
+        return View::make( 'users.show', compact( 'option', 'pageTitle' ) );
     }
 
     /**
@@ -63,9 +66,10 @@ class OptionsController extends BaseController {
     public function edit($id)
     {
         $option = option::find($id);
-        $pageTitle = 'Edit '. $option->name;
+        $optionName = ucwords( str_replace( '_', ' ', $option->name ) );
+        $pageTitle = 'Edit '. $optionName;
 
-        return View::make( 'options.edit', compact( 'option', 'pageTitle' ) );
+        return View::make( 'options.edit', compact( 'option', 'optionName', 'pageTitle' ) );
     }
 
     /**
@@ -79,10 +83,13 @@ class OptionsController extends BaseController {
     {
         $option = Option::findOrFail($id);
 
-        $validator = Validator::make( $data = Input::all(), Option::$rules );
+        $rules = Option::$rules;
 
-        if( $validator->fails() )
-        {
+        $rules[ 'name' ] = str_replace( '{id}', $option->id, $rules[ 'name' ] );
+
+        $validator = Validator::make( $data = Input::all(), $rules );
+
+        if( $validator->fails() ) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
@@ -92,19 +99,7 @@ class OptionsController extends BaseController {
     }
 
     public function confirmDestroy( $id ) {
-        $option = Option::find( $id );
-
-        if( in_array( $option->name, Config::get( 'options.locked', [ 'site_title', 'monk_version' ] ) ) ) {
-            Redirect::route( 'options.index' )->withErrors( new MessageBag( [
-                'name' => 'You can only edit: ' . $option->name,
-            ] ) );
-        }
-        $viewData = [
-            'user' => $option,
-            'pageTitle' => 'Confirm Delete ' . $option->name,
-        ];
-
-        return Response::view( 'options.destroy', $viewData );
+        //
     }
 
     /**
