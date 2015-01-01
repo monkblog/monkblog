@@ -9119,32 +9119,45 @@ h3::first-letter {
 }
 
 /* line 57, ../../scss/admin.scss */
+.fullWidth {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+/* line 64, ../../scss/admin.scss */
 .posts {
   list-style: none;
   margin: 0;
 }
-/* line 60, ../../scss/admin.scss */
+/* line 67, ../../scss/admin.scss */
 .posts li {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-/* line 68, ../../scss/admin.scss */
+/* line 75, ../../scss/admin.scss */
 .post .meta {
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 76, ../../scss/admin.scss */
+/* line 83, ../../scss/admin.scss */
 .post.full .meta {
   border-bottom: 1px solid #eeeeee;
   margin: 1rem 0;
 }
 
-/* line 82, ../../scss/admin.scss */
+/* line 89, ../../scss/admin.scss */
 .read-more {
   display: block;
   margin-top: 1rem;
+}
+
+/* line 95, ../../scss/admin.scss */
+.top-bar-section small {
+  color: #ccc;
 }

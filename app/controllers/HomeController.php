@@ -26,8 +26,13 @@ class HomeController extends BaseController {
 
 	public function getAdminHome()
 	{
+		$totalPosts = Post::count();
+		$totalPages = Page::count();
+
 		$viewData = [
 			'pageTitle' => 'Dashboard',
+			'totalPosts' => $totalPosts,
+			'totalPages' => $totalPages,
 		];
 
 		return View::make( 'admin.home', $viewData );

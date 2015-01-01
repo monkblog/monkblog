@@ -29,15 +29,5 @@ editor
 
 {% block javascript %}
 <script src="{{ asset( 'js/showdown.min.js' ) }}"></script>
-<script>
-var converter = new Showdown.converter();
-
-$( document ).ready( function() {
-    $( '#preview' ).html( converter.makeHtml( $( '#body' ).val() ) );
-
-    $( '#body' ).keyup( function() {
-        $( '#preview' ).html( converter.makeHtml( $( '#body' ).val() ) );
-    });
-});
-</script>
+<script src="{{ asset( 'js/admin.js' ) }}"></script>
 {% endblock %}
