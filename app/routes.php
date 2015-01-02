@@ -1,21 +1,31 @@
 <?php
 
 // Shared variables
-
 $pageList = [];
 $siteTitle = Config::get( 'site.title', '' );
 $siteVersion = Config::get( 'site.version', '' );
 $tagline = Config::get( 'site.tagline', '' );
+$contactEmail = Config::get( 'site_contact.email' );
+$contactFacebook = Config::get( 'site_contact.facebook' );
+$contactTwitter = Config::get( 'site_contact.twitter' );
 if ( php_sapi_name() != 'cli' ) {
-    $pageList = Page::where( 'is_published', '=', true )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
-    $siteTitle = Option::where( 'name', '=', 'site_title' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
-    $siteVersion = Option::where( 'name', '=',  'monk_version' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
-    $tagline = Option::where( 'name', '=',  'tagline' )->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $pageList = Page::where( 'is_published', '=', true )->cacheTags(['page', 'list'])->remember( Config::get( 'site.cacheduration', 5 ) )->get();
+
+    $siteTitle = Option::where( 'name', '=', 'site_title' )->cacheTags(['option', 'site_title'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $siteVersion = Option::where( 'name', '=',  'monk_version' )->cacheTags(['option', 'monk_version'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $tagline = Option::where( 'name', '=',  'tagline' )->cacheTags(['option', 'tagline'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+
+    $contactEmail = Option::where( 'name', '=', 'email' )->cacheTags(['option', 'email'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $contactFacebook = Option::where( 'name', '=', 'twitter' )->cacheTags(['option', 'twitter'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $contactTwitter = Option::where( 'name', '=', 'facebook' )->cacheTags(['option', 'facebook'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
 }
 
 View::share( 'siteTitle',  $siteTitle );
 View::share( 'monkVersion', $siteVersion );
 View::share( 'tagline',  $tagline );
+View::share( 'contactEmail', $contactEmail );
+View::share( 'contactFacebook', $contactFacebook );
+View::share( 'contactTwitter', $contactTwitter );
 View::share( 'pageList', $pageList );
 View::share( 'dateFormat', 'l, M jS @ g:ia' );
 

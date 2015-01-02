@@ -72,7 +72,9 @@ class UsersController extends BaseController {
         $user = User::find($id);
         $pageTitle = 'Edit '. $user->display_name;
 
-        return View::make( 'users.edit', compact( 'user', 'pageTitle' ) );
+        $authUser = Auth::user();
+
+        return View::make( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
     }
 
     /**
@@ -84,7 +86,7 @@ class UsersController extends BaseController {
     public function update( $id )
     {
         $user = User::findOrFail( $id );
-        $data = Input::except( 'password' );
+        $data = Input::except( 'password', 'password_confirmation' );
         $passwordInput = Input::get( 'password' );
 
         $userRules = User::$rules;

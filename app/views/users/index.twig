@@ -12,7 +12,7 @@
             <h5><a href="{{ url_route( 'admin.users.edit', user.id ) }}" title="Edit {{ user.display_name }}">{{ user.email }}</a></h5>
             <a href="{{ url_route( 'admin.users.updatePassword', user.id ) }}" title="Change Password">Change Password</a>
             </td>
-            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}{% if user.owner %} [ Site Owner ]{% endif %}</td>
             <td>{{ user.display_name }}</td>
             <td>
                 <a href="{{ url_route( 'admin.users.edit', user.id ) }}" title="Edit {{ user.display_name }}" class="button">Edit</a>

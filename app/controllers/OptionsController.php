@@ -12,11 +12,18 @@ class OptionsController extends BaseController {
      */
     public function index()
     {
-        $options = Option::all();
 
-        $pageTitle = 'Options';
+        $optionTabs = OptionTab::all();
 
-        return View::make( 'options.index', compact( 'options', 'pageTitle' ) );
+        $firstTab = $optionTabs->first();
+
+        $slug = $firstTab->slug;
+
+        $pageTitle = $firstTab->display_name . ' Options';
+
+        $options = $firstTab->options->all();
+
+        return View::make( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
     }
 
     /**
@@ -45,15 +52,22 @@ class OptionsController extends BaseController {
      * Display the specified resource.
      * GET /options/{id}
      *
-     * @param  int  $id
+     * @param  $slug
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $option = Option::findOrFail( $id );
-        $pageTitle = $option->name;
+        $optionTabs = OptionTab::all();
 
-        return View::make( 'users.show', compact( 'option', 'pageTitle' ) );
+        $optionTab = OptionTab::where( 'slug', '=', $slug )->get()->first();
+
+        $slug = $optionTab->slug;
+
+        $pageTitle = $optionTab->display_name . ' Options';
+
+        $options = $optionTab->options->all();
+
+        return View::make( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
     }
 
     /**
@@ -94,6 +108,14 @@ class OptionsController extends BaseController {
         }
 
         $option->update( $data );
+
+        Cache::tags('option', $option->name )->flush();
+
+        $tab = OptionTab::find($option->option_tab_id);
+
+        if( !empty( $tab ) ) {
+            return Redirect::route('admin.options.show', $tab->slug);
+        }
 
         return Redirect::route('admin.options.index');
     }
