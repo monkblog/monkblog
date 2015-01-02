@@ -9,9 +9,9 @@ editor
         <div class="small-6 columns">
             {{ form_model( post, { route : [ 'admin.posts.update', post.id ], method : 'put' } ) }}
             {{ form_label( 'title', 'Title' ) }}
-            {{ form_text( 'title', { required : 'required' } ) }}
+            {{ form_text( 'title', input_old('text'), { required : 'required' } ) }}
             {{ form_label( 'slug', 'Slug' ) }}
-            {{ form_text( 'slug', { required : 'required' } ) }}
+            {{ form_text( 'slug', input_old('slug'), { required : 'required' } ) }}
             {{ form_label( 'summary', 'Summary' ) }}
             {{ form_text( 'summary' ) }}
             {{ form_label( 'category_id', 'Category' ) }}
