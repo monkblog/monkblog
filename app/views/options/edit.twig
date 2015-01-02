@@ -3,7 +3,7 @@
 {% block content %}
     {{ form_model( option, { route : [ 'admin.options.update' , option.id ], method : 'put' } ) }}
         {{ form_hidden( 'name' ) }}
-        {{ form_label( 'value', optionName ) }}
+        {{ form_label( 'value', option.display_name ) }}
         {{ form_text( 'value' ) }}
         {{ form_hidden( 'autoload', true ) }}
         {{ form_submit( 'Save', { 'class' : 'button' } ) }}

@@ -10,7 +10,7 @@
     {% for option in options %}
         {% if option.name != 'monk_version' %}
         <tr>
-            <td><a href="{{ url_route( 'admin.options.edit', option.id ) }}">{{ option.name | replace( { '_' : ' ' } ) | title }}</a></td>
+            <td><a href="{{ url_route( 'admin.options.edit', option.id ) }}">{{ option.display_name }}</a></td>
             <td>{{ option.value }}</td>
         </tr>
         {% endif %}
