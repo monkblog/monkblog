@@ -1,7 +1,7 @@
 {% extends 'admin.layout' %}
 
 {% block content %}
-    {{ form_model( category, { 'route' : 'admin.categories.store' } ) }}
+    {{ form_model( category, { route : 'admin.categories.store' } ) }}
     {{ form_label( 'title', 'Title' ) }}
     {{ form_text( 'title' ) }}
     {{ form_label( 'slug', 'Slug' ) }}

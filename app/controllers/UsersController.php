@@ -1,6 +1,8 @@
 <?php
 
-class UsersController extends \BaseController {
+use \Illuminate\Support\MessageBag;
+
+class UsersController extends BaseController {
 
     /**
      * Display a listing of users
@@ -70,7 +72,9 @@ class UsersController extends \BaseController {
         $user = User::find($id);
         $pageTitle = 'Edit '. $user->display_name;
 
-        return View::make( 'users.edit', compact( 'user', 'pageTitle' ) );
+        $authUser = Auth::user();
+
+        return View::make( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
     }
 
     /**
@@ -79,20 +83,90 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update( $id )
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail( $id );
+        $data = Input::except( 'password', 'password_confirmation' );
+        $passwordInput = Input::get( 'password' );
 
-        $validator = Validator::make( $data = Input::all(), User::$rules );
+        $userRules = User::$rules;
+        //allow a user to update their info
+        $userRules[ 'email' ] = str_replace( '{id}', $user->id, $userRules[ 'email' ] );
+        $userRules[ 'display_name' ] = str_replace( '{id}', $user->id, $userRules[ 'display_name' ] );
+        $userRules[ 'password' ] = '';
 
-        if( $validator->fails() )
-        {
+        if( !Hash::check( $passwordInput, $user->getAuthPassword() ) ) {
+            return Redirect::back()->withErrors(new MessageBag( [
+                    'password' => 'Update failed, invalid password'
+                ]) )->withInput()->exceptInput( 'password' );
+        }
+
+        $validator = Validator::make( $data, array_filter( $userRules ) );
+
+        if( $validator->fails() ) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
         $user->update( $data );
 
         return Redirect::route('admin.users.index');
+    }
+
+    public function updatePassword( $id ) {
+        /**
+         * @todo add access for super admin once ACL is in place
+         */
+        if( Auth::id() != $id ) {
+            return Redirect::route( 'admin.users.index' )->withErrors(
+                new MessageBag( [
+                    'change_password' => "You don't have the right permissions to change the selected Users password"
+                ]) );
+        }
+
+        $user = User::find( $id );
+        $pageTitle = 'Reset Password for '. $user->display_name;
+
+        return View::make( 'users.edit-password', compact( 'user', 'pageTitle' ) );
+    }
+
+    public function savePassword( $id ) {
+        /**
+         * @todo add access for super admin once ACL is in place
+         */
+        if( Auth::id() != $id ) {
+            return Redirect::route( 'admin.users.index' )->withErrors(
+                new MessageBag( [
+                    'change_password' => "You don't have the right permissions to change the selected Users password"
+                ]) );
+        }
+
+        $user = User::find( $id );
+
+        $data = Input::except( 'old_password' );
+
+        if( !Hash::check( Input::get( 'old_password' ), $user->getAuthPassword() ) ) {
+            return Redirect::back()->withErrors( new MessageBag( [
+                'old_password' => 'Update failed, incorrect password supplied'
+            ]) )->withInput()->exceptInput( 'password' );
+        }
+
+        $userRules = User::$rules;
+        //allow a user to update their info
+        $userRules[ 'email' ] = str_replace( '{id}', $user->id, $userRules[ 'email' ] );
+        $userRules[ 'display_name' ] = str_replace( '{id}', $user->id, $userRules[ 'display_name' ] );
+
+        $validator = Validator::make( $data, array_filter( $userRules ) );
+
+        if( $validator->fails() ) {
+            return Redirect::back()->withErrors($validator)->withInput()->exceptInput( 'password' );
+        }
+
+        $data[ 'password' ] = Hash::make( $data[ 'password' ] );
+
+        $user->update( $data );
+
+        return Redirect::route( 'admin.users.index' )->withInput( [ 'message' => 'Password successfully changed.' ] );
+
     }
 
     public function confirmDestroy( $id ) {

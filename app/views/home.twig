@@ -8,7 +8,7 @@ home
     {% if featuredPost is not empty %}
     <article class="featured">
         <h1>{{ featuredPost.title }}</h1>
-        <span class="meta">{{ featurePost.published_at|date( dateFormat ) }}</span>
+        <span class="meta">{{ featurePost.published_at | date( dateFormat ) }}</span>
         <div class="summary">{{ featuredPost.summary }}</div>
         <a href="{{ url_route( 'post.public.show', featuredPost.slug ) }}" class="read-more">Read More</a>
     </article>
@@ -18,7 +18,7 @@ home
         {% for index, post in recentPosts %}
             <article class="post small-4 columns">
                 <h2><a href="{{ url_route( 'post.public.show', post.slug ) }}">{{ post.title }}</a></h2>
-                <span class="meta">{{ post.published_at|date( dateFormat ) }}</span>
+                <span class="meta">{{ post.published_at | date( dateFormat ) }}</span>
                 <div class="summary">{{ post.summary }}</div>
                 <a href="{{ url_route( 'post.public.show', post.slug ) }}" class="read-more">Read More</a>
             </article>

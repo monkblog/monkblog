@@ -14,9 +14,9 @@
         {% endfor %}
     </ul>
     {% if less %}
-        <a href="{{ url_route( 'archive', { 0 : prevOffset, 1 : limit } ) }}" class="post-nav previous left">Newer Posts</a>
+        <a href="{{ url_route( 'archive', [ prevOffset, limit ] ) }}" class="post-nav previous left">Newer Posts</a>
     {% endif %}
     {% if more  %}
-        <a href="{{ url_route( 'archive', { 0 : nextOffset, 1 : limit } ) }}" class="post-nav next right">Older Posts</a>
+        <a href="{{ url_route( 'archive', [ nextOffset, limit ] ) }}" class="post-nav next right">Older Posts</a>
     {% endif %}
 {% endblock %}

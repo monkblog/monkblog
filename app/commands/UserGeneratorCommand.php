@@ -58,6 +58,9 @@ class UserGeneratorCommand extends Command {
 			$this->info( 'Try running ' . $this->name . ' again.');
 		}
 		else {
+			if( count( User::all() ) == 0 ) {
+				$userData[ 'owner' ] = true;
+			}
 			$userData[ 'password' ] = Hash::make( $userData[ 'password' ] );
 			User::create( $userData );
 

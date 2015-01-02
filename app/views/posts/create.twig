@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="small-6 columns">
-        {{ form_model( post, { 'route' : 'admin.posts.store' } ) }}
+        {{ form_model( post, { route : 'admin.posts.store' } ) }}
         {{ form_label( 'title', 'Title' ) }}
         {{ form_text( 'title' ) }}
         {{ form_label( 'slug', 'Slug' ) }}
