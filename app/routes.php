@@ -16,8 +16,8 @@ if ( php_sapi_name() != 'cli' ) {
     $tagline = Option::where( 'name', '=',  'tagline' )->cacheTags(['option', 'tagline'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
 
     $contactEmail = Option::where( 'name', '=', 'email' )->cacheTags(['option', 'email'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
-    $contactFacebook = Option::where( 'name', '=', 'twitter' )->cacheTags(['option', 'twitter'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
-    $contactTwitter = Option::where( 'name', '=', 'facebook' )->cacheTags(['option', 'facebook'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $contactFacebook = Option::where( 'name', '=', 'facebook' )->cacheTags(['option', 'facebook'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
+    $contactTwitter = Option::where( 'name', '=', 'twitter' )->cacheTags(['option', 'twitter'])->remember( Config::get( 'site.cacheduration', 5 ) )->get()->first();
 }
 
 View::share( 'siteTitle',  $siteTitle );
