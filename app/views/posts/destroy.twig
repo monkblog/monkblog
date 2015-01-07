@@ -1,0 +1,12 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+
+    <p>Are you sure you want to delete "{{ post.title }}?" This cannot be undone.</p>
+
+    <a href="{{ route( 'admin.posts.index' ) }}" class="button">Cancel</a>
+    {{ form_model( post, { route : [ 'admin.posts.destroy', post.id ], method : 'delete' } ) }}
+    {{ form_submit( 'Delete Forever', { class : 'button alert' } ) }}
+    {{ form_close() }}
+
+{% endblock %}

@@ -1,0 +1,98 @@
+@import "admin_settings";
+@import "foundation";
+
+footer {
+    margin-top: 1rem;
+    p {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}
+
+header {
+    h1 {
+        font-size: 1.1rem;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+h3 {
+    border-bottom: 1px dotted #000;
+    display: block;
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+h3::first-letter {
+    color: #aaa;
+}
+
+.home h1 {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.post h1 {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+}
+
+.post header h1 {
+    font-size: 1.5rem;
+}
+
+.featured {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    .meta {
+        font-size: 0.9rem;
+        font-style: italic;
+        color: #999;
+    }
+}
+
+.fullWidth {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: initial;
+}
+
+.posts {
+    list-style: none;
+    margin: 0;
+    li {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+    }
+}
+
+.post {
+    .meta {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: #999;
+    }
+}
+
+.post.full {
+    .meta {
+        border-bottom: 1px solid $smoke;
+        margin: 1rem 0;
+    }
+}
+
+.read-more {
+    display: block;
+    margin-top: 1rem;
+}
+
+.top-bar-section {
+    small {
+        color: #ccc;
+    }
+}

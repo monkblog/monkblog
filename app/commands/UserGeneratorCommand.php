@@ -23,7 +23,7 @@ class UserGeneratorCommand extends Command {
 	/**
 	 * Create a new command instance.
 	 *
-	 * @return void
+	 * @return \UserGeneratorCommand
 	 */
 	public function __construct()
 	{
@@ -37,23 +37,35 @@ class UserGeneratorCommand extends Command {
 	 */
 	public function fire()
 	{
-		$email = $this->ask( 'What is the email for the user?' );
-		$firstName = $this->ask( 'First name?' );
-		$lastName = $this->ask( 'Last name?' );
-		$displayName = $this->ask( 'Display name?' );
-		$password = $this->secret( 'What is the password for the user?' );
+		$userData = [];
+		$userData[ 'email' ] = $this->ask( 'What is the email for the user?' );
+		$userData[ 'first_name' ] = $this->ask( 'First name?' );
+		$userData[ 'last_name' ] = $this->ask( 'Last name?' );
+		$userData[ 'display_name' ] = $this->ask( 'Display name?' );
+		$userData[ 'password' ] = $this->secret( 'What is the password for the user?' );
+		$userData[ 'password_confirmation' ] = $this->secret( 'Confirm password' );
 
-		$user = new User;
+		$validator = Validator::make( $userData, User::$rules );
 
-		$user->email = $email;
-		$user->first_name = $firstName;
-		$user->last_name = $lastName;
-		$user->display_name = $displayName;
-		$user->password = Hash::make( $password );
+		if( $validator->fails() ) {
+			$messages = $validator->errors()->getMessages();
+			foreach( $messages as $message ) {
+				if( isset( $message[ 0 ] ) ) {
+					$this->error( $message[ 0 ] );
+					echo "\n";
+				}
+			}
+			$this->info( 'Try running ' . $this->name . ' again.');
+		}
+		else {
+			if( count( User::all() ) == 0 ) {
+				$userData[ 'owner' ] = true;
+			}
+			$userData[ 'password' ] = Hash::make( $userData[ 'password' ] );
+			User::create( $userData );
 
-		$user->save();
-
-		echo "User created.\n\n";
+			$this->info( "User created." );
+		}
 	}
 
 }

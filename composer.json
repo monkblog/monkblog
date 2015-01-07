@@ -4,10 +4,11 @@
 	"keywords": ["blog", "laravel"],
 	"license": "MIT",
 	"type": "project",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"graham-campbell/markdown": "~2.0"
+		"graham-campbell/markdown": "~2.0",
+		"rcrowe/twigbridge": "~0.6"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",

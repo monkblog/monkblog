@@ -2,6 +2,6 @@
 
 return [
     'title' => 'Ben Overmyer',
-    'version' => '1.0',
+    'tagline' => 'Developer and Game Designer',
     'cacheduration' => 1,
 ];
