@@ -5,6 +5,6 @@
     {% if slug is defined and slug == tab.slug %}
       {% set active = ' class="active"' %}
     {% endif %}
-    <dd{{ active }}><a href="{{ url_route( 'admin.options.show', tab.slug ) }}">{{ tab.display_name }}</a></dd>
+    <dd{{ active|raw }}><a href="{{ url_route( 'admin.options.show', tab.slug ) }}">{{ tab.display_name }}</a></dd>
 {% endfor %}
 </dl>
