@@ -158,6 +158,8 @@ class PagesController extends \BaseController {
 			App::abort( 404 );
 		}
 
+		$page->body = Markdown::render( $page->body );
+
 		$viewData = [
 			'pageTitle' => $page->title,
 			'page' => $page,
