@@ -8,7 +8,7 @@ home
     {% if featuredPost is not empty %}
     <article class="featured">
         <h1>{{ featuredPost.title }}</h1>
-        <span class="meta">{{ featurePost.published_at | date( dateFormat ) }}</span>
+        <span class="meta">{{ featuredPost.published_at | date( dateFormat ) }}</span>
         <div class="summary">{{ featuredPost.summary }}</div>
         <a href="{{ url_route( 'post.public.show', featuredPost.slug ) }}" class="read-more">Read More</a>
     </article>
