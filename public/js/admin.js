@@ -5,7 +5,10 @@ $( document ).ready( function() {
 
     $( '#body' ).keyup( function() {
         $( '#preview' ).html( converter.makeHtml( $( '#body' ).val() ) );
+        $( '#body' ).css( 'height', $( '#preview' ).height() + 'px' );
     });
+
+    $( '#body' ).css( 'height', $( '#preview' ).height() + 'px' );
 
     $( '#title' ).blur( function () {
         if ( $( '#slug' ).val() === '' ) {

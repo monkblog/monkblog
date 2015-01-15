@@ -6,18 +6,31 @@
         {{ form_model( post, { route : 'admin.posts.store' } ) }}
         {{ form_label( 'title', 'Title' ) }}
         {{ form_text( 'title' ) }}
-        {{ form_label( 'slug', 'Slug' ) }}
-        {{ form_text( 'slug' ) }}
+    </div>
+    <div class="small-6 columns">
         {{ form_label( 'summary', 'Summary' ) }}
         {{ form_text( 'summary' ) }}
+    </div>
+</div>
+<div class="row">
+    <div class="small-6 columns">
+        {{ form_label( 'slug', 'Slug' ) }}
+        {{ form_text( 'slug' ) }}
+    </div>
+    <div class="small-6 columns">
         {{ form_label( 'category_id', 'Category' ) }}
         {{ form_select( 'category_id', categories ) }}
+    </div>
+</div>
+<div class="row">
+    <div class="small-6 columns">
         {{ form_label( 'body', 'Body' ) }}
         {{ form_textarea( 'body' ) }}
         {{ form_submit( 'Finish Draft', { 'class' : 'button' } ) }}
         {{ form_close() }}
     </div>
     <div class="small-6 columns">
+        <label>Preview</label>
         <div id="preview"></div>
     </div>
 </div>

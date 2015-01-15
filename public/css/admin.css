@@ -6282,7 +6282,7 @@ table tfoot tr td {
 /* line 107, ../../bower_components/foundation/scss/foundation/components/_tables.scss */
 table tr th,
 table tr td {
-  padding: 0.5625rem 0.625rem;
+  padding: 0 0.3125rem;
   font-size: 0.875rem;
   color: #222222;
   text-align: left;
@@ -9160,4 +9160,11 @@ h3::first-letter {
 /* line 95, ../../scss/admin.scss */
 .top-bar-section small {
   color: #ccc;
+}
+
+/* line 100, ../../scss/admin.scss */
+#body {
+  border: 0;
+  font-family: monospace;
+  font-size: 1.25rem;
 }
