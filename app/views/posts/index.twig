@@ -3,20 +3,18 @@
 {% block content %}
     <table>
         <thead>
-            <tr><th>Title</th><th>Slug</th><th>Summary</th><th>Created</th><th>Published</th><th></th></tr>
+            <tr><th>Title</th><th>Created</th><th>Published</th><th></th></tr>
         </thead>
         <tbody>
     {% for post in posts %}
         <tr>
             <td><a href="{{ route( 'admin.posts.edit', post.id ) }}">{{ post.title }}</a></td>
-            <td>{{ post.slug }}</td>
-            <td>{{ post.summary }}</td>
-            <td>{{ post.created_at }}</td>
+            <td>{{ post.created_at|date("M j, Y") }}</td>
             <td>
                 {% if not post.is_published %}
                     <a href="{{ route( 'admin.posts.publish', post.id ) }}" class="button tiny">Publish</a>
                 {% else %}
-                    <span>{{ post.published_at }}</span>
+                    <span>{{ post.published_at|date("M j, Y") }}</span>
                 {% endif %}
             </td>
             <td>
