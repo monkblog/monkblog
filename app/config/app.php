@@ -125,6 +125,7 @@ return array(
 		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'TwigBridge\ServiceProvider',
+		'Nathanmac\Utilities\Parser\ParserServiceProvider',
 	],
 
 	/*

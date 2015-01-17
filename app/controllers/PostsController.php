@@ -86,6 +86,7 @@ class PostsController extends \BaseController {
 			$post->is_published = true;
 			$post->published_at = date( 'Y-m-d H:i:s' );
 			$post->save();
+			Cache::tags( [ 'post', 'recent' ] )->flush();
 		}
 
 		return Redirect::route( 'admin.posts.index' );
@@ -124,7 +125,7 @@ class PostsController extends \BaseController {
 			App::abort( 404 );
 		}
 
-    $post->body = Markdown::render( $post->body );
+//    $post->body = Markdown::render( $post->body );
 		return View::make( 'posts.show', compact( 'post' ) );
 	}
 
@@ -165,6 +166,10 @@ class PostsController extends \BaseController {
 		}
 
 		$post->update( $data );
+
+		if( $post->is_published ) {
+			Cache::tags( [ 'post', 'recent' ] )->flush();
+		}
 
 		return Redirect::route( 'admin.posts.index' );
 	}

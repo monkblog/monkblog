@@ -4,8 +4,7 @@ class HomeController extends BaseController {
 
 	public function getHome()
 	{
-		$recentPosts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->take( 4 )->remember( Config::get( 'site.cacheduration', 5 ) )->get();
-
+		$recentPosts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->take( 4 )->cacheTags(['post', 'recent'])->remember( Config::get( 'site.cacheduration', 5 ) )->get();
 		$featuredPost = $recentPosts->shift();
 
 		$more = false;
