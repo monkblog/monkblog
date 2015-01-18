@@ -12,3 +12,5 @@
 */
 
 Artisan::add( new UserGeneratorCommand );
+
+Artisan::add( new PublishThemeConfig );

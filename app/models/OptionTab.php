@@ -11,4 +11,11 @@ class OptionTab extends \Eloquent {
 	{
 		return $this->hasMany( 'Option' );
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function themes() {
+		return $this->hasMany( 'Theme' );
+	}
 }

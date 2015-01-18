@@ -12,7 +12,6 @@ class OptionsController extends BaseController {
      */
     public function index()
     {
-
         $optionTabs = OptionTab::all();
 
         $firstTab = $optionTabs->first();
@@ -79,7 +78,7 @@ class OptionsController extends BaseController {
      */
     public function edit($id)
     {
-        $option = option::find($id);
+        $option = Option::find($id);
         $pageTitle = 'Edit '.  $option->display_name;
 
         return View::make( 'options.edit', compact( 'option', 'optionName', 'pageTitle' ) );

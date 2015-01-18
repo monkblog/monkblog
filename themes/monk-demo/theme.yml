@@ -1,0 +1,21 @@
+display_name: MonkBlog Demo Theme
+uri: monkblog.org
+description: The demo theme for MonkBlog
+version: 1.0
+license: MIT
+author: Eric Dowell
+author_uri: ericdowell.com
+author_email: hi@ericdowell.com
+domain_path: lang/
+assets_folder: assets
+assets:
+  css_src: scss/main.scss
+  css_output: main.css
+  css_outputFolder: css
+  js_src: js/**
+  js_output: app.min.js
+  js_outputFolder: min/
+template_type: twig
+template_folder: views
+template_namespace: monk-blog
+tags: demo, MonkBlog

@@ -20,7 +20,7 @@ class OptionsTableSeeder extends Seeder {
             foreach( $tab[ 'options' ] as $name => $value ) {
                 $checkOption = Option::where( 'name', $name )->get()->first();
 
-                if( empty( $checkOption ) && !empty( $value ) ) {
+                if( empty( $checkOption ) && !empty( $value ) && $tab[ 'slug' ] != 'themes' ) {
                     $option = new Option;
                     $option->name = $name;
                     $option->display_name = ucwords( str_replace( '_', ' ', $name ) );
@@ -29,6 +29,25 @@ class OptionsTableSeeder extends Seeder {
                     $option->sort_order = 1;
 
                     $optionTab->options()->save( $option );
+                }
+                else if( $tab[ 'slug' ] == 'themes' ) {
+                    if( $name == Config::get( 'theme.demo_name' ) && !Config::get( 'theme.demo_exist' ) )
+                        continue;
+
+                    $checkTheme = Option::where( 'name', $value[ 'name' ] )->get()->first();
+
+                    if(empty($checkTheme) && is_array( $value ) ) {
+
+                        $validator = Validator::make( $value, Theme::$rules );
+                        if( $validator->passes() ) {
+                            foreach( $value as $themeKey => $themeValue ) {
+
+                            }
+                            $theme = new Theme;
+                            $theme->name = $value[ 'name' ];
+                            $theme->display_name = $value[ 'display' ];
+                        }
+                    }
                 }
             }
         }

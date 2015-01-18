@@ -121,11 +121,15 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+
 		'Way\Generators\GeneratorsServiceProvider',
 		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'TwigBridge\ServiceProvider',
 		'Nathanmac\Utilities\Parser\ParserServiceProvider',
+
+		'MonkBlog\Providers\ThemeServiceProvider',
+		'MonkBlog\Providers\MonkServiceProvider',
 	],
 
 	/*
@@ -192,7 +196,10 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+
 		'Markdown'          => 'GrahamCampbell\Markdown\Facades\Markdown',
+		'Monk'              => 'MonkBlog\Facade\Monk',
+		'Parser'            => 'Nathanmac\Utilities\Parser\Facades\Parser',
 		'Twig'              => 'TwigBridge\Facade\Twig',
 	],
 

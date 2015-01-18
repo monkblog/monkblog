@@ -11,7 +11,7 @@
 		"Nathanmac/Parser": "2.*",
 		"kriswallsmith/assetic": "~1.2",
 		"rcrowe/twigbridge": "~0.6",
-		"twig/extensions": "~1.1.0"
+		"twig/extensions": "~1.2.0"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",
@@ -29,7 +29,10 @@
 		],
 		"psr-4": {
 			"MonkBlog\\": "app/src/MonkBlog/"
-	  	}
+	  	},
+		"files": [
+			"app/src/MonkBlog/helpers.php"
+		]
 	},
 	"scripts": {
 		"post-install-cmd": [

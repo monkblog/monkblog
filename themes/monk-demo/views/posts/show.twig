@@ -1,0 +1,19 @@
+{% extends 'monk-blog::layout' %}
+
+{% block bodyclass %}
+post
+{% endblock %}
+
+{% block top_content %}
+    <h1>{{ post.title | replace( { "'" : '&rsquo;' } ) | raw }}</h1>
+{% endblock %}
+
+{% block content %}
+    <article class="post full">
+        <div class="meta">{{ post.published_at | date( dateFormat ) }}</div>
+
+        <div id="content">
+            {{ md_render( post.body )|raw }}
+        </div>
+    </article>
+{% endblock %}

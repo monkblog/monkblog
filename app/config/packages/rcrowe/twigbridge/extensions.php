@@ -40,6 +40,12 @@ return [
         'TwigBridge\Extension\Laravel\Url',
 
         'MonkBlog\TwigBridge\Extension\Markdown',
+        'Twig_Extensions_Extension_Array',
+        'Twig_Extensions_Extension_Date',
+        'Twig_Extensions_Extension_I18n',
+        'Twig_Extensions_Extension_Intl',
+        'Twig_Extensions_Extension_Text',
+
 
         // 'TwigBridge\Extension\Laravel\Legacy\Facades',
     ],

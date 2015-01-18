@@ -20,4 +20,11 @@ $optionTabs[] = [
     ]
 ];
 
+$optionTabs[ ] = [
+    'slug' => 'themes',
+    'options' => [
+        Config::get( 'theme.demo_name' ) => Config::get( 'theme.demo_array' ),
+    ]
+];
+
 return $optionTabs;
