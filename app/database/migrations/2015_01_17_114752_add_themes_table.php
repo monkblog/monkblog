@@ -12,7 +12,7 @@ class AddThemesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('themes', function(Blueprint $table)
+		Schema::create('themes', function(Blueprint $table)
 		{
 			$table->increments( 'id' );
 			$table->string( 'name' )->unique();
@@ -47,10 +47,7 @@ class AddThemesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('themes', function(Blueprint $table)
-		{
-			Schema::drop( 'themes' );
-		});
+		Schema::drop( 'option_tabs' );
 	}
 
 }
