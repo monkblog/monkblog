@@ -8,7 +8,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"graham-campbell/markdown": "~2.0",
-		"rcrowe/twigbridge": "~0.6"
+		"rcrowe/twigbridge": "~0.6",
+		"symfony/yaml": "3.0.*@dev"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",
@@ -23,7 +24,10 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+		"psr-4": {
+			"MonkBlog\\": "app/src/MonkBlog/"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [
