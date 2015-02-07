@@ -17,7 +17,6 @@
     - composer
     - phpcommon
     - app
-    - mongodb
     - mysql
     - redis
     - nodejs
