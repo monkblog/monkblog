@@ -7574,14 +7574,14 @@ a img {
 p {
   font-family: inherit;
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 1.25rem;
   text-rendering: optimizeLegibility;
 }
 /* line 242, ../../bower_components/foundation/scss/foundation/components/_type.scss */
 p.lead {
-  font-size: 1.21875rem;
+  font-size: 1.71875rem;
   line-height: 1.6;
 }
 /* line 244, ../../bower_components/foundation/scss/foundation/components/_type.scss */
@@ -7696,7 +7696,7 @@ code {
 ul,
 ol,
 dl {
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 1.25rem;
   list-style-position: outside;
@@ -9069,7 +9069,7 @@ footer p {
 
 /* line 13, ../../scss/main.scss */
 header h1 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin: 0;
   padding: 0;
 }
@@ -9090,7 +9090,7 @@ h3::first-letter {
 
 /* line 32, ../../scss/main.scss */
 .home h1 {
-  font-size: 2rem;
+  font-size: 2.75rem;
   margin: 1rem 0;
 }
 
@@ -9107,43 +9107,55 @@ h3::first-letter {
 
 /* line 46, ../../scss/main.scss */
 .featured {
+  background: #fafafa;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
   margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
 }
-/* line 50, ../../scss/main.scss */
+/* line 54, ../../scss/main.scss */
+.featured .summary {
+  font-size: 1.5rem;
+}
+/* line 57, ../../scss/main.scss */
 .featured .meta {
   font-size: 0.9rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 57, ../../scss/main.scss */
+/* line 64, ../../scss/main.scss */
 .posts {
   list-style: none;
   margin: 0;
 }
-/* line 60, ../../scss/main.scss */
+/* line 67, ../../scss/main.scss */
 .posts li {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-/* line 68, ../../scss/main.scss */
+/* line 75, ../../scss/main.scss */
+.post .summary {
+  font-size: 1.5rem;
+}
+/* line 78, ../../scss/main.scss */
 .post .meta {
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 76, ../../scss/main.scss */
+/* line 86, ../../scss/main.scss */
 .post.full .meta {
   border-bottom: 1px solid #eeeeee;
   margin: 1rem 0;
 }
 
-/* line 82, ../../scss/main.scss */
+/* line 92, ../../scss/main.scss */
 .read-more {
   display: block;
   margin-top: 1rem;
