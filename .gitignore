@@ -10,3 +10,4 @@ bower_components
 _ide_helper.php
 .env.local.php
 .env.php
+.env

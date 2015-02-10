@@ -1,0 +1,65 @@
+<?php namespace App\Providers;
+
+use Illuminate\Routing\Router;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+
+class RouteServiceProvider extends ServiceProvider {
+
+	/**
+	 * This namespace is applied to the controller routes in your routes file.
+	 *
+	 * In addition, it is set as the URL generator's root namespace.
+	 *
+	 * @var string
+	 */
+	protected $namespace = null;
+
+	/**
+	 * Define your route model bindings, pattern filters, etc.
+	 *
+	 * @param  \Illuminate\Routing\Router  $router
+	 * @return void
+	 */
+	public function boot( Router $router )
+	{
+		parent::boot($router);
+
+		Route::filter('auth', function()
+		{
+			if (Auth::guest())
+			{
+				if (Request::ajax())
+				{
+					return Response::make('Unauthorized', 401);
+				}
+				else
+				{
+					$redirectTo = ( Request::path() != 'admin' && strstr( Request::path() , 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
+					return Redirect::guest( 'login' . $redirectTo );
+				}
+			}
+		});
+
+
+		Route::filter('auth.basic', function()
+		{
+			return Auth::basic();
+		});
+	}
+
+	/**
+	 * Define the routes for the application.
+	 *
+	 * @param  \Illuminate\Routing\Router  $router
+	 * @return void
+	 */
+	public function map(Router $router)
+	{
+		$router->group(['namespace' => $this->namespace], function($router)
+		{
+			require app_path('Http/routes.php');
+		});
+	}
+
+}
