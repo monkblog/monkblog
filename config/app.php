@@ -144,6 +144,12 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+
+		/**
+		 * Extra stuff
+		 */
+		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 		'TwigBridge\ServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 
@@ -194,9 +200,10 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
-
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	],
 
 ];

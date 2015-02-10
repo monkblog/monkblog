@@ -12,6 +12,8 @@
 		"illuminate/html": "~5.0"
 	},
 	"require-dev": {
+		"barryvdh/laravel-ide-helper": "~2.0@dev",
+		"barryvdh/laravel-debugbar": "~2.0@dev"
 	},
 	"autoload": {
 		"classmap": [
@@ -29,10 +31,12 @@
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan clear-compiled",
+		  "php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
+		  "php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [
