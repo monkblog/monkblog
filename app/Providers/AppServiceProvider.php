@@ -29,6 +29,17 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+
+		/**
+		 * Needed for Twig
+		 */
+		$this->app->bind('Illuminate\Html\FormBuilder', function () {
+			return new \Illuminate\Html\FormBuilder(
+				$this->app->make('Illuminate\Html\HtmlBuilder'),
+				$this->app->make('Illuminate\Routing\UrlGenerator'),
+				csrf_token()
+			);
+		});
 	}
 
 }
