@@ -148,10 +148,11 @@ return [
 		/**
 		 * Extra stuff
 		 */
+		'Illuminate\Html\HtmlServiceProvider',
+		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'TwigBridge\ServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
 
 	],
 
@@ -203,7 +204,8 @@ return [
 
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+		'Markdown'  => 'GrahamCampbell\Markdown\Facades\Markdown',
 	],
 
 ];

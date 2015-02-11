@@ -124,7 +124,7 @@ class PostsController extends \BaseController {
 			App::abort( 404 );
 		}
 
-    $post->body = Markdown::render( $post->body );
+    	$post->body = Markdown::convertToHtml( $post->body );
 		return View::make( 'posts.show', compact( 'post' ) );
 	}
 
@@ -201,7 +201,9 @@ class PostsController extends \BaseController {
 			App::abort( 404 );
 		}
 
-		$post->body = Markdown::render( $post->body );
+		$post->body = Markdown::convertToHtml( $post->body );
+
+		dd( Markdown::convertToHtml( $post->body ) );
 
 		$viewData = [
 			'post' => $post,
