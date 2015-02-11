@@ -203,8 +203,6 @@ class PostsController extends \BaseController {
 
 		$post->body = Markdown::convertToHtml( $post->body );
 
-		dd( Markdown::convertToHtml( $post->body ) );
-
 		$viewData = [
 			'post' => $post,
 			'pageTitle' => $post->title,

@@ -11,7 +11,6 @@ class RouteTest extends TestCase {
 
 	public function testAdminIsFirewalled()
 	{
-		Route::enableFilters();
 
 		$this->call( 'GET', '/admin' );
 
@@ -20,7 +19,6 @@ class RouteTest extends TestCase {
 
 	public function testAdminLetsInAuthenticatedUser()
 	{
-		Route::enableFilters();
 
 		$user = new User( [ 'email' => 'user@example.com' ] );
 
