@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace MonkBlog\Events;
 
 abstract class Event {
 

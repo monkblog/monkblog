@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace MonkBlog\Services;
 
-use App\User;
+use MonkBlog\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

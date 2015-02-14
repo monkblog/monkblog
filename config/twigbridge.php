@@ -110,7 +110,8 @@ return [
             'TwigBridge\Extension\Laravel\String',
             'TwigBridge\Extension\Laravel\Translator',
             'TwigBridge\Extension\Laravel\Url',
-            
+
+             'MonkBlog\Extension\TwigBridge\Markdown',
              'TwigBridge\Extension\Laravel\Form',
              'TwigBridge\Extension\Laravel\Html',
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',

@@ -76,8 +76,6 @@ class PagesController extends \BaseController {
 	{
 		$page = Page::findOrFail( $id );
 
-        $page->body = Markdown::convertToHtml( $page->body );
-
 		$viewData = [
 			'page' => $page,
 			'pageTitle' => $page->title,
@@ -157,8 +155,6 @@ class PagesController extends \BaseController {
 		if ( !$page ) {
 			App::abort( 404 );
 		}
-
-		$page->body = Markdown::convertToHtml( $page->body );
 
 		$viewData = [
 			'pageTitle' => $page->title,

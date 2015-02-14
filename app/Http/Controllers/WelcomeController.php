@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace MonkBlog\Http\Controllers;
 
 class WelcomeController extends Controller {
 

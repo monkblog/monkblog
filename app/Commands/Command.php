@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace MonkBlog\Commands;
 
 abstract class Command {
 
