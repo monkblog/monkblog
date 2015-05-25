@@ -1,6 +1,6 @@
 ## Monk!
 
-[ ![Codeship Status for ericdowell/MonkBlog](https://codeship.com/projects/b076aa70-e55a-0132-35df-0addec64e5bc/status?branch=master)](https://codeship.com/projects/82008) [ ![Test Coverage](https://codeclimate.com/github/ericdowell/MonkBlog/badges/coverage.svg)](https://codeclimate.com/github/ericdowell/MonkBlog)
+[ ![Codeship Status for ericdowell/MonkBlog](https://codeship.com/projects/b076aa70-e55a-0132-35df-0addec64e5bc/status)](https://codeship.com/projects/82008) [ ![Test Coverage](https://codeclimate.com/github/ericdowell/MonkBlog/badges/coverage.svg)](https://codeclimate.com/github/ericdowell/MonkBlog)
 
 A blogging engine built on Laravel. It's specifically built for my personal blog, http://benovermyer.com, though with a bit of tweaking on the visual side can be used for any blog site.
 
