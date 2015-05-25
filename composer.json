@@ -12,8 +12,8 @@
 		"illuminate/html": "~5.0"
 	},
 	"require-dev": {
-		"barryvdh/laravel-ide-helper": "~2.0@dev",
-		"barryvdh/laravel-debugbar": "~2.0@dev"
+		"barryvdh/laravel-ide-helper": "~2.0",
+		"barryvdh/laravel-debugbar": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

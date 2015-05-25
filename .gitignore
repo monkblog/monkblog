@@ -1,7 +1,6 @@
 .DS_Store
 vendor
 config/site.json
-/bootstrap/compiled.php
 .idea
 .vagrant
 node_modules
