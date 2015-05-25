@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env( 'LARAVEL_DEBUG' ),
+	'debug' => env( 'APP_DEBUG', false ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -148,7 +148,7 @@ return [
 		/**
 		 * Extra stuff
 		 */
-		'Illuminate\Html\HtmlServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'TwigBridge\ServiceProvider',
@@ -201,8 +201,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
-		'Form'      => 'Illuminate\Html\FormFacade',
-		'Html'      => 'Illuminate\Html\HtmlFacade',
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 		'Debugbar'  => 'Barryvdh\Debugbar\Facade',
 	],
 
