@@ -1,7 +1,6 @@
 .DS_Store
 vendor
 config/site.json
-/bootstrap/compiled.php
 .idea
 .vagrant
 node_modules
@@ -10,3 +9,4 @@ bower_components
 _ide_helper.php
 .env.local.php
 .env.php
+.env

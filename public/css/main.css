@@ -9057,24 +9057,24 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-/* line 4, ../../scss/main.scss */
+/* line 4, ../../resources/assets/scss/main.scss */
 footer {
   margin-top: 1rem;
 }
-/* line 6, ../../scss/main.scss */
+/* line 6, ../../resources/assets/scss/main.scss */
 footer p {
   font-size: 0.75rem;
   text-align: center;
 }
 
-/* line 13, ../../scss/main.scss */
+/* line 13, ../../resources/assets/scss/main.scss */
 header h1 {
   font-size: 1.25rem;
   margin: 0;
   padding: 0;
 }
 
-/* line 20, ../../scss/main.scss */
+/* line 20, ../../resources/assets/scss/main.scss */
 h3 {
   border-bottom: 1px dotted #000;
   display: block;
@@ -9083,29 +9083,29 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 28, ../../scss/main.scss */
+/* line 28, ../../resources/assets/scss/main.scss */
 h3::first-letter {
   color: #aaa;
 }
 
-/* line 32, ../../scss/main.scss */
+/* line 32, ../../resources/assets/scss/main.scss */
 .home h1 {
   font-size: 2.75rem;
   margin: 1rem 0;
 }
 
-/* line 37, ../../scss/main.scss */
+/* line 37, ../../resources/assets/scss/main.scss */
 .post h1 {
   font-size: 4.5rem;
   line-height: 4.5rem;
 }
 
-/* line 42, ../../scss/main.scss */
+/* line 42, ../../resources/assets/scss/main.scss */
 .post header h1 {
   font-size: 1.5rem;
 }
 
-/* line 46, ../../scss/main.scss */
+/* line 46, ../../resources/assets/scss/main.scss */
 .featured {
   background: #fafafa;
   margin-left: -0.5rem;
@@ -9115,47 +9115,47 @@ h3::first-letter {
   padding-right: 0.5rem;
   padding-bottom: 0.5rem;
 }
-/* line 54, ../../scss/main.scss */
+/* line 54, ../../resources/assets/scss/main.scss */
 .featured .summary {
   font-size: 1.5rem;
 }
-/* line 57, ../../scss/main.scss */
+/* line 57, ../../resources/assets/scss/main.scss */
 .featured .meta {
   font-size: 0.9rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 64, ../../scss/main.scss */
+/* line 64, ../../resources/assets/scss/main.scss */
 .posts {
   list-style: none;
   margin: 0;
 }
-/* line 67, ../../scss/main.scss */
+/* line 67, ../../resources/assets/scss/main.scss */
 .posts li {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-/* line 75, ../../scss/main.scss */
+/* line 75, ../../resources/assets/scss/main.scss */
 .post .summary {
   font-size: 1.5rem;
 }
-/* line 78, ../../scss/main.scss */
+/* line 78, ../../resources/assets/scss/main.scss */
 .post .meta {
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 86, ../../scss/main.scss */
+/* line 86, ../../resources/assets/scss/main.scss */
 .post.full .meta {
   border-bottom: 1px solid #eeeeee;
   margin: 1rem 0;
 }
 
-/* line 92, ../../scss/main.scss */
+/* line 92, ../../resources/assets/scss/main.scss */
 .read-more {
   display: block;
   margin-top: 1rem;

@@ -9057,24 +9057,24 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-/* line 4, ../../scss/admin.scss */
+/* line 4, ../../resources/assets/scss/admin.scss */
 footer {
   margin-top: 1rem;
 }
-/* line 6, ../../scss/admin.scss */
+/* line 6, ../../resources/assets/scss/admin.scss */
 footer p {
   font-size: 0.75rem;
   text-align: center;
 }
 
-/* line 13, ../../scss/admin.scss */
+/* line 13, ../../resources/assets/scss/admin.scss */
 header h1 {
   font-size: 1.1rem;
   margin: 0;
   padding: 0;
 }
 
-/* line 20, ../../scss/admin.scss */
+/* line 20, ../../resources/assets/scss/admin.scss */
 h3 {
   border-bottom: 1px dotted #000;
   display: block;
@@ -9083,42 +9083,42 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 28, ../../scss/admin.scss */
+/* line 28, ../../resources/assets/scss/admin.scss */
 h3::first-letter {
   color: #aaa;
 }
 
-/* line 32, ../../scss/admin.scss */
+/* line 32, ../../resources/assets/scss/admin.scss */
 .home h1 {
   font-size: 2rem;
   margin: 1rem 0;
 }
 
-/* line 37, ../../scss/admin.scss */
+/* line 37, ../../resources/assets/scss/admin.scss */
 .post h1 {
   font-size: 4.5rem;
   line-height: 4.5rem;
 }
 
-/* line 42, ../../scss/admin.scss */
+/* line 42, ../../resources/assets/scss/admin.scss */
 .post header h1 {
   font-size: 1.5rem;
 }
 
-/* line 46, ../../scss/admin.scss */
+/* line 46, ../../resources/assets/scss/admin.scss */
 .featured {
   margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
 }
-/* line 50, ../../scss/admin.scss */
+/* line 50, ../../resources/assets/scss/admin.scss */
 .featured .meta {
   font-size: 0.9rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 57, ../../scss/admin.scss */
+/* line 57, ../../resources/assets/scss/admin.scss */
 .fullWidth {
   width: 95%;
   margin-left: auto;
@@ -9126,43 +9126,43 @@ h3::first-letter {
   max-width: initial;
 }
 
-/* line 64, ../../scss/admin.scss */
+/* line 64, ../../resources/assets/scss/admin.scss */
 .posts {
   list-style: none;
   margin: 0;
 }
-/* line 67, ../../scss/admin.scss */
+/* line 67, ../../resources/assets/scss/admin.scss */
 .posts li {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-/* line 75, ../../scss/admin.scss */
+/* line 75, ../../resources/assets/scss/admin.scss */
 .post .meta {
   font-size: 0.8rem;
   font-style: italic;
   color: #999;
 }
 
-/* line 83, ../../scss/admin.scss */
+/* line 83, ../../resources/assets/scss/admin.scss */
 .post.full .meta {
   border-bottom: 1px solid #eeeeee;
   margin: 1rem 0;
 }
 
-/* line 89, ../../scss/admin.scss */
+/* line 89, ../../resources/assets/scss/admin.scss */
 .read-more {
   display: block;
   margin-top: 1rem;
 }
 
-/* line 95, ../../scss/admin.scss */
+/* line 95, ../../resources/assets/scss/admin.scss */
 .top-bar-section small {
   color: #ccc;
 }
 
-/* line 100, ../../scss/admin.scss */
+/* line 100, ../../resources/assets/scss/admin.scss */
 #body {
   border: 0;
   font-family: monospace;
