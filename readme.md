@@ -1,13 +1,23 @@
-## Monk!
+## Laravel PHP Framework
 
-[ ![Codeship Status for BenOvermyer/MonkBlog](https://codeship.com/projects/9c0892b0-5ff9-0132-ae75-2696ea524dd6/status)](https://codeship.com/projects/51582) [ ![Code Climate](https://codeclimate.com/github/BenOvermyer/MonkBlog/badges/gpa.svg)](https://codeclimate.com/github/BenOvermyer/MonkBlog) [ ![Test Coverage](https://codeclimate.com/github/BenOvermyer/MonkBlog/badges/coverage.svg)](https://codeclimate.com/github/BenOvermyer/MonkBlog)
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-A blogging engine built on Laravel. It's specifically built for my personal blog, http://benovermyer.com, though with a bit of tweaking on the visual side can be used for any blog site.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
 
-The intent is to have a full blog engine by the end of Q1 2015. Details on this plan are available at the [afore-mentioned blog](http://benovermyer.com).
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+
+## Official Documentation
+
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
 ### License
-
-The Monk blog engine is licensed under the  [MIT license](http://opensource.org/licenses/MIT)
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
