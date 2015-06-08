@@ -2,6 +2,7 @@
 vendor
 config/site.json
 /bootstrap/compiled.php
+/bootstrap/cache/*
 .idea
 .vagrant
 node_modules
@@ -9,4 +10,4 @@ bower_components
 .sass-cache
 _ide_helper.php
 .env.local.php
-.env.php
+.env
