@@ -1,12 +1,19 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "monkblog/monkblog-php",
+    "description": "MonkBlog a blogging engine.",
+    "keywords": ["monk", "blog", "monkblog", "laravel", "blogging"],
     "license": "MIT",
     "type": "project",
+    "authors": [
+      {
+        "name": "Eric Dowell",
+        "email": "eric@ericodwell.com"
+      }
+    ],
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*"
+        "laravel/framework": "5.1.*",
+        "monkblog/monkcore-php": "dev-develop"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -27,6 +34,12 @@
             "tests/TestCase.php"
         ]
     },
+    "repositories": [
+      {
+        "type": "git",
+        "url": "git@github.com:monkblog/monkcore-php.git"
+      }
+    ],
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
