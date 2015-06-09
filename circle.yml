@@ -6,8 +6,6 @@ machine:
 dependencies:
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
-  post:
-    - php artisan clear-compiled
 test:
   override:
     - case $CIRCLE_NODE_INDEX in 0) php -d memory_limit=-1 vendor/bin/phpunit ;; esac:
