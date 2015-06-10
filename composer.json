@@ -1,5 +1,5 @@
 {
-	"name": "benovermyer/monkblog",
+	"name": "monkblog/monkblog-php",
 	"description": "The Monk blog engine.",
 	"keywords": ["blog", "laravel"],
 	"license": "MIT",
