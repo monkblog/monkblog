@@ -1,8 +1,0 @@
----
-
-- include: install.deb.yml
-  when: ansible_os_family == 'Debian'
-
-- name: Ensure mysql is started
-  service: name=mysql state=started
-  changed_when: False
