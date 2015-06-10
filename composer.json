@@ -35,12 +35,6 @@
             "tests/TestCase.php"
         ]
     },
-    "repositories": [
-      {
-        "type": "git",
-        "url": "git@github.com:monkblog/monkcore-php.git"
-      }
-    ],
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fcce2bc14d6e47f27e64cd6415746956",
+    "hash": "8c5c011b19f7dcfec8953e4edf6f44fd",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -583,7 +583,7 @@
             "version": "dev-dev",
             "source": {
                 "type": "git",
-                "url": "git@github.com:monkblog/monkcore-php.git",
+                "url": "https://github.com/monkblog/monkcore-php.git",
                 "reference": "3b50d0ceb9d2e341291baf4629a7a53645f2081e"
             },
             "require": {
