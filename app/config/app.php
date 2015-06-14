@@ -125,6 +125,7 @@ return array(
 		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'TwigBridge\ServiceProvider',
+		'MonkBlog\Providers\ServiceProvider',
 	],
 
 	/*
@@ -193,6 +194,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Markdown'          => 'GrahamCampbell\Markdown\Facades\Markdown',
 		'Twig'              => 'TwigBridge\Facade\Twig',
+		'Installer'			=> 'MonkBlog\Facade\Installer',
 	],
 
 );
