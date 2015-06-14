@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace MonkBlog\Jobs;
 
 use Illuminate\Bus\Queueable;
 

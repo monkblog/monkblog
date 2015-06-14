@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace MonkBlog\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
