@@ -29,7 +29,6 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        database_path();
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
