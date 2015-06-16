@@ -1,0 +1,19 @@
+{
+  "name": "monkblog-php",
+  "version": "1.0.0",
+  "homepage": "https://github.com/monkblog/monkblog-php",
+  "authors": [
+    "eric@ericdowell.com"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.2"
+  }
+}

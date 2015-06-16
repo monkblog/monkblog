@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace MonkBlog\Http\Controllers\Auth;
 
-use App\User;
+use MonkBlog\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use MonkBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller

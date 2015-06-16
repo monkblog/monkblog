@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace MonkBlog\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use MonkBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
