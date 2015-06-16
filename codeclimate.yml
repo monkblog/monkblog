@@ -3,4 +3,7 @@ languages:
   JavaScript: true
   PHP: true
 # exclude_paths:
+- "bootstrap/"
+- "database/"
 - "resources/assets/sass/_settings.scss"
+- "vendor/
