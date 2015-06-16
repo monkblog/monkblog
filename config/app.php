@@ -145,6 +145,11 @@ return [
         MonkBlog\Providers\RouteServiceProvider::class,
 
         /*
+         * Core
+         */
+        MonkCore\MonkCoreServiceProvider::class,
+
+        /*
          * Extra
          */
         Collective\Html\HtmlServiceProvider::class,

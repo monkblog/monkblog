@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \MonkBlog\Console\Commands\Inspire::class,
+        \MonkBlog\Console\Commands\UserGeneratorCommand::class,
     ];
 
     /**
