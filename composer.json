@@ -22,7 +22,8 @@
         "laravelcollective/html": "~5.0",
         "michelf/php-markdown": "1.4.1",
         "rcrowe/twigbridge": "~0.7",
-        "twig/extensions": "~1.2.0"
+        "twig/extensions": "~1.2.0",
+        "pda/pheanstalk": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
