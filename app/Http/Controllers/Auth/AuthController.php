@@ -2,7 +2,7 @@
 
 namespace MonkBlog\Http\Controllers\Auth;
 
-use MonkBlog\User;
+use MonkBlog\Models\User;
 use Validator;
 use MonkBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;

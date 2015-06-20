@@ -19,6 +19,6 @@ class Category extends Model {
 	];
 
 	public function posts() {
-		return $this->hasMany( 'Post' );
+		return $this->hasMany( 'MonkBlog\Models\Post' );
 	}
 }

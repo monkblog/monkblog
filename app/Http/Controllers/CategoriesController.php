@@ -2,6 +2,11 @@
 
 namespace MonkBlog\Http\Controllers;
 
+use MonkBlog\Models\Category;
+use Illuminate\Http\Response;
+use Validator;
+use Input;
+
 class CategoriesController extends BaseController
 {
 
@@ -19,7 +24,7 @@ class CategoriesController extends BaseController
             'pageTitle' => 'Categories',
         ];
 
-        return View::make('categories.index', $viewData);
+        return view('categories.index', $viewData);
     }
 
     /**
@@ -34,7 +39,7 @@ class CategoriesController extends BaseController
             'category' => new Category,
         ];
 
-        return View::make('categories.create', $viewData);
+        return view('categories.create', $viewData);
     }
 
     /**
@@ -47,12 +52,12 @@ class CategoriesController extends BaseController
         $validator = Validator::make($data = Input::all(), Category::$rules);
 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         Category::create($data);
 
-        return Redirect::route('admin.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -66,7 +71,7 @@ class CategoriesController extends BaseController
         $category = Category::find($id);
 
         if (!$category) {
-            App::abort(404);
+            abort(404);
         }
 
         $viewData = [
@@ -74,7 +79,7 @@ class CategoriesController extends BaseController
             'pageTitle' => 'Category: ' . $category->title,
         ];
 
-        return View::make('categories.show', $viewData);
+        return view('categories.show', $viewData);
     }
 
     /**
@@ -88,7 +93,7 @@ class CategoriesController extends BaseController
         $category = Category::find($id);
 
         if (!$category) {
-            App::abort(404);
+            abort(404);
         }
 
         $viewData = [
@@ -96,7 +101,7 @@ class CategoriesController extends BaseController
             'pageTitle' => 'Editing Category "' . $category->title . '"',
         ];
 
-        return View::make('categories.edit', $viewData);
+        return view('categories.edit', $viewData);
     }
 
     /**
@@ -110,18 +115,18 @@ class CategoriesController extends BaseController
         $category = Category::find($id);
 
         if (!$category) {
-            App::abort(404);
+            abort(404);
         }
 
         $validator = Validator::make($data = Input::all(), Category::$rules);
 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $category->update($data);
 
-        return Redirect::route('admin.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function confirmDestroy($id)
@@ -133,7 +138,7 @@ class CategoriesController extends BaseController
             'pageTitle' => 'Confirm Delete ' . $category->title,
         ];
 
-        return Response::view('categories.destroy', $viewData);
+        return view('categories.destroy', $viewData);
     }
 
     /**
@@ -146,7 +151,7 @@ class CategoriesController extends BaseController
     {
         Category::destroy($id);
 
-        return Redirect::route('admin.categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
 }

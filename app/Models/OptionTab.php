@@ -13,6 +13,6 @@ class OptionTab extends Model {
 	 */
 	public function options()
 	{
-		return $this->hasMany( 'Option' );
+		return $this->hasMany( 'MonkBlog\Models\Option' );
 	}
 }

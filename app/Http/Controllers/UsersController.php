@@ -2,7 +2,13 @@
 
 namespace MonkBlog\Http\Controllers;
 
-use \Illuminate\Support\MessageBag;
+use Illuminate\Http\Response;
+use Illuminate\Support\MessageBag;
+use MonkBlog\Models\User;
+use Input;
+use Validator;
+use Hash;
+use Auth;
 
 class UsersController extends BaseController {
 
@@ -15,7 +21,7 @@ class UsersController extends BaseController {
         $users = User::all();
         $pageTitle = 'Users';
 
-        return View::make( 'users.index', compact( 'users', 'pageTitle' ) );
+        return view( 'users.index', compact( 'users', 'pageTitle' ) );
     }
 
     /**
@@ -26,7 +32,7 @@ class UsersController extends BaseController {
     public function create() {
         $user = new User();
         $pageTitle = 'Create User';
-        return View::make( 'users.create', compact( 'user' , 'pageTitle') );
+        return view( 'users.create', compact( 'user' , 'pageTitle') );
     }
 
     /**
@@ -40,13 +46,13 @@ class UsersController extends BaseController {
 
         if( $validator->fails() )
         {
-            return Redirect::back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $data[ 'password' ] = Hash::make( $data[ 'password' ] );
 
         User::create( $data );
 
-        return Redirect::route('admin.users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -60,7 +66,7 @@ class UsersController extends BaseController {
         $user = User::findOrFail( $id );
         $pageTitle = $user->display_name;
 
-        return View::make( 'users.show', compact( 'user', 'pageTitle' ) );
+        return view( 'users.show', compact( 'user', 'pageTitle' ) );
     }
 
     /**
@@ -76,7 +82,7 @@ class UsersController extends BaseController {
 
         $authUser = Auth::user();
 
-        return View::make( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
+        return view( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
     }
 
     /**
@@ -98,7 +104,7 @@ class UsersController extends BaseController {
         $userRules[ 'password' ] = '';
 
         if( !Hash::check( $passwordInput, $user->getAuthPassword() ) ) {
-            return Redirect::back()->withErrors(new MessageBag( [
+            return redirect()->back()->withErrors(new MessageBag( [
                     'password' => 'Update failed, invalid password'
                 ]) )->withInput()->exceptInput( 'password' );
         }
@@ -106,12 +112,12 @@ class UsersController extends BaseController {
         $validator = Validator::make( $data, array_filter( $userRules ) );
 
         if( $validator->fails() ) {
-            return Redirect::back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $user->update( $data );
 
-        return Redirect::route('admin.users.index');
+        return redirect()->route('admin.users.index');
     }
 
     public function updatePassword( $id ) {
@@ -119,7 +125,7 @@ class UsersController extends BaseController {
          * @todo add access for super admin once ACL is in place
          */
         if( Auth::id() != $id ) {
-            return Redirect::route( 'admin.users.index' )->withErrors(
+            return redirect()->route( 'admin.users.index' )->withErrors(
                 new MessageBag( [
                     'change_password' => "You don't have the right permissions to change the selected Users password"
                 ]) );
@@ -128,7 +134,7 @@ class UsersController extends BaseController {
         $user = User::find( $id );
         $pageTitle = 'Reset Password for '. $user->display_name;
 
-        return View::make( 'users.edit-password', compact( 'user', 'pageTitle' ) );
+        return view( 'users.edit-password', compact( 'user', 'pageTitle' ) );
     }
 
     public function savePassword( $id ) {
@@ -136,7 +142,7 @@ class UsersController extends BaseController {
          * @todo add access for super admin once ACL is in place
          */
         if( Auth::id() != $id ) {
-            return Redirect::route( 'admin.users.index' )->withErrors(
+            return redirect()->route( 'admin.users.index' )->withErrors(
                 new MessageBag( [
                     'change_password' => "You don't have the right permissions to change the selected Users password"
                 ]) );
@@ -147,7 +153,7 @@ class UsersController extends BaseController {
         $data = Input::except( 'old_password' );
 
         if( !Hash::check( Input::get( 'old_password' ), $user->getAuthPassword() ) ) {
-            return Redirect::back()->withErrors( new MessageBag( [
+            return redirect()->back()->withErrors( new MessageBag( [
                 'old_password' => 'Update failed, incorrect password supplied'
             ]) )->withInput()->exceptInput( 'password' );
         }
@@ -160,14 +166,14 @@ class UsersController extends BaseController {
         $validator = Validator::make( $data, array_filter( $userRules ) );
 
         if( $validator->fails() ) {
-            return Redirect::back()->withErrors($validator)->withInput()->exceptInput( 'password' );
+            return redirect()->back()->withErrors($validator)->withInput()->exceptInput( 'password' );
         }
 
         $data[ 'password' ] = Hash::make( $data[ 'password' ] );
 
         $user->update( $data );
 
-        return Redirect::route( 'admin.users.index' )->withInput( [ 'message' => 'Password successfully changed.' ] );
+        return redirect()->route( 'admin.users.index' )->withInput( [ 'message' => 'Password successfully changed.' ] );
 
     }
 
@@ -179,7 +185,7 @@ class UsersController extends BaseController {
             'pageTitle' => 'Confirm Delete ' . $user->display_name,
         ];
 
-        return Response::view( 'users.destroy', $viewData );
+        return view( 'users.destroy', $viewData );
     }
 
     /**
@@ -191,7 +197,7 @@ class UsersController extends BaseController {
     public function destroy( $id ) {
         User::destroy( $id );
 
-        return Redirect::route( 'admin.users.index' );
+        return redirect()->route( 'admin.users.index' );
     }
 
 }

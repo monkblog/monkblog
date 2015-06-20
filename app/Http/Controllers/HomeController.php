@@ -2,6 +2,9 @@
 
 namespace MonkBlog\Http\Controllers;
 
+use MonkBlog\Models\Post;
+use MonkBlog\Models\Page;
+
 class HomeController extends BaseController {
 
 	public function getHome()
@@ -23,7 +26,7 @@ class HomeController extends BaseController {
 			'more' => $more,
 		];
 
-		return View::make( 'home', $viewData );
+		return view( 'home', $viewData );
 	}
 
 	public function getAdminHome()
@@ -37,7 +40,7 @@ class HomeController extends BaseController {
 			'totalPages' => $totalPages,
 		];
 
-		return View::make( 'admin.home', $viewData );
+		return view( 'admin.home', $viewData );
 	}
 
 }

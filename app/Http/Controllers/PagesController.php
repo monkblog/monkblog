@@ -2,6 +2,11 @@
 
 namespace MonkBlog\Http\Controllers;
 
+use Illuminate\Http\Response;
+use MonkBlog\Models\Page;
+use Input;
+use Validator;
+
 class PagesController extends BaseController {
 
 	/**
@@ -18,7 +23,7 @@ class PagesController extends BaseController {
 			'pageTitle' => 'All Pages',
 		];
 
-		return View::make( 'pages.index', $viewData );
+		return view( 'pages.index', $viewData );
 	}
 
 	/**
@@ -33,7 +38,7 @@ class PagesController extends BaseController {
 			'pageTitle' => 'Write New Page',
 		];
 
-		return View::make( 'pages.create', $viewData );
+		return view( 'pages.create', $viewData );
 	}
 
 	public function publish( $id )
@@ -46,7 +51,7 @@ class PagesController extends BaseController {
 			$page->save();
 		}
 
-		return Redirect::route( 'admin.pages.index' );
+		return redirect()->route( 'admin.pages.index' );
 	}
 
 	/**
@@ -60,12 +65,12 @@ class PagesController extends BaseController {
 
 		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors( $validator )->withInput();
+			return redirect()->back()->withErrors( $validator )->withInput();
 		}
 
 		Page::create( $data );
 
-		return Redirect::route( 'admin.pages.index' );
+		return redirect()->route( 'admin.pages.index' );
 	}
 
 	/**
@@ -83,7 +88,7 @@ class PagesController extends BaseController {
 			'pageTitle' => $page->title,
 		];
 
-		return View::make( 'pages.show', $viewData );
+		return view( 'pages.show', $viewData );
 	}
 
 	/**
@@ -101,7 +106,7 @@ class PagesController extends BaseController {
 			'pageTitle' => 'Editing ' . $page->title,
 		];
 
-		return View::make( 'pages.edit', $viewData );
+		return view( 'pages.edit', $viewData );
 	}
 
 	/**
@@ -118,12 +123,12 @@ class PagesController extends BaseController {
 
 		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors( $validator )->withInput();
+			return redirect()->back()->withErrors( $validator )->withInput();
 		}
 
 		$page->update( $data );
 
-		return Redirect::route( 'admin.pages.index' );
+		return redirect()->route( 'admin.pages.index' );
 	}
 
 	/**
@@ -136,7 +141,7 @@ class PagesController extends BaseController {
 	{
 		Page::destroy( $id );
 
-		return Redirect::route( 'admin.pages.index' );
+		return redirect()->route( 'admin.pages.index' );
 	}
 
 	public function confirmDestroy( $id ) {
@@ -147,7 +152,7 @@ class PagesController extends BaseController {
 			'pageTitle' => 'Confirm Delete ' . $page->title,
 		];
 
-		return Response::view( 'pages.destroy', $viewData );
+		return view( 'pages.destroy', $viewData );
 	}
 
 	public function getPageBySlug( $slug ) {
@@ -155,7 +160,7 @@ class PagesController extends BaseController {
 		$page = Page::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
 
 		if ( !$page ) {
-			App::abort( 404 );
+			abort( 404 );
 		}
 
 		$viewData = [
@@ -163,7 +168,7 @@ class PagesController extends BaseController {
 			'page' => $page,
 		];
 
-		return Response::view( 'pages.show', $viewData );
+		return view( 'pages.show', $viewData );
 	}
 
 }

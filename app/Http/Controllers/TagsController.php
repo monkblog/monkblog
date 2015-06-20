@@ -2,6 +2,11 @@
 
 namespace MonkBlog\Http\Controllers;
 
+use Illuminate\Http\Response;
+use MonkBlog\Models\Tag;
+use Input;
+use Validator;
+
 class TagsController extends BaseController {
 
 	/**
@@ -13,7 +18,7 @@ class TagsController extends BaseController {
 	{
 		$tags = Tag::all();
 
-		return View::make('tags.index', compact('tags'));
+		return view('tags.index', compact('tags'));
 	}
 
 	/**
@@ -23,7 +28,7 @@ class TagsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('tags.create');
+		return view('tags.create');
 	}
 
 	/**
@@ -37,12 +42,12 @@ class TagsController extends BaseController {
 
 		if ($validator->fails())
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return redirect()->back()->withErrors($validator)->withInput();
 		}
 
 		Tag::create($data);
 
-		return Redirect::route('tags.index');
+		return redirect()->route('tags.index');
 	}
 
 	/**
@@ -55,7 +60,7 @@ class TagsController extends BaseController {
 	{
 		$tag = Tag::findOrFail($id);
 
-		return View::make('tags.show', compact('tag'));
+		return view('tags.show', compact('tag'));
 	}
 
 	/**
@@ -68,7 +73,7 @@ class TagsController extends BaseController {
 	{
 		$tag = Tag::find($id);
 
-		return View::make('tags.edit', compact('tag'));
+		return view('tags.edit', compact('tag'));
 	}
 
 	/**
@@ -85,12 +90,12 @@ class TagsController extends BaseController {
 
 		if ($validator->fails())
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return redirect()->back()->withErrors($validator)->withInput();
 		}
 
 		$tag->update($data);
 
-		return Redirect::route('tags.index');
+		return redirect()->route('tags.index');
 	}
 
 	/**
@@ -103,7 +108,7 @@ class TagsController extends BaseController {
 	{
 		Tag::destroy($id);
 
-		return Redirect::route('tags.index');
+		return redirect()->route('tags.index');
 	}
 
 }

@@ -21,6 +21,6 @@ class Post extends Model {
 	];
 
 	public function category() {
-		return $this->belongsTo( 'Category' );
+		return $this->belongsTo( 'MonkBlog\Models\Category' );
 	}
 }

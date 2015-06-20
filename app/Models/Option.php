@@ -37,7 +37,7 @@ class Option extends Model {
 
     public function option_tabs()
     {
-        return $this->belongsTo( 'OptionTab' );
+        return $this->belongsTo( 'MonkBlog\Models\OptionTab' );
     }
 
     /**

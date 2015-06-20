@@ -2,6 +2,12 @@
 
 namespace MonkBlog\Http\Controllers;
 
+use Illuminate\Http\Response;
+use MonkBlog\Models\Post;
+use MonkBlog\Models\Category;
+use Input;
+use Validator;
+
 class PostsController extends BaseController {
 
 	/**
@@ -18,7 +24,7 @@ class PostsController extends BaseController {
 			'pageTitle' => 'All Posts',
 		];
 
-		return View::make( 'posts.index', $viewData );
+		return view( 'posts.index', $viewData );
 	}
 
 	/**
@@ -61,7 +67,7 @@ class PostsController extends BaseController {
 			'less' => $less,
 		];
 
-		return View::make( 'posts.archive', $viewData );
+		return view( 'posts.archive', $viewData );
 	}
 
 	/**
@@ -77,7 +83,7 @@ class PostsController extends BaseController {
 			'categories' => Category::lists( 'title', 'id' ),
 		];
 
-		return View::make( 'posts.create', $viewData );
+		return view( 'posts.create', $viewData );
 	}
 
 	public function publish( $id )
@@ -90,7 +96,7 @@ class PostsController extends BaseController {
 			$post->save();
 		}
 
-		return Redirect::route( 'admin.posts.index' );
+		return redirect()->route( 'admin.posts.index' );
 	}
 
 	/**
@@ -104,12 +110,12 @@ class PostsController extends BaseController {
 
 		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors( $validator )->withInput();
+			return redirect()->back()->withErrors( $validator )->withInput();
 		}
 
 		Post::create( $data );
 
-		return Redirect::route( 'admin.posts.index' );
+		return redirect()->route( 'admin.posts.index' );
 	}
 
 	/**
@@ -123,10 +129,10 @@ class PostsController extends BaseController {
 		$post = Post::find( $id );
 
 		if ( !$post ) {
-			App::abort( 404 );
+			abort( 404 );
 		}
 
-		return View::make( 'posts.show', compact( 'post' ) );
+		return view( 'posts.show', compact( 'post' ) );
 	}
 
 	/**
@@ -145,7 +151,7 @@ class PostsController extends BaseController {
 			'categories' => Category::lists( 'title', 'id' ),
 		];
 
-		return View::make( 'posts.edit', $viewData );
+		return view( 'posts.edit', $viewData );
 	}
 
 	/**
@@ -162,12 +168,12 @@ class PostsController extends BaseController {
 
 		if ( $validator->fails() )
 		{
-			return Redirect::back()->withErrors( $validator )->withInput();
+			return redirect()->back()->withErrors( $validator )->withInput();
 		}
 
 		$post->update( $data );
 
-		return Redirect::route( 'admin.posts.index' );
+		return redirect()->route( 'admin.posts.index' );
 	}
 
 	/**
@@ -180,7 +186,7 @@ class PostsController extends BaseController {
 	{
 		Post::destroy( $id );
 
-		return Redirect::route( 'admin.posts.index' );
+		return redirect()->route( 'admin.posts.index' );
 	}
 
 	public function confirmDestroy( $id ) {
@@ -191,7 +197,7 @@ class PostsController extends BaseController {
 			'pageTitle' => 'Confirm Delete ' . $post->title,
 		];
 
-		return Response::view( 'posts.destroy', $viewData );
+		return view( 'posts.destroy', $viewData );
 	}
 
 	public function getPostBySlug( $slug ) {
@@ -199,7 +205,7 @@ class PostsController extends BaseController {
 		$post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
 
 		if ( !$post ) {
-			App::abort( 404 );
+			abort( 404 );
 		}
 
 		$viewData = [
@@ -207,7 +213,7 @@ class PostsController extends BaseController {
 			'pageTitle' => $post->title,
 		];
 
-		return Response::view( 'posts.show', $viewData );
+		return view( 'posts.show', $viewData );
 	}
 
 }

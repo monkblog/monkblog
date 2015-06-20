@@ -3,6 +3,7 @@
 namespace MonkBlog\Http\Middleware;
 
 use Closure;
+use Request;
 use Illuminate\Contracts\Auth\Guard;
 
 class Authenticate
@@ -38,7 +39,8 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                $redirectTo = ( Request::path() != 'admin' && strstr( Request::path() , 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
+                return redirect()->guest('login' . $redirectTo);
             }
         }
 

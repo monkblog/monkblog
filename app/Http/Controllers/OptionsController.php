@@ -3,6 +3,12 @@
 namespace MonkBlog\Http\Controllers;
 
 use Illuminate\Support\MessageBag;
+use Illuminate\Http\Response;
+use MonkBlog\Models\OptionTab;
+use MonkBlog\Models\Option;
+use Validator;
+use Cache;
+use Input;
 
 class OptionsController extends BaseController {
 
@@ -25,7 +31,7 @@ class OptionsController extends BaseController {
 
         $options = $firstTab->options->all();
 
-        return View::make( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
+        return view( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
     }
 
     /**
@@ -69,7 +75,7 @@ class OptionsController extends BaseController {
 
         $options = $optionTab->options->all();
 
-        return View::make( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
+        return view( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
     }
 
     /**
@@ -81,10 +87,10 @@ class OptionsController extends BaseController {
      */
     public function edit($id)
     {
-        $option = option::find($id);
+        $option = Option::find($id);
         $pageTitle = 'Edit '.  $option->display_name;
 
-        return View::make( 'options.edit', compact( 'option', 'optionName', 'pageTitle' ) );
+        return view( 'options.edit', compact( 'option', 'optionName', 'pageTitle' ) );
     }
 
     /**
@@ -105,7 +111,7 @@ class OptionsController extends BaseController {
         $validator = Validator::make( $data = Input::all(), $rules );
 
         if( $validator->fails() ) {
-            return Redirect::back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $option->update( $data );
@@ -115,10 +121,10 @@ class OptionsController extends BaseController {
         $tab = OptionTab::find($option->option_tab_id);
 
         if( !empty( $tab ) ) {
-            return Redirect::route('admin.options.show', $tab->slug);
+            return redirect()->route('admin.options.show', $tab->slug);
         }
 
-        return Redirect::route('admin.options.index');
+        return redirect()->route('admin.options.index');
     }
 
     public function confirmDestroy( $id ) {

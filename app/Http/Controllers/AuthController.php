@@ -3,6 +3,9 @@
 namespace MonkBlog\Http\Controllers;
 
 use Illuminate\Support\MessageBag;
+use Input;
+use Validator;
+use Auth;
 
 class AuthController extends BaseController {
 
@@ -14,7 +17,7 @@ class AuthController extends BaseController {
             'errors' => $errors,
             'redirect' => Input::get( 'redirect_to' ),
         ];
-        return Response::view( 'login', $viewData );
+        return view( 'login', $viewData );
     }
 
     public function postLogin() {
@@ -32,9 +35,9 @@ class AuthController extends BaseController {
             ];
             if( Auth::attempt( $credentials ) ) {
                 if( $redirect_admin = Input::get( 'redirect_to' ) ) {
-                    return Redirect::to( $redirect_admin );
+                    return redirect()->to( $redirect_admin );
                 }
-                return Redirect::route( 'admin.home' );
+                return redirect()->route( 'admin.home' );
             }
             $data[ 'errors' ] = new MessageBag([
                'password' => 'Email and/or Password are invalid',
@@ -45,14 +48,14 @@ class AuthController extends BaseController {
         }
         $data[ 'email' ] = $email;
 
-        return Redirect::route( 'login' )->withInput( $data );
+        return redirect()->route( 'login' )->withInput( $data );
     }
 
 
     public function getLogout() {
         Auth::logout();
 
-        return Redirect::route( 'home' );
+        return redirect()->route( 'home' );
     }
 
 }
