@@ -1,0 +1,13 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    {{ form_model( category, { route : [ 'admin.categories.update', category.id ], method : 'put' } ) }}
+    {{ form_label( 'title', 'Title' ) }}
+    {{ form_text( 'title' ) }}
+    {{ form_label( 'slug', 'Slug' ) }}
+    {{ form_text( 'slug' ) }}
+    {{ form_label( 'description', 'Description' ) }}
+    {{ form_text( 'description' ) }}
+    {{ form_submit( 'Save', { 'class' : 'button' } ) }}
+    {{ form_close() }}
+{% endblock %}

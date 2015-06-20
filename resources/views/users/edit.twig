@@ -1,0 +1,27 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    {{ form_model( user, { route : [ 'admin.users.update', user.id ], method : 'put' }  ) }}
+        {{ form_label( 'first_name', 'First Name' ) }}
+        {{ form_text( 'first_name' ) }}
+        {{ form_label( 'last_name', 'Last Name' ) }}
+        {{ form_text( 'last_name' ) }}
+        {{ form_label( 'display_name', 'Display Name' ) }}
+        {{ form_text( 'display_name' ) }}
+        {{ form_label( 'email', 'Email' ) }}
+        {{ form_email( 'email' ) }}
+        {% if authUser.owner and authUser.id != user.id %}
+        {{ form_label( 'owner', 'Site Owner' ) }}
+        {{ form_select( 'owner', { 1 : 'True', 0 : 'False' }, 0 ) }}
+        {% elseif authUser.owner and authUser.id == user.id %}
+        {{ form_hidden( 'owner' ) }}
+        {% else %}
+        {{ form_hidden( 'owner', 0 ) }}
+        {% endif %}
+        {{ form_label( 'password', 'Password' ) }}
+        {{ form_password( 'password', { required : 'required' } ) }}
+        {{ form_label( 'password_confirmation', 'Confirm Password' ) }}
+        {{ form_password( 'password_confirmation', { required : 'required' } ) }}
+        {{ form_submit( 'Save', { class : 'button' } ) }}
+    {{ form_close() }}
+{% endblock %}

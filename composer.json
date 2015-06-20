@@ -14,7 +14,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
-        "monkblog/monkcore-php": "dev-dev"
+        "michelf/php-markdown": "1.4.1",
+        "rcrowe/twigbridge": "~0.7",
+        "twig/extensions": "~1.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -41,10 +43,12 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-root-package-install": [
