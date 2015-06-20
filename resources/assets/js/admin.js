@@ -1,14 +1,18 @@
-var converter = new Showdown.converter();
+var converter = new showdown.Converter();
 
 $( document ).ready( function() {
-    $( '#preview' ).html( converter.makeHtml( $( '#body' ).val() ) );
+    $( document ).foundation();
 
-    $( '#body' ).keyup( function() {
-        $( '#preview' ).html( converter.makeHtml( $( '#body' ).val() ) );
-        $( '#body' ).css( 'height', $( '#preview' ).height() + 'px' );
+    var preview = $( '#preview' );
+    var body = $( '#body' );
+    preview.html( converter.makeHtml( body.val() ) );
+
+    body.keyup( function() {
+        preview.html( converter.makeHtml( body.val() ) );
+        body.css( 'height', preview.height() + 'px' );
     });
 
-    $( '#body' ).css( 'height', $( '#preview' ).height() + 'px' );
+    body.css( 'height', preview.height() + 'px' );
 
     $( '#title' ).blur( function () {
         if ( $( '#slug' ).val() === '' ) {
