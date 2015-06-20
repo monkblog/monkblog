@@ -9,7 +9,7 @@ dependencies:
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
     - php artisan migrate:install && php artisan migrate:refresh
-    - php artian db:seed
+    - php artisan db:seed
 checkout:
   post:
     - cp .env.testing .env
