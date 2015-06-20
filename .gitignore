@@ -7,8 +7,7 @@
 _ide_helper.php
 .idea
 /node_modules
-/public/assests/admin/*
-/public/assests/build/*
+/resources/assets/bower_components/
 .sass-cache
 /vendor
 .vagrant

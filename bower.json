@@ -14,6 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "~5.5.2"
+    "foundation": "~5.5.2",
+    "showdown": "~1.1.0",
+    "normalize.css": "~3.0.3"
   }
 }

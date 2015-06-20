@@ -5,7 +5,6 @@ languages:
 # exclude_paths:
 - "bootstrap/"
 - "database/"
-- "public/js/foundation.min.js"
-- "resources/assets/sass/_admin_settings.scss"
-- "resources/assets/sass/_settings.scss"
+- "public/assets/"
+- "resources/assets/sass/foundation/"
 - "vendor/

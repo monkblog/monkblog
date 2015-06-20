@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>{{ pageTitle }} | {{ siteTitle }}</title>
+        <!--[if lte IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
         <link href='//fonts.googleapis.com/css?family=Cabin:500|Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link type="text/css" rel="stylesheet" href="{{ asset( 'css/main.css' ) }}">
+        <link type="text/css" rel="stylesheet" href="{{ elixir( 'assets/css/main.css' ) }}">
     </head>
     <body class="{% block bodyclass %}{% endblock %}">
         <div class="row">
@@ -29,8 +33,6 @@
                 <p>This site is an online journal. It's not really intended to be copyrighted, trademarked, or otherwise legal-ified. I trust that you won't take my writing and use it as your own. If you do, though, I'm not going to do anything about it.</p>
             </footer>
         </div>
-        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="{{ asset( 'js/foundation.min.js' ) }}"></script>
-        <script src="{{ asset( 'js/app.js' ) }}"></script>
+        <script src="{{ elixir( 'assets/js/app.js' ) }}"></script>
     </body>
 </html>
