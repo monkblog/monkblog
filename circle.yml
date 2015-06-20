@@ -10,6 +10,9 @@ dependencies:
     - composer install --no-interaction --optimize-autoloader --prefer-source
     - php artisan migrate:install && php artisan migrate:refresh
     - php artian db:seed
+checkout:
+  post:
+    - cp .env.testing .env
 test:
   override:
     - case $CIRCLE_NODE_INDEX in 0) php -d memory_limit=-1 vendor/bin/phpunit --coverage-clover build/logs/clover.xml ;; esac:
