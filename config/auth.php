@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => MonkCore\Models\User::class,
+    'model' => MonkBlog\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

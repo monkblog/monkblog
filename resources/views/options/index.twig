@@ -1,0 +1,20 @@
+{% extends 'admin.layout' %}
+
+{% block content %}
+    {% include 'admin.sub-nav' with { tabs : optionTabs, label : 'Options' } %}
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+    {% for option in options %}
+        {% if option.name != 'monk_version' %}
+        <tr>
+            <td><a href="{{ url_route( 'admin.options.edit', option.id ) }}">{{ option.display_name }}</a></td>
+            <td>{{ option.value }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

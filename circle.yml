@@ -5,11 +5,17 @@ machine:
     America/Chicago
 dependencies:
   pre:
+    - echo "memory_limit = -1" > ~/.phpenv/versions/5.5.11/etc/conf.d/memory.ini
     - pecl install xdebug
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
+    - php artisan migrate:install && php artisan migrate:refresh
+    - php artisan db:seed
+checkout:
+  post:
+    - cp .env.testing .env
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) php -d memory_limit=-1 vendor/bin/phpunit --coverage-clover build/logs/clover.xml ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
         parallel: true
     - ./vendor/bin/test-reporter
