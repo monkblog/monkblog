@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use MonkBlog\Models\User;
 
 class LoginTest extends TestCase
 {
@@ -17,11 +18,6 @@ class LoginTest extends TestCase
              ->see('<input class="button" type="submit" value="Login">');
     }
 
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
     public function testUserLoginPage()
     {
         $this->visit('/login')
@@ -29,7 +25,14 @@ class LoginTest extends TestCase
                 'email' => 'testing@email.com',
                 'password' => ENV( 'APP_KEY', 'password' ),
             ]);
+    }
 
-        $this->visit('/login')->see('Dashboard');
+    public function testAdminPage() {
+        $user = User::find( 1 );
+
+        $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->visit('/login')
+            ->see('Dashboard');
     }
 }
