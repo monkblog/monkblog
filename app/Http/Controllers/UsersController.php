@@ -10,14 +10,16 @@ use Validator;
 use Hash;
 use Auth;
 
-class UsersController extends BaseController {
+class UsersController extends BaseController
+{
 
     /**
      * Display a listing of users
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         $users = User::all();
         $pageTitle = 'Users';
 
@@ -29,10 +31,12 @@ class UsersController extends BaseController {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
         $user = new User();
         $pageTitle = 'Create User';
-        return view( 'users.create', compact( 'user' , 'pageTitle') );
+
+        return view( 'users.create', compact( 'user', 'pageTitle' ) );
     }
 
     /**
@@ -42,26 +46,26 @@ class UsersController extends BaseController {
      */
     public function store()
     {
-        $validator = Validator::make($data = Input::all(), User::$rules);
+        $validator = Validator::make( $data = Input::all(), User::$rules );
 
-        if( $validator->fails() )
-        {
-            return redirect()->back()->withErrors($validator)->withInput();
+        if( $validator->fails() ) {
+            return redirect()->back()->withErrors( $validator )->withInput();
         }
         $data[ 'password' ] = Hash::make( $data[ 'password' ] );
 
         User::create( $data );
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route( 'admin.users.index' );
     }
 
     /**
      * Display the specified user.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function show($id)
+    public function show( $id )
     {
         $user = User::findOrFail( $id );
         $pageTitle = $user->display_name;
@@ -72,13 +76,14 @@ class UsersController extends BaseController {
     /**
      * Show the form for editing the specified user.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
-        $user = User::find($id);
-        $pageTitle = 'Edit '. $user->display_name;
+        $user = User::find( $id );
+        $pageTitle = 'Edit ' . $user->display_name;
 
         $authUser = Auth::user();
 
@@ -88,7 +93,8 @@ class UsersController extends BaseController {
     /**
      * Update the specified user in storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
     public function update( $id )
@@ -104,23 +110,24 @@ class UsersController extends BaseController {
         $userRules[ 'password' ] = '';
 
         if( !Hash::check( $passwordInput, $user->getAuthPassword() ) ) {
-            return redirect()->back()->withErrors(new MessageBag( [
-                    'password' => 'Update failed, invalid password'
-                ]) )->withInput()->exceptInput( 'password' );
+            return redirect()->back()->withErrors( new MessageBag( [
+                'password' => 'Update failed, invalid password'
+            ] ) )->withInput()->exceptInput( 'password' );
         }
 
         $validator = Validator::make( $data, array_filter( $userRules ) );
 
         if( $validator->fails() ) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors( $validator )->withInput();
         }
 
         $user->update( $data );
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route( 'admin.users.index' );
     }
 
-    public function updatePassword( $id ) {
+    public function updatePassword( $id )
+    {
         /**
          * @todo add access for super admin once ACL is in place
          */
@@ -128,16 +135,17 @@ class UsersController extends BaseController {
             return redirect()->route( 'admin.users.index' )->withErrors(
                 new MessageBag( [
                     'change_password' => "You don't have the right permissions to change the selected Users password"
-                ]) );
+                ] ) );
         }
 
         $user = User::find( $id );
-        $pageTitle = 'Reset Password for '. $user->display_name;
+        $pageTitle = 'Reset Password for ' . $user->display_name;
 
         return view( 'users.edit-password', compact( 'user', 'pageTitle' ) );
     }
 
-    public function savePassword( $id ) {
+    public function savePassword( $id )
+    {
         /**
          * @todo add access for super admin once ACL is in place
          */
@@ -145,7 +153,7 @@ class UsersController extends BaseController {
             return redirect()->route( 'admin.users.index' )->withErrors(
                 new MessageBag( [
                     'change_password' => "You don't have the right permissions to change the selected Users password"
-                ]) );
+                ] ) );
         }
 
         $user = User::find( $id );
@@ -155,7 +163,7 @@ class UsersController extends BaseController {
         if( !Hash::check( Input::get( 'old_password' ), $user->getAuthPassword() ) ) {
             return redirect()->back()->withErrors( new MessageBag( [
                 'old_password' => 'Update failed, incorrect password supplied'
-            ]) )->withInput()->exceptInput( 'password' );
+            ] ) )->withInput()->exceptInput( 'password' );
         }
 
         $userRules = User::$rules;
@@ -166,7 +174,7 @@ class UsersController extends BaseController {
         $validator = Validator::make( $data, array_filter( $userRules ) );
 
         if( $validator->fails() ) {
-            return redirect()->back()->withErrors($validator)->withInput()->exceptInput( 'password' );
+            return redirect()->back()->withErrors( $validator )->withInput()->exceptInput( 'password' );
         }
 
         $data[ 'password' ] = Hash::make( $data[ 'password' ] );
@@ -177,7 +185,8 @@ class UsersController extends BaseController {
 
     }
 
-    public function confirmDestroy( $id ) {
+    public function confirmDestroy( $id )
+    {
         $user = User::find( $id );
 
         $viewData = [
@@ -191,10 +200,12 @@ class UsersController extends BaseController {
     /**
      * Remove the specified user from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function destroy( $id ) {
+    public function destroy( $id )
+    {
         User::destroy( $id );
 
         return redirect()->route( 'admin.users.index' );

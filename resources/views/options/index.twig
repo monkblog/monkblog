@@ -1,7 +1,7 @@
-{% extends 'admin.layout' %}
+{% extends 'admin::layout' %}
 
 {% block content %}
-    {% include 'admin.sub-nav' with { tabs : optionTabs, label : 'Options' } %}
+    {% include 'admin::sub-nav' with { tabs : optionTabs, label : 'Options' } %}
     <table>
         <thead>
             <tr><th>Name</th><th>Value</th></tr>

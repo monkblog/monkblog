@@ -2,6 +2,7 @@
 
 namespace MonkBlog\Providers;
 
+use Auth;
 use Config;
 use View;
 use MonkBlog\Models\Option;
@@ -17,8 +18,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $currentTheme = current_theme();
+        View::addNamespace( $currentTheme, base_path("themes/{$currentTheme}/" ) );
+        View::addNamespace( 'admin', base_path( 'resources/admin/' ) );
+
         // Shared variables
-        $pageList = [];
+        $pageList = [ ];
         $siteTitle = Config::get( 'site.title', '' );
         $siteVersion = Config::get( 'site.version', '' );
         $tagline = Config::get( 'site.tagline', '' );
@@ -26,21 +31,21 @@ class AppServiceProvider extends ServiceProvider
         $contactFacebook = Config::get( 'site_contact.facebook' );
         $contactTwitter = Config::get( 'site_contact.twitter' );
 
-        if ( php_sapi_name() != 'cli' ) {
+        if( php_sapi_name() != 'cli' ) {
             $pageList = Page::where( 'is_published', '=', true )->get();
 
             $siteTitle = Option::where( 'name', '=', 'site_title' )->get()->first();
-            $siteVersion = Option::where( 'name', '=',  'monk_version' )->get()->first();
-            $tagline = Option::where( 'name', '=',  'tagline' )->get()->first();
+            $siteVersion = Option::where( 'name', '=', 'monk_version' )->get()->first();
+            $tagline = Option::where( 'name', '=', 'tagline' )->get()->first();
 
             $contactEmail = Option::where( 'name', '=', 'email' )->get()->first();
             $contactFacebook = Option::where( 'name', '=', 'facebook' )->get()->first();
             $contactTwitter = Option::where( 'name', '=', 'twitter' )->get()->first();
         }
 
-        View::share( 'siteTitle',  $siteTitle );
+        View::share( 'siteTitle', $siteTitle );
         View::share( 'monkVersion', $siteVersion );
-        View::share( 'tagline',  $tagline );
+        View::share( 'tagline', $tagline );
         View::share( 'contactEmail', $contactEmail );
         View::share( 'contactFacebook', $contactFacebook );
         View::share( 'contactTwitter', $contactTwitter );

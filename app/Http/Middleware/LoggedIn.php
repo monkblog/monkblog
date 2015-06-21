@@ -3,10 +3,10 @@
 namespace MonkBlog\Http\Middleware;
 
 use Closure;
-use Request;
+use View;
 use Illuminate\Contracts\Auth\Guard;
 
-class Authenticate
+class LoggedIn
 {
     /**
      * The Guard implementation.
@@ -37,15 +37,8 @@ class Authenticate
      */
     public function handle( $request, Closure $next )
     {
-        if( $this->auth->guest() ) {
-            if( $request->ajax() ) {
-                return response( 'Unauthorized.', 401 );
-            }
-            else {
-                $redirectTo = ( Request::path() != 'admin' && strstr( Request::path(), 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
-
-                return redirect()->guest( 'login' . $redirectTo );
-            }
+        if( $this->auth->check() ) {
+            View::share('logged_in', true);
         }
 
         return $next( $request );

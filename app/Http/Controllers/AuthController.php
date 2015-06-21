@@ -6,14 +6,12 @@ use Illuminate\Support\MessageBag;
 use Input;
 use Validator;
 use Auth;
-use Illuminate\Contracts\Auth\Guard;
 
-class AuthController extends BaseController {
+class AuthController extends BaseController
+{
 
-    public function getLogin( Guard $auth ) {
-        if( $auth->check() ) {
-            return redirect()->route( 'admin.home' );
-        }
+    public function getLogin()
+    {
         $errors = ( Input::old( 'errors' ) ) ? Input::old( 'errors' ) : new MessageBag();
 
         $viewData = [
@@ -21,16 +19,18 @@ class AuthController extends BaseController {
             'errors' => $errors,
             'redirect' => Input::get( 'redirect_to' ),
         ];
+
         return view( 'login', $viewData );
     }
 
-    public function postLogin() {
+    public function postLogin()
+    {
         $email = Input::get( 'email' );
 
         $validator = Validator::make( Input::all(), [
             "email" => "required|email",
             "password" => "required"
-        ]);
+        ] );
 
         if( $validator->passes() ) {
             $credentials = [
@@ -41,11 +41,12 @@ class AuthController extends BaseController {
                 if( $redirect_admin = Input::get( 'redirect_to' ) ) {
                     return redirect()->to( $redirect_admin );
                 }
+
                 return redirect()->route( 'admin.home' );
             }
-            $data[ 'errors' ] = new MessageBag([
-               'password' => 'Email and/or Password are invalid',
-            ]);
+            $data[ 'errors' ] = new MessageBag( [
+                'password' => 'Email and/or Password are invalid',
+            ] );
         }
         else {
             $data[ 'errors' ] = $validator->getMessageBag();
@@ -56,7 +57,8 @@ class AuthController extends BaseController {
     }
 
 
-    public function getLogout() {
+    public function getLogout()
+    {
         Auth::logout();
 
         return redirect()->route( 'home' );

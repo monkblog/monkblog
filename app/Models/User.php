@@ -8,7 +8,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+{
 
     use Authenticatable, CanResetPassword;
 
@@ -20,12 +21,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password' => 'required|confirmed',
     ];
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
     protected $fillable = [
         'email',
@@ -36,14 +37,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password'
     ];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [ 'password', 'password_confirmation', 'remember_token' ];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [ 'password', 'password_confirmation', 'remember_token' ];
 
-    public function update(Array $attributes = []) {
+    public function update( Array $attributes = [ ] )
+    {
         //There's one user and they're not the owner of the site yet.
         //Or the owner is giving ownership to another user.
         if( array_key_exists( 'owner', $attributes ) ) {
@@ -61,7 +63,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $attributes[ 'owner' ] = false;
         }
 
-        parent::update($attributes);
+        parent::update( $attributes );
     }
 
 }

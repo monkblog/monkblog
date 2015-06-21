@@ -29,5 +29,6 @@ class Kernel extends HttpKernel
         'auth' => \MonkBlog\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \MonkBlog\Http\Middleware\RedirectIfAuthenticated::class,
+        'logged_in' => \MonkBlog\Http\Middleware\LoggedIn::class,
     ];
 }

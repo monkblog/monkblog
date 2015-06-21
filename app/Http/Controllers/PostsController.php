@@ -8,212 +8,229 @@ use MonkBlog\Models\Category;
 use Input;
 use Validator;
 
-class PostsController extends BaseController {
+class PostsController extends BaseController
+{
 
-	/**
-	 * Display a listing of posts
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$posts = Post::orderBy( 'published_at', 'desc' )->get();
+    /**
+     * Display a listing of posts
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $posts = Post::orderBy( 'published_at', 'desc' )->get();
 
-		$viewData = [
-			'posts' => $posts,
-			'pageTitle' => 'All Posts',
-		];
+        $viewData = [
+            'posts' => $posts,
+            'pageTitle' => 'All Posts',
+        ];
 
-		return view( 'posts.index', $viewData );
-	}
+        return view( 'posts.index', $viewData );
+    }
 
-	/**
-	* Display an archive listing of posts
-	*
-	* @return Response
-	*/
-	public function archive( $offset = 0, $limit = 3 )
-	{
-		if ( $offset < 0 ) {
-			$offset = 0;
-		}
+    /**
+     * Display an archive listing of posts
+     *
+     * @return Response
+     */
+    public function archive( $offset = 0, $limit = 3 )
+    {
+        if( $offset < 0 ) {
+            $offset = 0;
+        }
 
-		$posts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->skip( $offset )->take( $limit )->get();
+        $posts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->skip( $offset )->take( $limit )->get();
 
-		$postCount = Post::where( 'is_published', '=', true )->count();
+        $postCount = Post::where( 'is_published', '=', true )->count();
 
-		$more = false;
-		$less = false;
+        $more = false;
+        $less = false;
 
-		if ( $offset + $limit < $postCount ) {
-			$more = true;
-		}
+        if( $offset + $limit < $postCount ) {
+            $more = true;
+        }
 
-		if ( $offset > 0 ) {
-			$less = true;
-		}
+        if( $offset > 0 ) {
+            $less = true;
+        }
 
-		$nextOffset = $offset + $limit;
-		$prevOffset = ( $offset - $limit < 0 ) ? 0 : $offset - $limit;
+        $nextOffset = $offset + $limit;
+        $prevOffset = ( $offset - $limit < 0 ) ? 0 : $offset - $limit;
 
-		$viewData = [
-			'posts' => $posts,
-			'pageTitle' => 'Archive',
-			'offset' => $offset,
-			'nextOffset' => $nextOffset,
-			'prevOffset' => $prevOffset,
-			'limit' => $limit,
-			'more' => $more,
-			'less' => $less,
-		];
+        $viewData = [
+            'posts' => $posts,
+            'pageTitle' => 'Archive',
+            'offset' => $offset,
+            'nextOffset' => $nextOffset,
+            'prevOffset' => $prevOffset,
+            'limit' => $limit,
+            'more' => $more,
+            'less' => $less,
+        ];
 
-		return view( 'posts.archive', $viewData );
-	}
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'post.archive' ) ) {
+            return response( current_theme_view( 'post.archive', $viewData ) );
+        }
 
-	/**
-	 * Show the form for creating a new post
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		$viewData = [
-			'pageTitle' => 'Write New Post',
-			'post' => new Post,
-			'categories' => Category::lists( 'title', 'id' ),
-		];
+        return view( 'posts.archive', $viewData );
+    }
 
-		return view( 'posts.create', $viewData );
-	}
+    /**
+     * Show the form for creating a new post
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        $viewData = [
+            'pageTitle' => 'Write New Post',
+            'post' => new Post,
+            'categories' => Category::lists( 'title', 'id' ),
+        ];
 
-	public function publish( $id )
-	{
-		$post = Post::find( $id );
+        return view( 'posts.create', $viewData );
+    }
 
-		if ( !$post->is_published ) {
-			$post->is_published = true;
-			$post->published_at = date( 'Y-m-d H:i:s' );
-			$post->save();
-		}
+    public function publish( $id )
+    {
+        $post = Post::find( $id );
 
-		return redirect()->route( 'admin.posts.index' );
-	}
+        if( !$post->is_published ) {
+            $post->is_published = true;
+            $post->published_at = date( 'Y-m-d H:i:s' );
+            $post->save();
+        }
 
-	/**
-	 * Store a newly created post in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$validator = Validator::make( $data = Input::all(), Post::$rules );
+        return redirect()->route( 'admin.posts.index' );
+    }
 
-		if ( $validator->fails() )
-		{
-			return redirect()->back()->withErrors( $validator )->withInput();
-		}
+    /**
+     * Store a newly created post in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $validator = Validator::make( $data = Input::all(), Post::$rules );
 
-		Post::create( $data );
+        if( $validator->fails() ) {
+            return redirect()->back()->withErrors( $validator )->withInput();
+        }
 
-		return redirect()->route( 'admin.posts.index' );
-	}
+        Post::create( $data );
 
-	/**
-	 * Display the specified post.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show( $id )
-	{
-		$post = Post::find( $id );
+        return redirect()->route( 'admin.posts.index' );
+    }
 
-		if ( !$post ) {
-			abort( 404 );
-		}
+    /**
+     * Display the specified post.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function show( $id )
+    {
+        $post = Post::find( $id );
 
-		return view( 'posts.show', compact( 'post' ) );
-	}
+        if( !$post ) {
+            abort( 404 );
+        }
 
-	/**
-	 * Show the form for editing the specified post.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit( $id )
-	{
-		$post = Post::find( $id );
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'categories.show' ) ) {
+            return response( current_theme_view( 'categories.show', compact( 'post' ) ) );
+        }
 
-		$viewData = [
-			'pageTitle' => 'Edit Post: ' . $post->title,
-			'post' => $post,
-			'categories' => Category::lists( 'title', 'id' ),
-		];
+        return view( 'posts.show', compact( 'post' ) );
+    }
 
-		return view( 'posts.edit', $viewData );
-	}
+    /**
+     * Show the form for editing the specified post.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function edit( $id )
+    {
+        $post = Post::find( $id );
 
-	/**
-	 * Update the specified post in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update( $id )
-	{
-		$post = Post::findOrFail( $id );
+        $viewData = [
+            'pageTitle' => 'Edit Post: ' . $post->title,
+            'post' => $post,
+            'categories' => Category::lists( 'title', 'id' ),
+        ];
 
-		$validator = Validator::make( $data = Input::all(), Post::$rules );
+        return view( 'posts.edit', $viewData );
+    }
 
-		if ( $validator->fails() )
-		{
-			return redirect()->back()->withErrors( $validator )->withInput();
-		}
+    /**
+     * Update the specified post in storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function update( $id )
+    {
+        $post = Post::findOrFail( $id );
 
-		$post->update( $data );
+        $validator = Validator::make( $data = Input::all(), Post::$rules );
 
-		return redirect()->route( 'admin.posts.index' );
-	}
+        if( $validator->fails() ) {
+            return redirect()->back()->withErrors( $validator )->withInput();
+        }
 
-	/**
-	 * Remove the specified post from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy( $id )
-	{
-		Post::destroy( $id );
+        $post->update( $data );
 
-		return redirect()->route( 'admin.posts.index' );
-	}
+        return redirect()->route( 'admin.posts.index' );
+    }
 
-	public function confirmDestroy( $id ) {
-		$post = Post::find( $id );
+    /**
+     * Remove the specified post from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy( $id )
+    {
+        Post::destroy( $id );
 
-		$viewData = [
-			'post' => $post,
-			'pageTitle' => 'Confirm Delete ' . $post->title,
-		];
+        return redirect()->route( 'admin.posts.index' );
+    }
 
-		return view( 'posts.destroy', $viewData );
-	}
+    public function confirmDestroy( $id )
+    {
+        $post = Post::find( $id );
 
-	public function getPostBySlug( $slug ) {
+        $viewData = [
+            'post' => $post,
+            'pageTitle' => 'Confirm Delete ' . $post->title,
+        ];
 
-		$post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
+        return view( 'posts.destroy', $viewData );
+    }
 
-		if ( !$post ) {
-			abort( 404 );
-		}
+    public function getPostBySlug( $slug )
+    {
 
-		$viewData = [
-			'post' => $post,
-			'pageTitle' => $post->title,
-		];
+        $post = Post::where( 'slug', '=', $slug )->where( 'is_published', '=', true )->first();
 
-		return view( 'posts.show', $viewData );
-	}
+        if( !$post ) {
+            abort( 404 );
+        }
+
+        $viewData = [
+            'post' => $post,
+            'pageTitle' => $post->title,
+        ];
+
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'posts.show' ) ) {
+            return response( current_theme_view( 'posts.show', $viewData ) );
+        }
+
+        return view( 'posts.show', $viewData );
+    }
 
 }

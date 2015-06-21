@@ -16,7 +16,7 @@ class Markdown extends Twig_Extension
      *
      * @param \Michelf\Markdown $md
      */
-    public function __construct( Md $md)
+    public function __construct( Md $md )
     {
         $this->md = $md;
     }
@@ -35,7 +35,7 @@ class Markdown extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('md_render', [$this->md, 'defaultTransform']),
+            new Twig_SimpleFunction( 'md_render', [ $this->md, 'defaultTransform' ] ),
         ];
     }
 }
