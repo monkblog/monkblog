@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use MonkBlog\Models\User;
 
 class LoginTest extends TestCase
 {
@@ -27,12 +26,4 @@ class LoginTest extends TestCase
             ]);
     }
 
-    public function testAdminPage() {
-        $user = User::find( 1 );
-
-        $this->actingAs($user)
-            ->withSession(['foo' => 'bar'])
-            ->visit('/login')
-            ->see('Dashboard');
-    }
 }
