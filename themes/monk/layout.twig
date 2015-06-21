@@ -8,8 +8,14 @@
         <![endif]-->
         <link href='//fonts.googleapis.com/css?family=Cabin:500|Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link type="text/css" rel="stylesheet" href="{{ elixir( 'assets/css/main.css' ) }}">
+        {% if logged_in == true %}
+        <link type="text/css" rel="stylesheet" href="{{ elixir( 'assets/css/admin.css' ) }}">
+        {% endif %}
     </head>
     <body class="{% block bodyclass %}{% endblock %}">
+        {% if logged_in == true %}
+            {% include 'admin::nav' %}
+        {% endif %}
         <div class="row">
             <header class="small-12 columns">
                 <h1><a href="{{ url_route( 'home' ) }}">{{ siteTitle }}</a> <small>{{ tagline }}</small></h1>
@@ -25,7 +31,7 @@
                 {% block content %}{% endblock %}
             </div>
             <div class="small-3 columns">
-                {% include 'sidebar' %}
+                {% include 'monk::sidebar' %}
             </div>
         </div>
         <div class="row">

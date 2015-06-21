@@ -1,4 +1,4 @@
-{% extends 'admin.layout' %}
+{% extends 'admin::layout' %}
 
 {% block content %}
     {{ form_model( option, { route : [ 'admin.options.update' , option.id ], method : 'put' } ) }}

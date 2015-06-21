@@ -68,6 +68,10 @@ class PostsController extends BaseController
             'less' => $less,
         ];
 
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'post.archive' ) ) {
+            return response( current_theme_view( 'post.archive', $viewData ) );
+        }
+
         return view( 'posts.archive', $viewData );
     }
 
@@ -131,6 +135,10 @@ class PostsController extends BaseController
 
         if( !$post ) {
             abort( 404 );
+        }
+
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'categories.show' ) ) {
+            return response( current_theme_view( 'categories.show', compact( 'post' ) ) );
         }
 
         return view( 'posts.show', compact( 'post' ) );
@@ -217,6 +225,10 @@ class PostsController extends BaseController
             'post' => $post,
             'pageTitle' => $post->title,
         ];
+
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'posts.show' ) ) {
+            return response( current_theme_view( 'posts.show', $viewData ) );
+        }
 
         return view( 'posts.show', $viewData );
     }

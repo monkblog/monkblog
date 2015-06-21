@@ -89,6 +89,10 @@ class PagesController extends BaseController
             'pageTitle' => $page->title,
         ];
 
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'pages.show' ) ) {
+            return response( current_theme_view( 'pages.show', $viewData ) );
+        }
+
         return view( 'pages.show', $viewData );
     }
 
@@ -172,6 +176,10 @@ class PagesController extends BaseController
             'pageTitle' => $page->title,
             'page' => $page,
         ];
+
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'pages.show' ) ) {
+            return response( current_theme_view( 'pages.show', $viewData ) );
+        }
 
         return view( 'pages.show', $viewData );
     }

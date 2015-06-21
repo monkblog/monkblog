@@ -6,16 +6,12 @@ use Illuminate\Support\MessageBag;
 use Input;
 use Validator;
 use Auth;
-use Illuminate\Contracts\Auth\Guard;
 
 class AuthController extends BaseController
 {
 
-    public function getLogin( Guard $auth )
+    public function getLogin()
     {
-        if( $auth->check() ) {
-            return redirect()->route( 'admin.home' );
-        }
         $errors = ( Input::old( 'errors' ) ) ? Input::old( 'errors' ) : new MessageBag();
 
         $viewData = [

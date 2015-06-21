@@ -36,6 +36,9 @@
         "classmap": [
             "database"
         ],
+        "files": [
+            "helpers.php"
+        ],
         "psr-4": {
             "MonkBlog\\": "app/"
         }

@@ -27,6 +27,10 @@ class HomeController extends BaseController
             'more' => $more,
         ];
 
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'home' ) ) {
+            return response( current_theme_view( 'home', $viewData ) );
+        }
+
         return view( 'home', $viewData );
     }
 
@@ -41,7 +45,7 @@ class HomeController extends BaseController
             'totalPages' => $totalPages,
         ];
 
-        return view( 'admin.home', $viewData );
+        return view( 'admin::index', $viewData );
     }
 
 }

@@ -80,6 +80,10 @@ class CategoriesController extends BaseController
             'pageTitle' => 'Category: ' . $category->title,
         ];
 
+        if( current_theme_exists() && theme_view_exists( current_theme(), 'categories.show' ) ) {
+            return response( current_theme_view( 'categories.show', $viewData ) );
+        }
+
         return view( 'categories.show', $viewData );
     }
 

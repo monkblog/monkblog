@@ -2,6 +2,7 @@
 
 namespace MonkBlog\Providers;
 
+use Auth;
 use Config;
 use View;
 use MonkBlog\Models\Option;
@@ -17,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $currentTheme = current_theme();
+        View::addNamespace( $currentTheme, base_path("themes/{$currentTheme}/" ) );
+        View::addNamespace( 'admin', base_path( 'resources/admin/' ) );
+
         // Shared variables
         $pageList = [ ];
         $siteTitle = Config::get( 'site.title', '' );

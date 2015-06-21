@@ -3,9 +3,10 @@
 namespace MonkBlog\Http\Middleware;
 
 use Closure;
+use View;
 use Illuminate\Contracts\Auth\Guard;
 
-class RedirectIfAuthenticated
+class LoggedIn
 {
     /**
      * The Guard implementation.
@@ -37,7 +38,7 @@ class RedirectIfAuthenticated
     public function handle( $request, Closure $next )
     {
         if( $this->auth->check() ) {
-            return redirect()->route( 'admin.home' );
+            View::share('logged_in', true);
         }
 
         return $next( $request );
