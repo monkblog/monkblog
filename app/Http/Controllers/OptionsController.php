@@ -10,7 +10,8 @@ use Validator;
 use Cache;
 use Input;
 
-class OptionsController extends BaseController {
+class OptionsController extends BaseController
+{
 
     /**
      * Display a listing of the resource.
@@ -61,9 +62,10 @@ class OptionsController extends BaseController {
      * GET /options/{id}
      *
      * @param  $slug
+     *
      * @return Response
      */
-    public function show($slug)
+    public function show( $slug )
     {
         $optionTabs = OptionTab::all();
 
@@ -82,13 +84,14 @@ class OptionsController extends BaseController {
      * Show the form for editing the specified resource.
      * GET /options/{id}/edit
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
-        $option = Option::find($id);
-        $pageTitle = 'Edit '.  $option->display_name;
+        $option = Option::find( $id );
+        $pageTitle = 'Edit ' . $option->display_name;
 
         return view( 'options.edit', compact( 'option', 'optionName', 'pageTitle' ) );
     }
@@ -97,12 +100,13 @@ class OptionsController extends BaseController {
      * Update the specified resource in storage.
      * PUT /options/{id}
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function update($id)
+    public function update( $id )
     {
-        $option = Option::findOrFail($id);
+        $option = Option::findOrFail( $id );
 
         $rules = Option::$rules;
 
@@ -111,23 +115,24 @@ class OptionsController extends BaseController {
         $validator = Validator::make( $data = Input::all(), $rules );
 
         if( $validator->fails() ) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors( $validator )->withInput();
         }
 
         $option->update( $data );
 
-        Cache::tags('option', $option->name )->flush();
+        Cache::tags( 'option', $option->name )->flush();
 
-        $tab = OptionTab::find($option->option_tab_id);
+        $tab = OptionTab::find( $option->option_tab_id );
 
         if( !empty( $tab ) ) {
-            return redirect()->route('admin.options.show', $tab->slug);
+            return redirect()->route( 'admin.options.show', $tab->slug );
         }
 
-        return redirect()->route('admin.options.index');
+        return redirect()->route( 'admin.options.index' );
     }
 
-    public function confirmDestroy( $id ) {
+    public function confirmDestroy( $id )
+    {
         //
     }
 
@@ -135,10 +140,11 @@ class OptionsController extends BaseController {
      * Remove the specified resource from storage.
      * DELETE /options/{id}
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
         //
     }

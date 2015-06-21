@@ -4,18 +4,19 @@ namespace MonkBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model {
+class Page extends Model
+{
 
-	// Add your validation rules here
-	public static $rules = [
-		// 'title' => 'required'
-	];
+    // Add your validation rules here
+    public static $rules = [
+        // 'title' => 'required'
+    ];
 
-	// Don't forget to fill this array
-	protected $fillable = [
-		'title',
-		'slug',
-		'body',
-	];
+    // Don't forget to fill this array
+    protected $fillable = [
+        'title',
+        'slug',
+        'body',
+    ];
 
 }

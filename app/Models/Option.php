@@ -4,7 +4,8 @@ namespace MonkBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Option extends Model {
+class Option extends Model
+{
 
     /**
      * The model's rules
@@ -28,7 +29,7 @@ class Option extends Model {
 
     protected $table = 'options';
 
-	protected $fillable = [
+    protected $fillable = [
         'name',
         'value',
         'autoload',
@@ -44,11 +45,12 @@ class Option extends Model {
      * Create a new Eloquent Collection instance.
      *
      * @param  array $models
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function newCollection(Array $models = [])
+    public function newCollection( Array $models = [ ] )
     {
-        return new OptionCollection($models);
+        return new OptionCollection( $models );
     }
 
     public function __toString()
