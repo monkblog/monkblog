@@ -11,16 +11,16 @@ class UserTest extends TestCase
     /**
      * @var MonkBlog\Models\User
      */
-    protected static $user;
+    protected $user;
 
-    public static function setUpBeforeClass()
+    public function setUp()
     {
-        self::$user = User::find( 1 );
+        $this->user = User::find( 1 );
     }
 
     public function testAdminPage()
     {
-        $this->actingAs(self::$user)
+        $this->actingAs($this->user)
             ->withSession(['foo' => 'bar'])
             ->visit('/login')
             ->see('Dashboard');
