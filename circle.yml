@@ -12,6 +12,7 @@ dependencies:
     - php artisan key:generate
     - php artisan migrate:install && php artisan migrate:refresh
     - php artisan db:seed
+    - php artisan clear-compiled
 checkout:
   post:
     - cp .env.testing .env
