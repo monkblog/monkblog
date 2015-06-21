@@ -13,14 +13,15 @@ class UserTest extends TestCase
      */
     protected static $user;
 
-    public function getTestUser() {
+    public function getTestUser()
+    {
         if( self::$user instanceof User ) {
             return self::$user;
         }
-        self::$user = User::find( 1 );
+        return self::$user = User::find( 1 );
     }
 
-    public function testAdminPage()
+    public function testLoginRedirectToAdminDashboard()
     {
         $this->actingAs($this->getTestUser())
             ->withSession(['foo' => 'bar'])
