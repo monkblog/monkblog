@@ -9,6 +9,7 @@ dependencies:
     - pecl install xdebug
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
+    - php artisan key:generate
     - php artisan migrate:install && php artisan migrate:refresh
     - php artisan db:seed
 checkout:
