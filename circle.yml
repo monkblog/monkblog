@@ -19,3 +19,8 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
         parallel: true
     - ./vendor/bin/test-reporter
+deployment:
+  master:
+    branch: master
+    commands:
+      - curl $FORGEDEPLOY
