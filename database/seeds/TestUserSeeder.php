@@ -13,13 +13,10 @@ class TestUserSeeder extends Seeder
         $userData[ 'first_name' ] = 'Test';
         $userData[ 'last_name' ] = 'User';
         $userData[ 'display_name' ] = 'test_user';
-        $userData[ 'password' ] = ENV( 'APP_KEY', 'password' );
-        $userData[ 'password_confirmation' ] = ENV( 'APP_KEY', 'password' );
+        $userData[ 'password' ] = Hash::make( ENV( 'APP_KEY', 'password' ) );
         $userData[ 'owner' ] = true;
-        $userData[ 'password' ] = Hash::make( $userData[ 'password' ] );
 
-        $user = new User($userData);
-        $user->save();
+        User::create($userData);
     }
 
 }
