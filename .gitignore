@@ -6,6 +6,7 @@
 .env
 _ide_helper.php
 .idea
+Homestead.yaml
 /node_modules
 /resources/assets/bower_components/
 .sass-cache
