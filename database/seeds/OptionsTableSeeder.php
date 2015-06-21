@@ -4,11 +4,12 @@ use Illuminate\Database\Seeder;
 use MonkBlog\Models\Option;
 use MonkBlog\Models\OptionTab;
 
-class OptionsTableSeeder extends Seeder {
+class OptionsTableSeeder extends Seeder
+{
 
     public function run()
     {
-        $optionTabs = Config::get( 'option_tabs' , [] );
+        $optionTabs = Config::get( 'option_tabs', [ ] );
 
         foreach( $optionTabs as $tab ) {
             $optionTab = OptionTab::where( 'slug', $tab[ 'slug' ] )->get()->first();
