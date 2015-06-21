@@ -16,4 +16,14 @@ class LoginTest extends TestCase
         $this->visit('/login')
              ->see('<input class="button" type="submit" value="Login">');
     }
+
+    public function testUserLoginPage()
+    {
+        $this->visit('/login')
+            ->fillForm('Login', [
+                'email' => 'testing@email.com',
+                'password' => ENV( 'APP_KEY', 'password' ),
+            ]);
+    }
+
 }
