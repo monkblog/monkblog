@@ -3,10 +3,12 @@
 use Illuminate\Database\Seeder;
 use MonkBlog\Models\Category;
 
-class CategoriesTableSeeder extends Seeder {
+class CategoriesTableSeeder extends Seeder
+{
 
-    public function run() {
-        $uncategorized =  DB::table( 'categories' )->where( 'slug', 'uncategorized' )->get();
+    public function run()
+    {
+        $uncategorized = DB::table( 'categories' )->where( 'slug', 'uncategorized' )->get();
 
         if( count( DB::table( 'categories' )->get() ) == 0 && empty( $uncategorized ) ) {
             Category::create( [

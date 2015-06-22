@@ -9,6 +9,7 @@ dependencies:
     - pecl install xdebug
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
+    - php artisan key:generate
     - php artisan migrate:install && php artisan migrate:refresh
     - php artisan db:seed
 checkout:
@@ -19,6 +20,7 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
         parallel: true
     - ./vendor/bin/test-reporter
+    - bash <(curl -s https://codecov.io/bash)
 deployment:
   master:
     branch: master
