@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info( 'Seeding options from configs' );
         $this->call( 'OptionsTableSeeder' );
 
-        if( ENV( 'APP_ENV' ) == 'testing' && ENV( 'DB_CONNECTION' ) == 'circle' ) {
+        if( ENV( 'APP_ENV' ) == 'testing' && ENV( 'DB_CONNECTION' ) == 'testing' ) {
             $this->command->info( 'Seeding TEST DATA' );
             $this->call( 'TestUserSeeder' );
             $this->call( 'TestPostSeeder' );

@@ -46,7 +46,7 @@ return [
 
     'connections' => [
 
-        'circle' => [
+        'testing' => [
             'driver'    => 'mysql',
             'host'      => '127.0.01',
             'database'  => 'circle_test',
