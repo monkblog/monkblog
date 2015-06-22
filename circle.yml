@@ -20,6 +20,7 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
         parallel: true
     - ./vendor/bin/test-reporter
+    - bash <(curl -s https://codecov.io/bash)
 deployment:
   master:
     branch: master
