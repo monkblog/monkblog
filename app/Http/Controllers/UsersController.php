@@ -67,10 +67,14 @@ class UsersController extends BaseController
      */
     public function show( $id )
     {
-        $user = User::findOrFail( $id );
-        $pageTitle = $user->display_name;
+        $user = User::find( $id );
+        if( $user instanceof User ) {
+            $pageTitle = $user->display_name;
 
-        return view( 'users.show', compact( 'user', 'pageTitle' ) );
+            return view( 'users.show', compact( 'user', 'pageTitle' ) );
+        }
+
+        abort( 404 );
     }
 
     /**
@@ -83,11 +87,15 @@ class UsersController extends BaseController
     public function edit( $id )
     {
         $user = User::find( $id );
-        $pageTitle = 'Edit ' . $user->display_name;
+        if( $user instanceof User ) {
+            $pageTitle = 'Edit ' . $user->display_name;
 
-        $authUser = Auth::user();
+            $authUser = Auth::user();
 
-        return view( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
+            return view( 'users.edit', compact( 'user', 'authUser', 'pageTitle' ) );
+        }
+
+        abort( 404 );
     }
 
     /**

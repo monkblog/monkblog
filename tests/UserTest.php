@@ -40,6 +40,10 @@ class UserTest extends TestCase
         return $userData;
     }
 
+    /**
+     * @group user
+     * @group login
+     */
     public function testLoginRedirectToAdminDashboard()
     {
         $this->actingAs($this->getTestUser())
@@ -48,6 +52,10 @@ class UserTest extends TestCase
             ->see('Dashboard');
     }
 
+    /**
+     * @group user
+     * @group update
+     */
     public function testUpdateUser() {
         $user = $this->getTestUser();
 

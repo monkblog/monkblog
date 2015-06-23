@@ -7,9 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LoginTest extends TestCase
 {
     /**
-     * A basic functional test example.
-     *
-     * @return void
+     * @group login
      */
     public function testLoginPage()
     {
@@ -17,6 +15,10 @@ class LoginTest extends TestCase
              ->see('<input class="button" type="submit" value="Login">');
     }
 
+    /**
+     * @group user
+     * @group login
+     */
     public function testUserLoginPage()
     {
         $this->visit('/login')
@@ -26,6 +28,10 @@ class LoginTest extends TestCase
             ]);
     }
 
+    /**
+     * @group user
+     * @group login
+     */
     public function testUserLoginPost() {
         $userData = [
             'email' => 'testing@email.com',
@@ -35,6 +41,10 @@ class LoginTest extends TestCase
         $this->call( 'POST', '/login', $userData )->isOk();
     }
 
+    /**
+     * @group user
+     * @group login
+     */
     public function testUserLoginFailedPost() {
         $userData = [
             'email' => 'testing@email.com',
