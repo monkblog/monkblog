@@ -4,6 +4,7 @@
 /bower_components
 .DS_Store
 .env
+.env.bak
 _ide_helper.php
 .idea
 Homestead.yaml

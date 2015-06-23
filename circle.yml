@@ -20,9 +20,6 @@ test:
     - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
         parallel: true
     - ./vendor/bin/test-reporter
-    - bash <(curl -s https://codecov.io/bash)
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 deployment:
   master:
     branch: master
