@@ -26,4 +26,22 @@ class LoginTest extends TestCase
             ]);
     }
 
+    public function testUserLoginPost() {
+        $userData = [
+            'email' => 'testing@email.com',
+            'password' => ENV( 'APP_KEY', 'password' ),
+        ];
+
+        $this->call( 'POST', '/login', $userData )->isOk();
+    }
+
+    public function testUserLoginFailedPost() {
+        $userData = [
+            'email' => 'testing@email.com',
+            'password' => '',
+        ];
+
+        $this->call( 'POST', '/login', $userData )->isRedirect( '/login' );
+    }
+
 }
