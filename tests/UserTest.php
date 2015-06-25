@@ -52,6 +52,17 @@ class UserTest extends TestCase
             ->see('Dashboard');
     }
 
+
+    public function testLogout()
+    {
+        $this->actingAs($this->getTestUser())
+            ->withSession(['foo' => 'bar'])
+            ->visit('/admin')
+            ->click('Logout')
+            ->visit('/login')
+            ->see('<input class="button" type="submit" value="Login">');
+    }
+
     /**
      * @group user
      * @group update
