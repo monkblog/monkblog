@@ -37,6 +37,14 @@ class AdminPanelTest extends TestCase
      */
     protected $model = 'Post';
 
+    protected $modelRoute = [
+        'Category' => 'categories',
+        'Option' => 'options',
+        'Page' => 'pages',
+        'Post' => 'posts',
+        'User' => 'users',
+    ];
+
     /**
      * @return User
      */
@@ -125,6 +133,10 @@ class AdminPanelTest extends TestCase
         return $this;
     }
 
+    protected function getModelRoute() {
+        return $this->modelRoute[ $this->model ];
+    }
+
     /**
      * @param array $data
      *
@@ -167,9 +179,9 @@ class AdminPanelTest extends TestCase
     protected function CRUDModel()
     {
         //Create calls
-        $this->call( 'POST', $this->createPath, $this->data )->isOk();
+        $this->route( 'POST', "admin.{$this->getModelRoute()}.create", $this->data )->isOk();
 
-        $this->call( 'POST', $this->createPath, [ ] )->isRedirect( $this->createPath );
+        $this->route( 'POST',  "admin.{$this->getModelRoute()}.create", [ ] )->isRedirect( $this->createPath );
 
         //Create and save model with data
         $model = $this->getNewModel();
@@ -181,9 +193,9 @@ class AdminPanelTest extends TestCase
         $this->assertInstanceOf( $this->getModelClassName(), $create );
 
         //Call to edit forms
-        $this->call( 'POST', $this->editPath, $this->data )->isOk();
+        $this->route( 'POST', "admin.{$this->getModelRoute()}.edit", $this->data )->isOk();
 
-        $this->call( 'POST', $this->editPath, [ ] )->isRedirect( $this->editPath );
+        $this->route( 'POST', "admin.{$this->getModelRoute()}.edit", [ ] )->isRedirect( $this->editPath );
 
         return $this;
     }

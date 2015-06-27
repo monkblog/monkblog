@@ -38,7 +38,7 @@ class LoginTest extends TestCase
             'password' => ENV( 'APP_KEY', 'password' ),
         ];
 
-        $this->call( 'POST', '/login', $userData )->isOk();
+        $this->route( 'POST', 'login.post', $userData )->isOk();
     }
 
     /**
@@ -51,7 +51,8 @@ class LoginTest extends TestCase
             'password' => '',
         ];
 
-        $this->call( 'POST', '/login', $userData )->isRedirect( '/login' );
+        $this->route( 'POST', 'login.post', $userData )->isRedirect( '/login' );
+
     }
 
 }
