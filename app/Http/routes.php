@@ -1,20 +1,18 @@
 <?php
 
-// Public routes
-
 Route::group( [ 'middleware' => 'logged_in' ], function () {
-    Route::get( '/', [ 'as' => 'home', 'uses' => 'HomeController@getHome' ] );
-    Route::get( 'post/{slug}', [ 'as' => 'post.public.show', 'uses' => 'PostsController@getPostBySlug' ] );
-    Route::get( 'categories/{slug}', [ 'as' => 'category.public.show', 'uses' => 'CategoriesController@show' ] );
-    Route::get( '/archive/{offset}/{limit}', [ 'as' => 'archive', 'uses' => 'PostsController@archive' ] );
 
-// Auth routes
+    // Home
+
+    Route::get( '/', [ 'as' => 'home', 'uses' => 'HomeController@getHome' ] );
+
+    // Auth routes
 
     Route::get( '/login', [ 'as' => 'login', 'middleware' => 'guest', 'uses' => 'AuthController@getLogin' ] );
     Route::post( '/login', [ 'as' => 'login.post', 'uses' => 'AuthController@postLogin' ] );
     Route::get( '/logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' ] );
 
-// Admin routes
+    // Admin routes
 
     Route::group( [ 'prefix' => 'admin', 'middleware' => 'auth' ], function () {
         Route::get( '/', [ 'as' => 'admin.home', 'uses' => 'HomeController@getAdminHome' ] );
@@ -35,7 +33,13 @@ Route::group( [ 'middleware' => 'logged_in' ], function () {
         Route::resource( 'options', 'OptionsController' );
     } );
 
-// Public pages
+    // Public routes
+
+    Route::get( 'post/{slug}', [ 'as' => 'post.public.show', 'uses' => 'PostsController@getPostBySlug' ] );
+    Route::get( 'categories/{slug}', [ 'as' => 'category.public.show', 'uses' => 'CategoriesController@show' ] );
+    Route::get( '/archive/{offset}/{limit}', [ 'as' => 'archive', 'uses' => 'PostsController@archive' ] );
+
+    // Public pages
 
     Route::get( '/{slug}', [ 'as' => 'page.public.show', 'uses' => 'PagesController@getPageBySlug' ] );
 });
