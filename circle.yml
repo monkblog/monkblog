@@ -7,11 +7,17 @@ dependencies:
   pre:
     - echo "memory_limit = -1" > ~/.phpenv/versions/5.5.11/etc/conf.d/memory.ini
     - pecl install xdebug
+    - gem install compass
+    - npm install -g gulp
+    - npm install -g bower
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
     - php artisan key:generate
     - php artisan migrate:install && php artisan migrate:refresh
     - php artisan db:seed
+    - npm install
+    - bower install
+    - gulp
 checkout:
   post:
     - cp .env.testing .env
