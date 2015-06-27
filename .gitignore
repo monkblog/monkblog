@@ -9,6 +9,8 @@ _ide_helper.php
 .idea
 Homestead.yaml
 /node_modules
+/public/assets/*
+/public/build/*
 /resources/assets/bower_components/
 .sass-cache
 /vendor
