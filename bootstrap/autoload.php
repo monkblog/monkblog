@@ -16,6 +16,10 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
+
+//use ThemeManager\Starter;
+//Starter::bootstrapAutoload();
+
 /*
 |--------------------------------------------------------------------------
 | Include The Compiled Class File
