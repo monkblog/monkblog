@@ -156,6 +156,7 @@ return [
         /**
          * Theme Service Provider
          */
+        ( class_exists( 'Monk\ServiceProvider' ) ) ? Monk\ServiceProvider::class : MonkBlog\Providers\EmptyServiceProvider::class,
     ],
 
     /*
