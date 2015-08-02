@@ -20,4 +20,11 @@ $optionTabs[] = [
     ]
 ];
 
+$optionTabs[] = [
+    'slug' => 'themes',
+    'options' => [
+        'current_theme' => 'monk'
+    ]
+];
+
 return $optionTabs;

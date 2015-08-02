@@ -1,0 +1,22 @@
+{% extends 'test::layout' %}
+
+{% block content %}
+    <h1>Post Archive</h1>
+
+    <ul>
+        {% for post in posts %}
+        <li>
+            <h2><a href="{{ url_route( 'post.public.show', post.slug ) }}">{{ post.title }}</a></h2>
+            <span>{{ post.published_at | date( dateFormat ) }}</span>
+            <div>{{ post.summary }}</div>
+            <a href="{{ url_route( 'post.public.show', post.slug ) }}">Read More</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if less %}
+        <a href="{{ url_route( 'archive', [ prevOffset, limit ] ) }}">Newer Posts</a>
+    {% endif %}
+    {% if more  %}
+        <a href="{{ url_route( 'archive', [ nextOffset, limit ] ) }}">Older Posts</a>
+    {% endif %}
+{% endblock %}

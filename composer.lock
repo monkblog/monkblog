@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "52aac259ab0dae1da1e7f7676ae98a25",
+    "hash": "68537214a70c87e68e24c9af68294d4e",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -332,6 +332,64 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "filp/whoops",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Whoops": "src/"
+                },
+                "classmap": [
+                    "src/deprecated"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://github.com/filp/whoops",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "silex-provider",
+                "whoops",
+                "zf2"
+            ],
+            "time": "2015-06-29 05:42:04"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -846,16 +904,16 @@
         },
         {
             "name": "monkblog/theme-manager",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monkblog/theme-manager.git",
-                "reference": "6cf61605274cdd01bcfa8fec42452d7be4e4d355"
+                "reference": "e6be2945caa178edf75a63cf6f06432cc831f97e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monkblog/theme-manager/zipball/6cf61605274cdd01bcfa8fec42452d7be4e4d355",
-                "reference": "6cf61605274cdd01bcfa8fec42452d7be4e4d355",
+                "url": "https://api.github.com/repos/monkblog/theme-manager/zipball/e6be2945caa178edf75a63cf6f06432cc831f97e",
+                "reference": "e6be2945caa178edf75a63cf6f06432cc831f97e",
                 "shasum": ""
             },
             "require": {
@@ -901,7 +959,7 @@
                 "theme",
                 "theme manager"
             ],
-            "time": "2015-06-28 20:25:45"
+            "time": "2015-08-02 19:38:43"
         },
         {
             "name": "monolog/monolog",

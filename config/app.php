@@ -152,6 +152,11 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         ThemeManager\ServiceProvider::class,
         TwigBridge\ServiceProvider::class,
+
+        /**
+         * Theme Service Provider
+         */
+        ( class_exists( 'Monk\ServiceProvider' ) ) ? Monk\ServiceProvider::class : MonkBlog\Providers\EmptyServiceProvider::class,
     ],
 
     /*

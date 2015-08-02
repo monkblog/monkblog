@@ -1,0 +1,32 @@
+{% extends 'test::layout' %}
+
+{% block content %}
+    {% if featuredPost is not empty %}
+    <article>
+        <h1><a href="{{ url_route( 'post.public.show', featuredPost.slug ) }}">{{ featuredPost.title }}</a></h1>
+        <span>{{ featuredPost.published_at | date( dateFormat ) }}</span>
+        <div>{{ featuredPost.summary }}</div>
+        <a href="{{ url_route( 'post.public.show', featuredPost.slug ) }}">Read More</a>
+    </article>
+    {% endif %}
+
+    {% if recentPosts is not empty and recentPosts is iterable %}
+        {% for index, post in recentPosts %}
+            <article>
+                <h2><a href="{{ url_route( 'post.public.show', post.slug ) }}">{{ post.title }}</a></h2>
+                <span>{{ post.published_at | date( dateFormat ) }}</span>
+                <div>{{ post.summary }}</div>
+                <a href="{{ url_route( 'post.public.show', post.slug ) }}">Read More</a>
+            </article>
+        {% endfor %}
+    {% else %}
+     <article>
+         <h2>No Posts Found</h2>
+         <div>Nothing to see here yet.</div>
+     </article>
+    {% endif %}
+
+    {% if more %}
+        <a href="{{ url_route( 'archive', [ 3, 5 ] ) }}">Older Posts</a>
+    {% endif %}
+{% endblock %}
