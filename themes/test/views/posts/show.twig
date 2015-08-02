@@ -1,0 +1,19 @@
+{% extends 'test::layout' %}
+
+{% block bodyclass %}
+post
+{% endblock %}
+
+{% block top_content %}
+    <h1>{{ post.title | replace( { "'" : '&rsquo;' } ) | raw }}</h1>
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div>{{ post.published_at | date( dateFormat ) }}</div>
+
+        <div>
+            {{ md_render( post.body )|raw }}
+        </div>
+    </article>
+{% endblock %}

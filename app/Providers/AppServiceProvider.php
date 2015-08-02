@@ -19,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $currentTheme = current_theme();
-        View::addNamespace( $currentTheme, base_path("themes/{$currentTheme}/" ) );
+        if( current_theme_exists() ) {
+            View::addNamespace( $currentTheme, base_path( "themes/{$currentTheme}/views" ) );
+        }
         View::addNamespace( 'admin', base_path( 'resources/admin/' ) );
 
         // Shared variables

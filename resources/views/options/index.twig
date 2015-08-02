@@ -2,6 +2,7 @@
 
 {% block content %}
     {% include 'admin::sub-nav' with { tabs : optionTabs, label : 'Options' } %}
+    {% if slug != 'themes' %}
     <table>
         <thead>
             <tr><th>Name</th><th>Value</th></tr>
@@ -17,4 +18,27 @@
     {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <ul class="small-block-grid-3">
+        {% if themes is not empty and themes is iterable %}
+            {% for theme in themes %}
+            <li>
+                <h4>{{ theme.getInfoByKey( 'display_name' ) ? theme.getInfoByKey( 'display_name' ) : theme.name }}</h4>
+                {% if theme.name == currentTheme %}
+                <div class="button success">Current Theme</div>
+                {% else %}
+                {{ form_model( option, { route : [ 'admin.options.update' , id ], method : 'put' } ) }}
+                    {{ form_hidden( 'name', 'current_theme' ) }}
+                    {{ form_hidden( 'value', theme.name ) }}
+                    {{ form_hidden( 'autoload', true ) }}
+                    {{ form_submit( 'Change To ' ~ theme.name, { 'class' : 'button' } ) }}
+                {{ form_close() }}
+                {% endif %}
+            </li>
+            {% endfor %}
+        {% else %}
+            <li><h4>No Themes Found</h4><p>Please make sure at least one theme to the themes folder.</p></li>
+        {% endif %}
+    </ul>
+    {% endif %}
 {% endblock %}

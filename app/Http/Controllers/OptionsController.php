@@ -9,6 +9,7 @@ use MonkBlog\Models\Option;
 use Validator;
 use Cache;
 use Input;
+use ThemeManager;
 
 class OptionsController extends BaseController
 {
@@ -67,6 +68,10 @@ class OptionsController extends BaseController
      */
     public function show( $slug )
     {
+        $themes = [];
+        $currentTheme = current_theme();
+        $id = '';
+
         $optionTabs = OptionTab::all();
 
         $optionTab = OptionTab::where( 'slug', '=', $slug )->get()->first();
@@ -77,7 +82,12 @@ class OptionsController extends BaseController
 
         $options = $optionTab->options->all();
 
-        return view( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle' ) );
+        if( $slug == 'themes' ) {
+            $themes = ThemeManager::all();
+            $id = $optionTab->options->first()->id;
+        }
+
+        return view( 'options.index', compact( 'slug', 'optionTabs', 'options', 'pageTitle', 'themes', 'currentTheme', 'id' ) );
     }
 
     /**

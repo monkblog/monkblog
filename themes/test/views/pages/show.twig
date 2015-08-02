@@ -1,0 +1,11 @@
+{% extends 'test::layout' %}
+
+{% block content %}
+
+    <h1>{{ page.title | replace( "'", "&rsquo;") | raw }}</h1>
+
+    <div>
+        {{ md_render( page.body )|raw }}
+    </div>
+
+{% endblock %}
