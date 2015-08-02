@@ -4,6 +4,7 @@ namespace MonkBlog\Http\Controllers\Auth;
 
 use MonkBlog\Models\User;
 use Validator;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use MonkBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -21,6 +22,7 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers;
+    use ThrottlesLogins;
 
     /**
      * Create a new authentication controller instance.
