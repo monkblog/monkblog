@@ -13,7 +13,7 @@ class ServiceProvider extends Provider
      */
     public function boot()
     {
-
+        //
     }
 
     /**

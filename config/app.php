@@ -156,7 +156,7 @@ return [
         /**
          * Theme Service Provider
          */
-        Monk\ServiceProvider::class,
+        ( class_exists( 'Monk\ServiceProvider' ) ) ? Monk\ServiceProvider::class : '',
     ],
 
     /*

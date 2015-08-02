@@ -12,6 +12,8 @@ dependencies:
     - npm install -g bower
   override:
     - composer install --no-interaction --optimize-autoloader --prefer-source
+    - composer install --no-interaction --optimize-autoloader --prefer-source:
+        pwd: themes/monk
     - php artisan key:generate
     - php artisan migrate:install && php artisan migrate:refresh
     - php artisan db:seed

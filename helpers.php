@@ -27,7 +27,6 @@ if( ! function_exists( 'current_theme_view' ) ) {
      */
     function current_theme_view( $view, $data = [] )
     {
-        debug( 'home_theme' );
         return view( current_theme() . '::' . $view, $data )->render();
     }
 }
