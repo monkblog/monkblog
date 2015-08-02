@@ -7,9 +7,11 @@ if( ! function_exists( 'current_theme' ) ) {
      */
     function current_theme()
     {
-        $currentTheme = \MonkBlog\Models\Option::where( 'name', '=', 'current_theme' )->get()->first();
-        if( !empty( $currentTheme->value ) ) {
-            return $currentTheme->value;
+        if( php_sapi_name() != 'cli' ) {
+            $currentTheme = \MonkBlog\Models\Option::where( 'name', '=', 'current_theme' )->get()->first();
+            if( !empty( $currentTheme->value ) ) {
+                return $currentTheme->value;
+            }
         }
 
         return Config::get( 'theme_manager.current', 'monk' );
