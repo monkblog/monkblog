@@ -5,7 +5,13 @@ if( ! function_exists( 'current_theme' ) ) {
     /**
      * @return mixed
      */
-    function current_theme() {
+    function current_theme()
+    {
+        $currentTheme = \MonkBlog\Models\Option::where( 'name', '=', 'current_theme' )->get()->first();
+        if( !empty( $currentTheme->value ) ) {
+            return $currentTheme->value;
+        }
+
         return Config::get( 'theme_manager.current', 'monk' );
     }
 }
@@ -17,7 +23,8 @@ if( ! function_exists( 'current_theme_view' ) ) {
      *
      * @return string
      */
-    function current_theme_view( $view, $data = [] ) {
+    function current_theme_view( $view, $data = [] )
+    {
         debug( 'home_theme' );
         return view( current_theme() . '::' . $view, $data )->render();
     }
@@ -30,7 +37,8 @@ if( ! function_exists( 'theme_view_exists' ) ) {
      *
      * @return bool
      */
-    function theme_view_exists( $namespace, $view ) {
+    function theme_view_exists( $namespace, $view )
+    {
         return View::exists( $namespace  .'::' . $view );
     }
 }
@@ -39,7 +47,8 @@ if( ! function_exists( 'current_theme_exists' ) ) {
     /**
      * @return bool
      */
-    function current_theme_exists() {
+    function current_theme_exists()
+    {
         $currentTheme = current_theme();
         return ( File::exists( base_path( "themes/{$currentTheme}/" ) ) );
     }

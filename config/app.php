@@ -152,6 +152,11 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         ThemeManager\ServiceProvider::class,
         TwigBridge\ServiceProvider::class,
+
+        /**
+         * Theme Service Provider
+         */
+        Monk\ServiceProvider::class,
     ],
 
     /*

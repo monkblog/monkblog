@@ -18,7 +18,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 
 //use ThemeManager\Starter;
-//Starter::bootstrapAutoload();
+ThemeManager\Starter::bootstrapAutoload();
 
 /*
 |--------------------------------------------------------------------------

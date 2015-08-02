@@ -1,0 +1,8 @@
+{
+  "name": "monk-autoload",
+  "autoload": {
+    "psr-4": {
+      "Monk\\": "src/Monk/"
+    }
+  }
+}
