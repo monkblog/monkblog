@@ -34,5 +34,4 @@ if (file_exists($compiledPath)) {
     require $compiledPath;
 }
 
-use ThemeManager\Starter;
-Starter::bootstrapAutoload();
+theme_manager_starter()->bootstrapAutoload();
