@@ -10,13 +10,23 @@
 
 A blogging engine built on Laravel.
 
-### License
+## Homestead local dev instructions
+
+If you prefer to use Homestead over Docker, you can find [instructions on the Laravel website](http://laravel.com/docs/5.1/homestead).
+
+## Docker local dev instructions
+
+If you don't yet have Docker installed, install it [via dinghy](https://github.com/codekitchen/dinghy).
+
+After you have Docker installed, these two commands will get you started:
+
+    docker-compose build
+    docker-compose up
+
+Note, however, that there are two environment variables you must set in your own shell before running `docker-compose up`. These are `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD`, and refer to the MySQL root password in the MySQL container (not used by us, but mandatory for the container) and the password for the `monk` user in the MySQL container, respectively.
+
+## License
 
 The Monk blog engine is licensed under the  [MIT license](http://opensource.org/licenses/MIT)
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
-
-### In the Beginning
-
-Ben Overmyer started the PHP version and has since moved on to creating MonkBlog in Ruby on Rails [BenOvermyer/MonkBlog](https://github.com/benovermyer/monkblog).
