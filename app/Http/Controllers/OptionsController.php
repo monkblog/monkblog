@@ -9,7 +9,6 @@ use MonkBlog\Models\Option;
 use Validator;
 use Cache;
 use Input;
-use ThemeManager;
 
 class OptionsController extends BaseController
 {
@@ -83,7 +82,7 @@ class OptionsController extends BaseController
         $options = $optionTab->options->all();
 
         if( $slug == 'themes' ) {
-            $themes = ThemeManager::all();
+            $themes = theme_manager()->all();
             $id = $optionTab->options->first()->id;
         }
 

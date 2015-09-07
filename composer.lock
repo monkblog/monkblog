@@ -904,16 +904,16 @@
         },
         {
             "name": "monkblog/theme-manager",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monkblog/theme-manager.git",
-                "reference": "f9614c1db3af234bb9391a94729cd9a32468715a"
+                "reference": "a34af1b107d4d608060513464026b8179d47fcfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monkblog/theme-manager/zipball/f9614c1db3af234bb9391a94729cd9a32468715a",
-                "reference": "f9614c1db3af234bb9391a94729cd9a32468715a",
+                "url": "https://api.github.com/repos/monkblog/theme-manager/zipball/a34af1b107d4d608060513464026b8179d47fcfe",
+                "reference": "a34af1b107d4d608060513464026b8179d47fcfe",
                 "shasum": ""
             },
             "require": {
@@ -930,7 +930,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -963,7 +963,7 @@
                 "theme manager",
                 "themes"
             ],
-            "time": "2015-08-17 02:12:52"
+            "time": "2015-09-07 16:31:42"
         },
         {
             "name": "monolog/monolog",
@@ -2871,16 +2871,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "e9a40577323e67f1de2e214abf32976a0352d8f8"
+                "reference": "36635a903bdeb54899d7407bc95610501fd98559"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/e9a40577323e67f1de2e214abf32976a0352d8f8",
-                "reference": "e9a40577323e67f1de2e214abf32976a0352d8f8",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/36635a903bdeb54899d7407bc95610501fd98559",
+                "reference": "36635a903bdeb54899d7407bc95610501fd98559",
                 "shasum": ""
             },
             "require": {
@@ -2892,15 +2892,14 @@
                 "symfony/console": "~2.3",
                 "symfony/event-dispatcher": "~2.1",
                 "symfony/finder": "~2.1",
-                "symfony/process": "~2.1",
+                "symfony/process": "^2.6",
                 "symfony/yaml": "~2.1"
             },
             "require-dev": {
                 "behat/behat": "^3.0.11",
                 "bossa/phpspec2-expect": "~1.0",
                 "phpunit/phpunit": "~4.4",
-                "symfony/filesystem": "~2.1",
-                "symfony/process": "~2.1"
+                "symfony/filesystem": "~2.1"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "~1.0 – Adds Nyan formatters"
@@ -2945,7 +2944,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2015-05-30 15:21:40"
+            "time": "2015-09-07 07:07:37"
         },
         {
             "name": "phpspec/prophecy",
