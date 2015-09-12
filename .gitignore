@@ -15,3 +15,5 @@ Homestead.yaml
 .sass-cache
 /vendor
 .vagrant
+supervisord.log
+supervisord.pid
