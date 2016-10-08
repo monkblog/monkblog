@@ -8,7 +8,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/monkblog/monkblog-php/v/unstable.svg)](https://packagist.org/packages/monkblog/monkblog-php)
 [![License](https://poser.pugx.org/monkblog/monkblog-php/license.svg)](https://packagist.org/packages/monkblog/monkblog-php)
 
-A blogging engine built on Laravel.
+A blogging engine built on Laravel 5.1.
 
 ## Homestead local dev instructions
 
@@ -16,14 +16,42 @@ If you prefer to use Homestead over Docker, you can find [instructions on the La
 
 ## Docker local dev instructions
 
-If you don't yet have Docker installed, install it [via dinghy](https://github.com/codekitchen/dinghy).
+If you don't yet have Docker installed, install it [according to the Docker website](https://www.docker.com).
 
 After you have Docker installed, these two commands will get you started:
 
     docker-compose build
     docker-compose up
 
-Note, however, that there are two environment variables you must set in your own shell before running `docker-compose up`. These are `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD`, and refer to the MySQL root password in the MySQL container (not used by us, but mandatory for the container) and the password for the `monk` user in the MySQL container, respectively.
+### Dependency installation and configuration
+
+Next, you'll need to run these commands, in order:
+
+```
+cp .env.example .env
+composer install
+npm install
+bower install
+gulp
+```
+
+### Adding your first admin user
+
+Add an admin user by using the following console command:
+
+```
+php artisan user:generate
+```
+
+If you want to run it through a Docker container, do it like this:
+
+```
+docker exec -it monkblogphp_app_1 php artisan user:generate
+```
+
+## Admin Interface
+
+Access the admin interface via `/admin` on your site.
 
 ## License
 

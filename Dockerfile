@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:trusty
 MAINTAINER Ben Overmyer <manatrance@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
