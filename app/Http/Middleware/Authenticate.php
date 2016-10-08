@@ -3,8 +3,8 @@
 namespace MonkBlog\Http\Middleware;
 
 use Closure;
-use Request;
 use Illuminate\Contracts\Auth\Guard;
+use Request;
 
 class Authenticate
 {
@@ -18,11 +18,11 @@ class Authenticate
     /**
      * Create a new filter instance.
      *
-     * @param  Guard $auth
+     * @param Guard $auth
      *
      * @return void
      */
-    public function __construct( Guard $auth )
+    public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
@@ -30,24 +30,23 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @return mixed
      */
-    public function handle( $request, Closure $next )
+    public function handle($request, Closure $next)
     {
-        if( $this->auth->guest() ) {
-            if( $request->ajax() ) {
-                return response( 'Unauthorized.', 401 );
-            }
-            else {
-                $redirectTo = ( Request::path() != 'admin' && strstr( Request::path(), 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                $redirectTo = (Request::path() != 'admin' && strstr(Request::path(), 'admin/')) ? '?redirect_to='.urlencode(Request::path()) : '';
 
-                return redirect()->guest( 'login' . $redirectTo );
+                return redirect()->guest('login'.$redirectTo);
             }
         }
 
-        return $next( $request );
+        return $next($request);
     }
 }

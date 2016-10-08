@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LoginTest extends TestCase
 {
@@ -23,8 +20,8 @@ class LoginTest extends TestCase
     {
         $this->visit('/login')
             ->fillForm('Login', [
-                'email' => 'testing@email.com',
-                'password' => ENV( 'APP_KEY', 'password' ),
+                'email'    => 'testing@email.com',
+                'password' => ENV('APP_KEY', 'password'),
             ]);
     }
 
@@ -32,27 +29,27 @@ class LoginTest extends TestCase
      * @group user
      * @group login
      */
-    public function testUserLoginPost() {
+    public function testUserLoginPost()
+    {
         $userData = [
-            'email' => 'testing@email.com',
-            'password' => ENV( 'APP_KEY', 'password' ),
+            'email'    => 'testing@email.com',
+            'password' => ENV('APP_KEY', 'password'),
         ];
 
-        $this->route( 'POST', 'login.post', $userData )->isOk();
+        $this->route('POST', 'login.post', $userData)->isOk();
     }
 
     /**
      * @group user
      * @group login
      */
-    public function testUserLoginFailedPost() {
+    public function testUserLoginFailedPost()
+    {
         $userData = [
-            'email' => 'testing@email.com',
+            'email'    => 'testing@email.com',
             'password' => '',
         ];
 
-        $this->route( 'POST', 'login.post', $userData )->isRedirect( '/login' );
-
+        $this->route('POST', 'login.post', $userData)->isRedirect('/login');
     }
-
 }

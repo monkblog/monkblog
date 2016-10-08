@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class AddOwnerToUsers extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,9 +13,9 @@ class AddOwnerToUsers extends Migration
      */
     public function up()
     {
-        Schema::table( 'users', function ( Blueprint $table ) {
-            $table->boolean( 'owner' );
-        } );
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('owner');
+        });
     }
 
     /**
@@ -26,9 +25,8 @@ class AddOwnerToUsers extends Migration
      */
     public function down()
     {
-        Schema::table( 'users', function ( Blueprint $table ) {
-            $table->dropColumn( 'owner' );
-        } );
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('owner');
+        });
     }
-
 }

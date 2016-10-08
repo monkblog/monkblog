@@ -1,8 +1,10 @@
-<?php namespace MonkBlog\Extension\TwigBridge;
+<?php
 
+namespace MonkBlog\Extension\TwigBridge;
+
+use Michelf\Markdown as Md;
 use Twig_Extension;
 use Twig_SimpleFunction;
-use Michelf\Markdown as Md;
 
 class Markdown extends Twig_Extension
 {
@@ -16,13 +18,13 @@ class Markdown extends Twig_Extension
      *
      * @param \Michelf\Markdown $md
      */
-    public function __construct( Md $md )
+    public function __construct(Md $md)
     {
         $this->md = $md;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -30,12 +32,12 @@ class Markdown extends Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction( 'md_render', [ $this->md, 'defaultTransform' ] ),
+            new Twig_SimpleFunction('md_render', [$this->md, 'defaultTransform']),
         ];
     }
 }

@@ -4,9 +4,9 @@ namespace MonkBlog\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -25,57 +25,56 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception $e
+     * @param \Exception $e
      *
      * @return void
      */
-    public function report( Exception $e )
+    public function report(Exception $e)
     {
-        return parent::report( $e );
+        return parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception               $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $e
      *
      * @return \Illuminate\Http\Response
      */
-    public function render( $request, Exception $e )
+    public function render($request, Exception $e)
     {
-        if( $e instanceof ModelNotFoundException ) {
-            $e = new NotFoundHttpException( $e->getMessage(), $e );
+        if ($e instanceof ModelNotFoundException) {
+            $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
-        if( $this->isHttpException( $e ) ) {
-            return $this->renderHttpException( $e );
+        if ($this->isHttpException($e)) {
+            return $this->renderHttpException($e);
         }
 
-        if( config( 'app.debug' ) ) {
-            return $this->renderExceptionWithWhoops( $e );
+        if (config('app.debug')) {
+            return $this->renderExceptionWithWhoops($e);
         }
 
-        return parent::render( $request, $e );
+        return parent::render($request, $e);
     }
 
     /**
      * Render an exception using Whoops.
      *
-     * @param  \Exception $e
+     * @param \Exception $e
      *
      * @return \Illuminate\Http\Response
      */
-    protected function renderExceptionWithWhoops( Exception $e )
+    protected function renderExceptionWithWhoops(Exception $e)
     {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler( new \Whoops\Handler\PrettyPageHandler() );
+        $whoops = new \Whoops\Run();
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 
         return new \Illuminate\Http\Response(
-            $whoops->handleException( $e ),
+            $whoops->handleException($e),
             $e->getStatusCode(),
             $e->getHeaders()
         );
     }
-
 }

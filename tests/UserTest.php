@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use MonkBlog\Models\User;
 
@@ -16,24 +14,26 @@ class UserTest extends TestCase
 
     public function getTestUser()
     {
-        if( self::$user instanceof User ) {
+        if (self::$user instanceof User) {
             return self::$user;
         }
-        return self::$user = User::find( 1 );
+
+        return self::$user = User::find(1);
     }
 
-    public function userData( Array $override = [] ) {
+    public function userData(array $override = [])
+    {
         $userData = [];
-        $userData[ 'email' ] = 'testing@email.com';
-        $userData[ 'first_name' ] = 'User';
-        $userData[ 'last_name' ] = 'Test';
-        $userData[ 'display_name' ] = 'test_user';
-        $userData[ 'password' ] = Hash::make( ENV( 'APP_KEY', 'password' ) );
-        $userData[ 'owner' ] = true;
+        $userData['email'] = 'testing@email.com';
+        $userData['first_name'] = 'User';
+        $userData['last_name'] = 'Test';
+        $userData['display_name'] = 'test_user';
+        $userData['password'] = Hash::make(ENV('APP_KEY', 'password'));
+        $userData['owner'] = true;
 
-        if( !empty( $override ) ) {
-            foreach( $override as $key => $value ) {
-                $userData[ $key ] = $value;
+        if (!empty($override)) {
+            foreach ($override as $key => $value) {
+                $userData[$key] = $value;
             }
         }
 
@@ -52,7 +52,6 @@ class UserTest extends TestCase
             ->see('Dashboard');
     }
 
-
     public function testLogout()
     {
         $this->actingAs($this->getTestUser())
@@ -67,18 +66,19 @@ class UserTest extends TestCase
      * @group user
      * @group update
      */
-    public function testUpdateUser() {
+    public function testUpdateUser()
+    {
         $user = $this->getTestUser();
 
-        $this->assertEquals( 'Test', $user->first_name );
+        $this->assertEquals('Test', $user->first_name);
 
-        $userData = $this->userData( [
+        $userData = $this->userData([
             'first_name' => 'User',
-            'last_name' => 'Test',
+            'last_name'  => 'Test',
         ]);
 
-        $user->update( $userData );
+        $user->update($userData);
 
-        $this->assertEquals( 'User', $user->first_name );
+        $this->assertEquals('User', $user->first_name);
     }
 }

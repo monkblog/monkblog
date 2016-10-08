@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,15 +13,14 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'categories', function ( Blueprint $table ) {
-            $table->increments( 'id' );
-            $table->string( 'title' );
-            $table->string( 'slug' )->unique();
-            $table->string( 'description' );
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('description');
             $table->timestamps();
-        } );
+        });
     }
-
 
     /**
      * Reverse the migrations.
@@ -31,7 +29,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop( 'categories' );
+        Schema::drop('categories');
     }
-
 }

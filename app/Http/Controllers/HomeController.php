@@ -2,36 +2,35 @@
 
 namespace MonkBlog\Http\Controllers;
 
-use MonkBlog\Models\Post;
 use MonkBlog\Models\Page;
+use MonkBlog\Models\Post;
 
 class HomeController extends BaseController
 {
-
     public function getHome()
     {
-        $recentPosts = Post::where( 'is_published', '=', true )->orderBy( 'published_at', 'desc' )->take( 4 )->get();
+        $recentPosts = Post::where('is_published', '=', true)->orderBy('published_at', 'desc')->take(4)->get();
 
         $featuredPost = $recentPosts->shift();
 
         $more = false;
 
-        if( Post::where( 'is_published', '=', true )->count() > 5 ) {
+        if (Post::where('is_published', '=', true)->count() > 5) {
             $more = true;
         }
 
         $viewData = [
-            'pageTitle' => 'Home',
+            'pageTitle'    => 'Home',
             'featuredPost' => $featuredPost,
-            'recentPosts' => $recentPosts,
-            'more' => $more,
+            'recentPosts'  => $recentPosts,
+            'more'         => $more,
         ];
 
-        if( current_theme_exists() && theme_view_exists( current_theme(), 'home' ) ) {
-            return response( current_theme_view( 'home', $viewData ) );
+        if (current_theme_exists() && theme_view_exists(current_theme(), 'home')) {
+            return response(current_theme_view('home', $viewData));
         }
 
-        return view( 'home', $viewData );
+        return view('home', $viewData);
     }
 
     public function getAdminHome()
@@ -40,12 +39,11 @@ class HomeController extends BaseController
         $totalPages = Page::count();
 
         $viewData = [
-            'pageTitle' => 'Dashboard',
+            'pageTitle'  => 'Dashboard',
             'totalPosts' => $totalPosts,
             'totalPages' => $totalPages,
         ];
 
-        return view( 'admin::index', $viewData );
+        return view('admin::index', $viewData);
     }
-
 }
