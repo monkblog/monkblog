@@ -9,59 +9,55 @@ use Auth;
 
 class AuthController extends BaseController
 {
-
     public function getLogin()
     {
-        $errors = ( Input::old( 'errors' ) ) ? Input::old( 'errors' ) : new MessageBag();
+        $errors = (Input::old('errors')) ? Input::old('errors') : new MessageBag();
 
         $viewData = [
             'pageTitle' => 'Login',
             'errors' => $errors,
-            'redirect' => Input::get( 'redirect_to' ),
+            'redirect' => Input::get('redirect_to'),
         ];
 
-        return view( 'login', $viewData );
+        return view('login', $viewData);
     }
 
     public function postLogin()
     {
-        $email = Input::get( 'email' );
+        $email = Input::get('email');
 
-        $validator = Validator::make( Input::all(), [
-            "email" => "required|email",
-            "password" => "required"
-        ] );
+        $validator = Validator::make(Input::all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        if( $validator->passes() ) {
+        if ($validator->passes()) {
             $credentials = [
                 'email' => $email,
-                'password' => Input::get( 'password' )
+                'password' => Input::get('password'),
             ];
-            if( Auth::attempt( $credentials ) ) {
-                if( $redirect_admin = Input::get( 'redirect_to' ) ) {
-                    return redirect()->to( $redirect_admin );
+            if (Auth::attempt($credentials)) {
+                if ($redirect_admin = Input::get('redirect_to')) {
+                    return redirect()->to($redirect_admin);
                 }
 
-                return redirect()->route( 'admin.home' );
+                return redirect()->route('admin.home');
             }
-            $data[ 'errors' ] = new MessageBag( [
+            $data['errors'] = new MessageBag([
                 'password' => 'Email and/or Password are invalid',
-            ] );
+            ]);
+        } else {
+            $data['errors'] = $validator->getMessageBag();
         }
-        else {
-            $data[ 'errors' ] = $validator->getMessageBag();
-        }
-        $data[ 'email' ] = $email;
+        $data['email'] = $email;
 
-        return redirect()->route( 'login' )->withInput( $data );
+        return redirect()->route('login')->withInput($data);
     }
-
 
     public function getLogout()
     {
         Auth::logout();
 
-        return redirect()->route( 'home' );
+        return redirect()->route('home');
     }
-
 }

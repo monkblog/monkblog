@@ -22,7 +22,7 @@ class LoggedIn
      *
      * @return void
      */
-    public function __construct( Guard $auth )
+    public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
@@ -35,12 +35,12 @@ class LoggedIn
      *
      * @return mixed
      */
-    public function handle( $request, Closure $next )
+    public function handle($request, Closure $next)
     {
-        if( $this->auth->check() ) {
+        if ($this->auth->check()) {
             View::share('logged_in', true);
         }
 
-        return $next( $request );
+        return $next($request);
     }
 }

@@ -12,7 +12,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-
     use Authenticatable, Authorizable, CanResetPassword;
 
     public static $rules = [
@@ -36,7 +35,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'last_name',
         'owner',
         'display_name',
-        'password'
+        'password',
     ];
 
     /**
@@ -44,28 +43,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
-    protected $hidden = [ 'password', 'password_confirmation', 'remember_token' ];
+    protected $hidden = ['password', 'password_confirmation', 'remember_token'];
 
-    public function update( Array $attributes = [ ] )
+    public function update(array $attributes = [])
     {
         //There's one user and they're not the owner of the site yet.
         //Or the owner is giving ownership to another user.
-        if( array_key_exists( 'owner', $attributes ) ) {
-            if( count( User::all() ) == 1 && $this->owner == 0 || $this->owner ) {
-                $attributes[ 'owner' ] = true;
+        if (array_key_exists('owner', $attributes)) {
+            if (count(self::all()) == 1 && $this->owner == 0 || $this->owner) {
+                $attributes['owner'] = true;
+            } else {
+                $attributes['owner'] = false;
             }
-            else {
-                $attributes[ 'owner' ] = false;
-            }
-        }
-        else if( $this->owner ) {
-            $attributes[ 'owner' ] = true;
-        }
-        else {
-            $attributes[ 'owner' ] = false;
+        } elseif ($this->owner) {
+            $attributes['owner'] = true;
+        } else {
+            $attributes['owner'] = false;
         }
 
-        parent::update( $attributes );
+        parent::update($attributes);
     }
-
 }

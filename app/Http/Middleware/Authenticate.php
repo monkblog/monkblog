@@ -22,7 +22,7 @@ class Authenticate
      *
      * @return void
      */
-    public function __construct( Guard $auth )
+    public function __construct(Guard $auth)
     {
         $this->auth = $auth;
     }
@@ -35,19 +35,18 @@ class Authenticate
      *
      * @return mixed
      */
-    public function handle( $request, Closure $next )
+    public function handle($request, Closure $next)
     {
-        if( $this->auth->guest() ) {
-            if( $request->ajax() ) {
-                return response( 'Unauthorized.', 401 );
-            }
-            else {
-                $redirectTo = ( Request::path() != 'admin' && strstr( Request::path(), 'admin/' ) ) ? '?redirect_to=' . urlencode( Request::path() ) : '';
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                $redirectTo = (Request::path() != 'admin' && strstr(Request::path(), 'admin/')) ? '?redirect_to='.urlencode(Request::path()) : '';
 
-                return redirect()->guest( 'login' . $redirectTo );
+                return redirect()->guest('login'.$redirectTo);
             }
         }
 
-        return $next( $request );
+        return $next($request);
     }
 }

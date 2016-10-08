@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,20 +13,19 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'posts', function ( Blueprint $table ) {
-            $table->increments( 'id' );
-            $table->string( 'title' );
-            $table->string( 'slug' )->unique();
-            $table->string( 'body' );
-            $table->string( 'summary' );
-            $table->integer( 'category_id' )->unsigned();
-            $table->foreign( 'category_id' )->references( 'id' )->on( 'categories' );
-            $table->boolean( 'is_published' );
-            $table->timestamp( 'published_at' )->index();
+        Schema::create('posts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('body');
+            $table->string('summary');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->boolean('is_published');
+            $table->timestamp('published_at')->index();
             $table->timestamps();
-        } );
+        });
     }
-
 
     /**
      * Reverse the migrations.
@@ -36,7 +34,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop( 'posts' );
+        Schema::drop('posts');
     }
-
 }

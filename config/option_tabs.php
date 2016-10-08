@@ -1,30 +1,30 @@
 <?php
 
-$optionTabs = [ ];
+$optionTabs = [];
 
 $optionTabs[] = [
     'slug' => 'general',
     'options' => [
-        'site_title' => ENV( 'SITE_TITLE', 'MonkBlog' ),
-        'tagline' => ENV( 'SITE_TAGLINE', 'Just another MonkBlog' ),
-        'monk_version' => ENV( 'SITE_VERSION', '1.5@beta' ),
-    ]
+        'site_title' => ENV('SITE_TITLE', 'MonkBlog'),
+        'tagline' => ENV('SITE_TAGLINE', 'Just another MonkBlog'),
+        'monk_version' => ENV('SITE_VERSION', '1.5@beta'),
+    ],
 ];
 
 $optionTabs[] = [
     'slug' => 'contact_info',
     'options' => [
-        'email' => ENV( 'SITE_CONTACT_EMAIL', 'support@monkblog.org' ),
-        'facebook' => ENV( 'SITE_CONTACT_FACEBOOK', 'monkblog' ),
-        'twitter' => ENV( 'SITE_CONTACT_TWITTER', 'monkblog' ),
-    ]
+        'email' => ENV('SITE_CONTACT_EMAIL', 'support@monkblog.org'),
+        'facebook' => ENV('SITE_CONTACT_FACEBOOK', 'monkblog'),
+        'twitter' => ENV('SITE_CONTACT_TWITTER', 'monkblog'),
+    ],
 ];
 
 $optionTabs[] = [
     'slug' => 'themes',
     'options' => [
-        'current_theme' => 'monk'
-    ]
+        'current_theme' => 'monk',
+    ],
 ];
 
 return $optionTabs;

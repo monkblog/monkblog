@@ -3,5 +3,5 @@
 return [
     'locked' => [
         'monk_version',
-    ]
+    ],
 ];
