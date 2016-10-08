@@ -25,8 +25,7 @@ checkout:
     - cp .env.testing .env
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) $PHPUNIT --coverage-clover build/logs/clover.xml ;; esac:
-        parallel: true
+    - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
     - if [ -z ${CODECLIMATE_REPO_TOKEN+x} ]; then echo "env CODECLIMATE_REPO_TOKEN was not exported, must be a forked PR"; else ./vendor/bin/test-reporter; fi
 deployment:
   master:
