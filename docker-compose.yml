@@ -1,18 +1,18 @@
-web:
+app:
   build: .
   ports:
     - "8080:80"
   volumes:
     - .:/srv/www
   links:
-    - db
-    - cache
-db:
+    - mysql
+    - memcached
+mysql:
   image: mysql:5.6
   environment:
     MYSQL_ROOT_PASSWORD:
     MYSQL_DATABASE: monk
     MYSQL_USER: monk
-    MYSQL_PASSWORD:
-cache:
+    MYSQL_PASSWORD: monk
+memcached:
   image: memcached:latest
