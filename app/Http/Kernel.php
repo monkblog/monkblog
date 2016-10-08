@@ -26,9 +26,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \MonkBlog\Http\Middleware\Authenticate::class,
+        'auth'       => \MonkBlog\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \MonkBlog\Http\Middleware\RedirectIfAuthenticated::class,
-        'logged_in' => \MonkBlog\Http\Middleware\LoggedIn::class,
+        'guest'      => \MonkBlog\Http\Middleware\RedirectIfAuthenticated::class,
+        'logged_in'  => \MonkBlog\Http\Middleware\LoggedIn::class,
     ];
 }

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-
     // Add your validation rules here
     public static $rules = [
         // 'title' => 'required'
@@ -21,6 +20,6 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasMany( 'MonkBlog\Models\Post' );
+        return $this->hasMany('MonkBlog\Models\Post');
     }
 }

@@ -84,9 +84,9 @@ return [
         */
         'globals' => [],
     ],
-    
+
     'extensions' => [
-    
+
         /*
         |--------------------------------------------------------------------------
         | Extensions
@@ -112,7 +112,7 @@ return [
             'TwigBridge\Extension\Laravel\Url',
 
             'MonkBlog\Extension\TwigBridge\Markdown',
-            
+
             'TwigBridge\Extension\Laravel\Form',
             'TwigBridge\Extension\Laravel\Html',
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',
@@ -177,7 +177,7 @@ return [
         */
         'functions' => [
             'elixir',
-            'head', 
+            'head',
             'last',
         ],
 
@@ -210,5 +210,5 @@ return [
         |
         */
         'filters' => [],
-    ],  
+    ],
 ];

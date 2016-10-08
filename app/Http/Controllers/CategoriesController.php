@@ -2,16 +2,15 @@
 
 namespace MonkBlog\Http\Controllers;
 
-use MonkBlog\Models\Category;
 use Illuminate\Http\Response;
-use Validator;
 use Input;
+use MonkBlog\Models\Category;
+use Validator;
 
 class CategoriesController extends BaseController
 {
-
     /**
-     * Display a listing of categories
+     * Display a listing of categories.
      *
      * @return Response
      */
@@ -21,14 +20,14 @@ class CategoriesController extends BaseController
 
         $viewData = [
             'categories' => $categories,
-            'pageTitle' => 'Categories',
+            'pageTitle'  => 'Categories',
         ];
 
-        return view( 'categories.index', $viewData );
+        return view('categories.index', $viewData);
     }
 
     /**
-     * Show the form for creating a new category
+     * Show the form for creating a new category.
      *
      * @return Response
      */
@@ -36,10 +35,10 @@ class CategoriesController extends BaseController
     {
         $viewData = [
             'pageTitle' => 'Create New Category',
-            'category' => new Category,
+            'category'  => new Category(),
         ];
 
-        return view( 'categories.create', $viewData );
+        return view('categories.create', $viewData);
     }
 
     /**
@@ -49,117 +48,116 @@ class CategoriesController extends BaseController
      */
     public function store()
     {
-        $validator = Validator::make( $data = Input::all(), Category::$rules );
+        $validator = Validator::make($data = Input::all(), Category::$rules);
 
-        if( $validator->fails() ) {
-            return redirect()->back()->withErrors( $validator )->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Category::create( $data );
+        Category::create($data);
 
-        return redirect()->route( 'admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
 
     /**
      * Display the specified category.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function show( $id )
+    public function show($id)
     {
-        $category = Category::find( $id );
+        $category = Category::find($id);
 
-        if( !$category ) {
-            abort( 404 );
+        if (!$category) {
+            abort(404);
         }
 
         $viewData = [
-            'category' => $category,
-            'pageTitle' => 'Category: ' . $category->title,
+            'category'  => $category,
+            'pageTitle' => 'Category: '.$category->title,
         ];
 
-        if( current_theme_exists() && theme_view_exists( current_theme(), 'categories.show' ) ) {
-            return response( current_theme_view( 'categories.show', $viewData ) );
+        if (current_theme_exists() && theme_view_exists(current_theme(), 'categories.show')) {
+            return response(current_theme_view('categories.show', $viewData));
         }
 
-        return view( 'categories.show', $viewData );
+        return view('categories.show', $viewData);
     }
 
     /**
      * Show the form for editing the specified category.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function edit( $id )
+    public function edit($id)
     {
-        $category = Category::find( $id );
+        $category = Category::find($id);
 
-        if( !$category ) {
-            abort( 404 );
+        if (!$category) {
+            abort(404);
         }
 
         $viewData = [
-            'category' => $category,
-            'pageTitle' => 'Editing Category "' . $category->title . '"',
+            'category'  => $category,
+            'pageTitle' => 'Editing Category "'.$category->title.'"',
         ];
 
-        return view( 'categories.edit', $viewData );
+        return view('categories.edit', $viewData);
     }
 
     /**
      * Update the specified category in storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function update( $id )
+    public function update($id)
     {
-        $category = Category::find( $id );
+        $category = Category::find($id);
 
-        if( !$category ) {
-            abort( 404 );
+        if (!$category) {
+            abort(404);
         }
 
-        $validator = Validator::make( $data = Input::all(), Category::$rules );
+        $validator = Validator::make($data = Input::all(), Category::$rules);
 
-        if( $validator->fails() ) {
-            return redirect()->back()->withErrors( $validator )->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $category->update( $data );
+        $category->update($data);
 
-        return redirect()->route( 'admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
 
-    public function confirmDestroy( $id )
+    public function confirmDestroy($id)
     {
-        $category = Category::find( $id );
+        $category = Category::find($id);
 
         $viewData = [
-            'category' => $category,
-            'pageTitle' => 'Confirm Delete ' . $category->title,
+            'category'  => $category,
+            'pageTitle' => 'Confirm Delete '.$category->title,
         ];
 
-        return view( 'categories.destroy', $viewData );
+        return view('categories.destroy', $viewData);
     }
 
     /**
      * Remove the specified category from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function destroy( $id )
+    public function destroy($id)
     {
-        Category::destroy( $id );
+        Category::destroy($id);
 
-        return redirect()->route( 'admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace MonkBlog\Http\Controllers\Auth;
 
-use MonkBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use MonkBlog\Http\Controllers\Controller;
 
 class PasswordController extends Controller
 {
@@ -27,6 +27,6 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware( 'guest' );
+        $this->middleware('guest');
     }
 }

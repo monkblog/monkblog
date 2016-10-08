@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-
     // Add your validation rules here
     public static $rules = [
         // 'title' => 'required'
@@ -18,5 +17,4 @@ class Page extends Model
         'slug',
         'body',
     ];
-
 }

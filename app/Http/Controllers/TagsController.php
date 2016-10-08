@@ -3,15 +3,14 @@
 namespace MonkBlog\Http\Controllers;
 
 use Illuminate\Http\Response;
-use MonkBlog\Models\Tag;
 use Input;
+use MonkBlog\Models\Tag;
 use Validator;
 
 class TagsController extends BaseController
 {
-
     /**
-     * Display a listing of tags
+     * Display a listing of tags.
      *
      * @return Response
      */
@@ -19,17 +18,17 @@ class TagsController extends BaseController
     {
         $tags = Tag::all();
 
-        return view( 'tags.index', compact( 'tags' ) );
+        return view('tags.index', compact('tags'));
     }
 
     /**
-     * Show the form for creating a new tag
+     * Show the form for creating a new tag.
      *
      * @return Response
      */
     public function create()
     {
-        return view( 'tags.create' );
+        return view('tags.create');
     }
 
     /**
@@ -39,79 +38,78 @@ class TagsController extends BaseController
      */
     public function store()
     {
-        $validator = Validator::make( $data = Input::all(), Tag::$rules );
+        $validator = Validator::make($data = Input::all(), Tag::$rules);
 
-        if( $validator->fails() ) {
-            return redirect()->back()->withErrors( $validator )->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Tag::create( $data );
+        Tag::create($data);
 
-        return redirect()->route( 'tags.index' );
+        return redirect()->route('tags.index');
     }
 
     /**
      * Display the specified tag.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function show( $id )
+    public function show($id)
     {
-        $tag = Tag::findOrFail( $id );
+        $tag = Tag::findOrFail($id);
 
-        return view( 'tags.show', compact( 'tag' ) );
+        return view('tags.show', compact('tag'));
     }
 
     /**
      * Show the form for editing the specified tag.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function edit( $id )
+    public function edit($id)
     {
-        $tag = Tag::find( $id );
+        $tag = Tag::find($id);
 
-        return view( 'tags.edit', compact( 'tag' ) );
+        return view('tags.edit', compact('tag'));
     }
 
     /**
      * Update the specified tag in storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function update( $id )
+    public function update($id)
     {
-        $tag = Tag::findOrFail( $id );
+        $tag = Tag::findOrFail($id);
 
-        $validator = Validator::make( $data = Input::all(), Tag::$rules );
+        $validator = Validator::make($data = Input::all(), Tag::$rules);
 
-        if( $validator->fails() ) {
-            return redirect()->back()->withErrors( $validator )->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $tag->update( $data );
+        $tag->update($data);
 
-        return redirect()->route( 'tags.index' );
+        return redirect()->route('tags.index');
     }
 
     /**
      * Remove the specified tag from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
-    public function destroy( $id )
+    public function destroy($id)
     {
-        Tag::destroy( $id );
+        Tag::destroy($id);
 
-        return redirect()->route( 'tags.index' );
+        return redirect()->route('tags.index');
     }
-
 }

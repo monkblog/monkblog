@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class OptionTab extends Model
 {
-
     protected $table = 'option_tabs';
 
     /**
@@ -14,6 +13,6 @@ class OptionTab extends Model
      */
     public function options()
     {
-        return $this->hasMany( 'MonkBlog\Models\Option' );
+        return $this->hasMany('MonkBlog\Models\Option');
     }
 }

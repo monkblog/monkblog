@@ -1,11 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use MonkBlog\Models\Post;
-use MonkBlog\Models\Page;
 use MonkBlog\Models\Option;
+use MonkBlog\Models\Page;
+use MonkBlog\Models\Post;
 use MonkBlog\Models\User;
 
 class AdminPanelTest extends TestCase
@@ -30,7 +28,7 @@ class AdminPanelTest extends TestCase
     /**
      * @var array
      */
-    protected $data = [ ];
+    protected $data = [];
 
     /**
      * @var string
@@ -39,10 +37,10 @@ class AdminPanelTest extends TestCase
 
     protected $modelRoute = [
         'Category' => 'categories',
-        'Option' => 'options',
-        'Page' => 'pages',
-        'Post' => 'posts',
-        'User' => 'users',
+        'Option'   => 'options',
+        'Page'     => 'pages',
+        'Post'     => 'posts',
+        'User'     => 'users',
     ];
 
     /**
@@ -50,11 +48,11 @@ class AdminPanelTest extends TestCase
      */
     public function getTestUser()
     {
-        if( self::$user instanceof User ) {
+        if (self::$user instanceof User) {
             return self::$user;
         }
 
-        return self::$user = User::find( 1 );
+        return self::$user = User::find(1);
     }
 
     /**
@@ -63,10 +61,10 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    public function viewItem( $visit = '/', $see = 'No Posts Found' )
+    public function viewItem($visit = '/', $see = 'No Posts Found')
     {
-        $this->visit( $visit )
-            ->see( $see );
+        $this->visit($visit)
+            ->see($see);
 
         return $this;
     }
@@ -77,12 +75,12 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function setAdminPage( $visit = '/admin', $see = 'Dashboard' )
+    protected function setAdminPage($visit = '/admin', $see = 'Dashboard')
     {
-        $this->actingAs( $this->getTestUser() )
-            ->withSession( [ 'foo' => 'bar' ] )
-            ->visit( $visit )
-            ->see( $see );
+        $this->actingAs($this->getTestUser())
+            ->withSession(['foo' => 'bar'])
+            ->visit($visit)
+            ->see($see);
 
         return $this;
     }
@@ -93,12 +91,12 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function clickAdminPanel( $visit = '/admin', $click = 'button' )
+    protected function clickAdminPanel($visit = '/admin', $click = 'button')
     {
-        $this->actingAs( $this->getTestUser() )
-            ->withSession( [ 'foo' => 'bar' ] )
-            ->visit( $visit )
-            ->click( $click );
+        $this->actingAs($this->getTestUser())
+            ->withSession(['foo' => 'bar'])
+            ->visit($visit)
+            ->click($click);
 
         return $this;
     }
@@ -108,7 +106,7 @@ class AdminPanelTest extends TestCase
      */
     protected function getModelClassName()
     {
-        return "MonkBlog\\Models\\" . $this->model;
+        return 'MonkBlog\\Models\\'.$this->model;
     }
 
     /**
@@ -118,7 +116,7 @@ class AdminPanelTest extends TestCase
     {
         $class = $this->getModelClassName();
 
-        return new $class;
+        return new $class();
     }
 
     /**
@@ -126,15 +124,16 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function setModel( $model = 'Page' )
+    protected function setModel($model = 'Page')
     {
         $this->model = $model;
 
         return $this;
     }
 
-    protected function getModelRoute() {
-        return $this->modelRoute[ $this->model ];
+    protected function getModelRoute()
+    {
+        return $this->modelRoute[$this->model];
     }
 
     /**
@@ -142,7 +141,7 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function setData( $data = [ ] )
+    protected function setData($data = [])
     {
         $this->data = $data;
 
@@ -154,7 +153,7 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function setCreatePath( $path )
+    protected function setCreatePath($path)
     {
         $this->createPath = $path;
 
@@ -166,7 +165,7 @@ class AdminPanelTest extends TestCase
      *
      * @return $this
      */
-    protected function setEditPath( $path )
+    protected function setEditPath($path)
     {
         $this->editPath = $path;
 
@@ -179,23 +178,23 @@ class AdminPanelTest extends TestCase
     protected function CRUDModel()
     {
         //Create calls
-        $this->route( 'POST', "admin.{$this->getModelRoute()}.create", $this->data )->isOk();
+        $this->route('POST', "admin.{$this->getModelRoute()}.create", $this->data)->isOk();
 
-        $this->route( 'POST',  "admin.{$this->getModelRoute()}.create", [ ] )->isRedirect( $this->createPath );
+        $this->route('POST', "admin.{$this->getModelRoute()}.create", [])->isRedirect($this->createPath);
 
         //Create and save model with data
         $model = $this->getNewModel();
 
-        $this->assertInstanceOf( $this->getModelClassName(), $model );
+        $this->assertInstanceOf($this->getModelClassName(), $model);
 
-        $create = $model->create( $this->data );
+        $create = $model->create($this->data);
 
-        $this->assertInstanceOf( $this->getModelClassName(), $create );
+        $this->assertInstanceOf($this->getModelClassName(), $create);
 
         //Call to edit forms
-        $this->route( 'POST', "admin.{$this->getModelRoute()}.edit", $this->data )->isOk();
+        $this->route('POST', "admin.{$this->getModelRoute()}.edit", $this->data)->isOk();
 
-        $this->route( 'POST', "admin.{$this->getModelRoute()}.edit", [ ] )->isRedirect( $this->editPath );
+        $this->route('POST', "admin.{$this->getModelRoute()}.edit", [])->isRedirect($this->editPath);
 
         return $this;
     }
@@ -214,7 +213,7 @@ class AdminPanelTest extends TestCase
      */
     public function testPostsAdminPage()
     {
-        $this->setAdminPage( '/admin/posts', 'All Posts' );
+        $this->setAdminPage('/admin/posts', 'All Posts');
     }
 
     /**
@@ -225,21 +224,21 @@ class AdminPanelTest extends TestCase
     public function testPostsCRUDPage()
     {
         $goodData = [
-            'title' => 'First Post',
-            'summary' => 'This is the first post',
-            'slug' => 'first-post',
+            'title'       => 'First Post',
+            'summary'     => 'This is the first post',
+            'slug'        => 'first-post',
             'category_id' => 1,
-            'body' => 'Lets blog.',
+            'body'        => 'Lets blog.',
         ];
 
-        $this->setCreatePath( '/admin/posts/create' )
-            ->setData( $goodData )
-            ->setEditPath( '/admin/posts/1/edit' )
+        $this->setCreatePath('/admin/posts/create')
+            ->setData($goodData)
+            ->setEditPath('/admin/posts/1/edit')
             ->CRUDModel()
-            ->setAdminPage( '/admin/posts', 'First Post' )
-            ->clickAdminPanel( '/admin/posts', 'Publish' )
-            ->viewItem( '/post/first-post', 'First Post' )
-            ->clickAdminPanel( '/admin/posts', 'Delete' );
+            ->setAdminPage('/admin/posts', 'First Post')
+            ->clickAdminPanel('/admin/posts', 'Publish')
+            ->viewItem('/post/first-post', 'First Post')
+            ->clickAdminPanel('/admin/posts', 'Delete');
 
 //        $this->clickAdminPanel('/admin/posts/1/delete', 'Delete Forever');
     }
@@ -250,7 +249,7 @@ class AdminPanelTest extends TestCase
      */
     public function testPagesAdminPage()
     {
-        $this->setAdminPage( '/admin/pages', 'All Pages' );
+        $this->setAdminPage('/admin/pages', 'All Pages');
     }
 
     /**
@@ -262,19 +261,19 @@ class AdminPanelTest extends TestCase
     {
         $goodData = [
             'title' => 'First Page',
-            'slug' => 'first-page',
-            'body' => 'This is a page.',
+            'slug'  => 'first-page',
+            'body'  => 'This is a page.',
         ];
 
-        $this->setCreatePath( '/admin/pages/create' )
-            ->setModel( 'Page' )
-            ->setData( $goodData )
-            ->setEditPath( '/admin/pages/1/edit' )
+        $this->setCreatePath('/admin/pages/create')
+            ->setModel('Page')
+            ->setData($goodData)
+            ->setEditPath('/admin/pages/1/edit')
             ->CRUDModel()
-            ->setAdminPage( '/admin/pages', 'First Page' )
-            ->clickAdminPanel( '/admin/pages', 'Publish' )
-            ->viewItem( '/first-page', 'First Page' )
-            ->clickAdminPanel( '/admin/pages', 'Delete' );
+            ->setAdminPage('/admin/pages', 'First Page')
+            ->clickAdminPanel('/admin/pages', 'Publish')
+            ->viewItem('/first-page', 'First Page')
+            ->clickAdminPanel('/admin/pages', 'Delete');
 
 //        $this->clickAdminPanel('/admin/pages/1/delete', 'Delete Forever');
     }
@@ -285,7 +284,7 @@ class AdminPanelTest extends TestCase
      */
     public function testCategoriesAdminPage()
     {
-        $this->setAdminPage( '/admin/categories', 'Categories' );
+        $this->setAdminPage('/admin/categories', 'Categories');
     }
 
     /**
@@ -296,18 +295,18 @@ class AdminPanelTest extends TestCase
     public function testCategoriesCRUDPage()
     {
         $goodData = [
-            'title' => 'Second Category',
-            'slug' => 'second-category',
+            'title'       => 'Second Category',
+            'slug'        => 'second-category',
             'description' => 'This is a category description.',
         ];
 
-        $this->setCreatePath( '/admin/categories/create' )
-            ->setModel( 'Category' )
-            ->setData( $goodData )
-            ->setEditPath( '/admin/categories/1/edit' )
+        $this->setCreatePath('/admin/categories/create')
+            ->setModel('Category')
+            ->setData($goodData)
+            ->setEditPath('/admin/categories/1/edit')
             ->CRUDModel()
-            ->setAdminPage( '/admin/categories', 'Second Category' )
-            ->clickAdminPanel( '/admin/categories', 'Delete' );
+            ->setAdminPage('/admin/categories', 'Second Category')
+            ->clickAdminPanel('/admin/categories', 'Delete');
 
 //        $this->clickAdminPanel('/admin/categories/2/delete', 'Delete Forever');
     }
@@ -318,7 +317,7 @@ class AdminPanelTest extends TestCase
      */
     public function testUsersAdminPage()
     {
-        $this->setAdminPage( '/admin/users', 'Users' );
+        $this->setAdminPage('/admin/users', 'Users');
     }
 
     /**
@@ -329,24 +328,24 @@ class AdminPanelTest extends TestCase
     public function testUserCRUDPage()
     {
         $goodData = [
-            'first_name' => 'Second Test',
-            'last_name' => 'User',
-            'display_name' => 'second_test_user',
-            'email' => 'second_test@email.com',
-            'password' => ENV( 'APP_KEY', 'password' ),
-            'password_confirmation' => ENV( 'APP_KEY', 'password' ),
+            'first_name'            => 'Second Test',
+            'last_name'             => 'User',
+            'display_name'          => 'second_test_user',
+            'email'                 => 'second_test@email.com',
+            'password'              => ENV('APP_KEY', 'password'),
+            'password_confirmation' => ENV('APP_KEY', 'password'),
         ];
 
-        $this->setCreatePath( '/admin/users/create' )
-            ->setModel( 'User' )
-            ->setData( $goodData )
-            ->setEditPath( '/admin/users/2/edit' )
+        $this->setCreatePath('/admin/users/create')
+            ->setModel('User')
+            ->setData($goodData)
+            ->setEditPath('/admin/users/2/edit')
             ->CRUDModel()
-            ->setAdminPage( '/admin/users', 'Second Test User' )
-            ->setAdminPage( '/admin/users/2', 'Second Test User' )
-            ->viewItem( '/admin/users/2', 'Second Test User' )
-            ->viewItem( '/admin/users/2', 'second_test@email.com' )
-            ->clickAdminPanel( '/admin/users', 'Delete' );
+            ->setAdminPage('/admin/users', 'Second Test User')
+            ->setAdminPage('/admin/users/2', 'Second Test User')
+            ->viewItem('/admin/users/2', 'Second Test User')
+            ->viewItem('/admin/users/2', 'second_test@email.com')
+            ->clickAdminPanel('/admin/users', 'Delete');
 
 //        $this->clickAdminPanel('/admin/users/2/delete', 'Delete Forever');
     }
@@ -357,7 +356,7 @@ class AdminPanelTest extends TestCase
      */
     public function testOptionsAdminPage()
     {
-        $this->setAdminPage( '/admin/options', 'General Options' );
+        $this->setAdminPage('/admin/options', 'General Options');
     }
 
     /**
@@ -366,7 +365,6 @@ class AdminPanelTest extends TestCase
      */
     public function testOptionsContactAdminPage()
     {
-        $this->setAdminPage( '/admin/options/contact_info', 'Contact Info' );
+        $this->setAdminPage('/admin/options/contact_info', 'Contact Info');
     }
-
 }
