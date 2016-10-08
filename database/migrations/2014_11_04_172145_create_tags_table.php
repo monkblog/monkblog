@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTagsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,13 +13,12 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'tags', function ( Blueprint $table ) {
-            $table->increments( 'id' );
-            $table->string( 'name' );
+        Schema::create('tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
             $table->timestamps();
-        } );
+        });
     }
-
 
     /**
      * Reverse the migrations.
@@ -29,7 +27,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop( 'tags' );
+        Schema::drop('tags');
     }
-
 }

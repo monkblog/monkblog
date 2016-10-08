@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePagesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,16 +13,16 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'pages', function ( Blueprint $table ) {
-            $table->increments( 'id' );
-            $table->string( 'title' );
-            $table->string( 'description' );
-            $table->string( 'body' );
-            $table->string( 'slug' )->unique();
-            $table->boolean( 'is_published' );
-            $table->timestamp( 'published_at' )->index();
+        Schema::create('pages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('description');
+            $table->string('body');
+            $table->string('slug')->unique();
+            $table->boolean('is_published');
+            $table->timestamp('published_at')->index();
             $table->timestamps();
-        } );
+        });
     }
 
     /**
@@ -33,7 +32,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop( 'pages' );
+        Schema::drop('pages');
     }
-
 }

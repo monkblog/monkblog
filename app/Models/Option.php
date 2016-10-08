@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
-
     /**
-     * The model's rules
+     * The model's rules.
      *
      * @var array
      */
@@ -38,7 +37,7 @@ class Option extends Model
 
     public function option_tabs()
     {
-        return $this->belongsTo( 'MonkBlog\Models\OptionTab' );
+        return $this->belongsTo('MonkBlog\Models\OptionTab');
     }
 
     /**
@@ -48,9 +47,9 @@ class Option extends Model
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function newCollection( Array $models = [ ] )
+    public function newCollection(array $models = [])
     {
-        return new OptionCollection( $models );
+        return new OptionCollection($models);
     }
 
     public function __toString()
