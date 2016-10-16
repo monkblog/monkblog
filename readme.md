@@ -33,6 +33,8 @@ composer install
 npm install
 bower install
 gulp
+php artisan key:generate
+php artisan db:seed
 ```
 
 ### Adding your first admin user
