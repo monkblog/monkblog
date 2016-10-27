@@ -18,9 +18,8 @@ If you prefer to use Homestead over Docker, you can find [instructions on the La
 
 If you don't yet have Docker installed, install it [according to the Docker website](https://www.docker.com).
 
-After you have Docker installed, these two commands will get you started:
+After you have Docker installed, this command will get you started:
 
-    docker-compose build
     docker-compose up
 
 ### Dependency installation and configuration
@@ -30,11 +29,12 @@ Next, you'll need to run these commands, in order:
 ```
 cp .env.example .env
 composer install
-npm install
+npm install (or, better yet, yarn)
 bower install
 gulp
-php artisan key:generate
-php artisan db:seed
+docker exec monkblogphp_app_1 php artisan key:generate
+docker exec monkblogphp_app_1 php artisan migrate
+docker exec monkblogphp_app_1 php artisan db:seed
 ```
 
 ### Adding your first admin user
